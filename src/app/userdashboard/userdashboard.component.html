@@ -1,0 +1,14 @@
+<div *ngIf=key>
+  
+<div class="d-flex mt-3 bg-light">
+  <div>
+    <h4 class="txt-success">Welcome , {{ Name }}</h4>
+  </div>
+  <div class=" ms-auto"><a class="btn btn-primary" routerLink="userCart">Cart 🛒</a></div>
+  <div class="ms-2">
+    <button class="btn btn-danger" (click)="logOut()">Logout</button>
+  </div>
+</div>
+</div>
+
+<router-outlet></router-outlet>

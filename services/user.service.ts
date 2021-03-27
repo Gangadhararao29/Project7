@@ -23,4 +23,7 @@ export class UserService {
   addProduct(productObj):Observable<any>{
     return this.hc.post("/product/addproduct",productObj)
   }
+  checkUser(userName):Observable<any>{
+    return this.hc.post("/user/checkuser",userName)
+  }
 }

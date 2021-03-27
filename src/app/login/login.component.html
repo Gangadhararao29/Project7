@@ -1,0 +1,80 @@
+<div *ngIf="!Name">
+  <div class="container text-center text-light fst-italic p-3 mx-auto my-3" style="width: 50%; background-color: rgb(4,67,67)" > 
+    <h5 style="width: 80%; margin: auto"> Please Login to continue</h5>
+  </div>
+  <!-- LOGIN DASHBOARD PAGE -->
+  <form
+    #formRef="ngForm"
+    (ngSubmit)="onSubmit(formRef)"
+    class="mt-3"
+    style="width: 50%; margin: auto"
+  >
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="un"
+        placeholder="Username"
+        name="userName"
+        ngModel
+        #userName1="ngModel"
+        [class.is-valid]="userName1.valid"
+        [class.is-invalid]="(userName1.invalid && userName1.touched) || formRef.submitted"
+      />
+      <label for="un">Username</label>
+      <div id="un" class="invalid-feedback bg-warning m-0 fw-bolder">
+        Please Enter valid Username
+      </div>
+    </div>
+    <div class="form-floating">
+      <input
+        type="password"
+        required
+        class="form-control"
+        id="pw"
+        placeholder="Password"
+        name="password"
+        ngModel
+        #password1="ngModel"
+        [class.is-valid]="password1.valid"
+        [class.is-invalid]="
+          (password1.invalid && password1.touched) || formRef.submitted
+        "
+      />
+      <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
+        Please Enter valid password
+      </div>
+      <label for="pw">Password</label>
+    </div>
+    <div class="m-3 text-center">
+      <button class="btn btn-primary">Login</button>
+    </div>
+  </form>
+
+  <!-- REGISTRATION PAGE -->
+
+  <div
+    class="container text-center text-light fst-italic p-3 m-auto"
+    style="width: 50%; background-color: rgb(4,67,67)"
+  >
+    <h5 style="width: 80%; margin: auto">
+      If you are new to this app, Please click on
+      <a class="text-light" routerLink="register">Register</a>
+    </h5>
+  </div>
+
+  <router-outlet></router-outlet>
+  <div>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
+</div>
+
+<div *ngIf="Name">
+  <div>
+    <app-adminuserdashboard></app-adminuserdashboard>
+  </div>
+  <div>
+    <app-userdashboard></app-userdashboard>
+  </div>
+</div>

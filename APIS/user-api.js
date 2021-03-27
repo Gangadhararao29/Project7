@@ -20,8 +20,25 @@ const userApiObject = express.Router();
 //   }
 // })
 
-userApiObject.post('/createuser', async (req, res) => {
+userApiObject.post('/checkuser', async (req, res) => {
+  const user = await userModel.findOne({ "userName": req.body.userName})
+ 
+  if (user != null) {
+    try {
+      res.send({ message: "Username already present" });
+    }
+    catch (err) {
+      res.sendStatus(500).send(err);
+    }
+  }
+    else {
+      try{res.send({message:"Continue......."})}
+      catch (err) {
+        res.sendStatus(500).send(err);
+      }} 
+    })
 
+userApiObject.post('/createuser', async (req, res) => {
   // const prevData = await userModel.findOne({ "Id": (req.body.Id * 1) })
 
   const prevData = await userModel.findOne({ "userName": req.body.userName })
@@ -71,6 +88,11 @@ userApiObject.post("/login", async (req, res) => {
   let loginObj = req.body;
   let userData = await userModel.findOne({ userName: loginObj.userName })
 
+  console.log("loginObj.userName")
+
+  if(loginObj.userName == ""){
+    res.send({message:"Please enter Username"})
+  }
   if (!userData) {
     res.send({ message: "Username not found" })
   }

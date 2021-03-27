@@ -16,9 +16,9 @@ const multer = require("multer")
 
 //configure cloudinary
 cloudinary.config({
-    cloud_name: 'cloudinaryganga29',
-    api_key: '475142755956332',
-    api_secret: 'ukOvWtKqI6wuyJoTlPmPcVf3nKI'
+    cloud_name: process.env.cloudName,
+    api_key: process.env.apiKey,
+    api_secret: process.env.apiSecret
 });
 
 //configure cloudinary storage
@@ -66,13 +66,11 @@ productApiObj.post("/addproduct", upload.single('photo'), errorHandler(async (re
 
 
 productApiObj.get("/productsget", errorHandler(async (req, res) => {
-
     //get all products from db
     let productsArray = await Product.find()
 
     res.send({ message: productsArray })
 }))
-
 
 
 
