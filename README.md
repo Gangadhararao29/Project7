@@ -31,5 +31,19 @@ Run server using node server.js
 
 Build latest Angular application using ng build
 
-## Output
-https://localhost:3000/
+## For working
+create .env file in root directory
+
+add following variables to the .env with suitable value
+
+PORT = port_number
+
+dburl = mongodb_database_url
+
+SECRET = secret_key
+
+cloudName = cloudinary cloud_name
+
+apiKey = cloudinary apikey
+
+apiSecret = cloudinaryapisecret
