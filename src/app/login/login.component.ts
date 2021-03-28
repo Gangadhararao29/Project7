@@ -31,14 +31,15 @@ export class LoginComponent implements OnInit {
         alert('Please enter correct password');
         formRef.reset();
       } else if (res['message'] == 'login successful') {
+        
         localStorage.setItem('token', res['token']);
         localStorage.setItem('userName', res['userName']);
-        localStorage.setItem('admin', res['userTypeAdmin']);
 
-        if (res['userTypeAdmin'])
-          this.router.navigateByUrl('/adminuserdashboard');
+        if (res['userTypeAdmin']) {
+          this.router.navigateByUrl('/admin/home');
+        }
         else {
-          this.router.navigateByUrl('/userdashboard');
+          this.router.navigateByUrl('/user/home');
         }
       }
     });
