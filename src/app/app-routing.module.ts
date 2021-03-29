@@ -41,9 +41,6 @@ const routes: Routes = [
       {path: 'addproduct',component:AddproductComponent},
       { path: '', redirectTo:'admin/home', pathMatch: 'prefix'}
     ]
-
-  
-
   },
 
   { path: 'cart', component:CartComponent},

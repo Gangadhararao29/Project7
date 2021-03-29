@@ -14,11 +14,11 @@
       name="userName"
       ngModel
       #userName="ngModel"
-      [class.is-valid]="userName.valid"
+      [class.is-valid]="userName.valid && !userFlag"
       [class.is-invalid]="
-        (userName.invalid && userName.touched) || formRef.submitted
+        (userName.invalid && userName.touched) || formRef.submitted || userFlag
       "
-      (change)="checkForUser(userName.value)"
+      (blur)="checkForUser(userName.value)"
     />
     <div id="un" class="invalid-feedback bg-warning m-0 fw-bolder">
       Please Enter valid Username
