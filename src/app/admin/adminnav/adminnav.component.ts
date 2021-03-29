@@ -16,6 +16,7 @@ export class AdminnavComponent implements OnInit {
   ngOnInit(): void {
     //get username from localstorage
    this.Name= localStorage.getItem("userName")
+   this.Name = this.Name.charAt(0).toUpperCase() + this.Name.slice(1)
   }
 
   logOut(){
