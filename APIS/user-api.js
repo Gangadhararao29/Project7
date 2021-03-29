@@ -59,7 +59,6 @@ userApiObject.post('/checkuser', async (req, res) => {
 
 userApiObject.post('/createuser', async (req, res) => {
   // const prevData = await userModel.findOne({ "Id": (req.body.Id * 1) })
-
   const prevData = await userModel.findOne({ "userName": req.body.userName })
   if (!prevData) {
 
@@ -119,7 +118,7 @@ userApiObject.post("/login", async (req, res) => {
   let value= await bcrypt.compare(loginObj.password,userData.password)
   
   if (value) {
-    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 30 })
+    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 600 })
     // console.log(loginObj)
     res.send({ message: "login successful", token: signedToken, userName: loginObj.userName ,userTypeAdmin : userData.userTypeAdmin})
   }
