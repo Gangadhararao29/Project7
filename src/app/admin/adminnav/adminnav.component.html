@@ -1,0 +1,57 @@
+<nav
+  id="mainNav"
+  class="navbar navbar-expand-md navbar-dark"
+  style="background-color: rgb(4, 67, 67)"
+>
+  <div class="container">
+    <a class="navbar-brand mx-4 my-2 fs-3" href="#">FarmFresh</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav fs-5">
+        <a
+          class="nav-link"
+          aria-current="page"
+          routerLink="home"
+          routerLinkActive="active"
+          >Home</a
+        >
+        <a
+          class="nav-link"
+          aria-current="page"
+          routerLink="updateprices"
+          routerLinkActive="active"
+          >Update Prices</a
+        >
+        <a
+          class="nav-link"
+          aria-current="page"
+          routerLink="addproduct"
+          routerLinkActive="active"
+          >Add new Product</a
+        >
+        <a
+          class="nav-link"
+          aria-current="page"
+          routerLink="editproduct"
+          routerLinkActive="active"
+          >Edit/Delete Product</a
+        >
+
+      </div>
+      
+      <div class="ms-auto mx-1">
+        <button class="btn btn-danger" (click)="logOut()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>

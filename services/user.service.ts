@@ -16,14 +16,13 @@ export class UserService {
   loginUser(loginObj):Observable<any>{
     return this.hc.post("/user/login",loginObj)
   }
-
-  loginAdminUser(loginObj):Observable<any>{
-    return this.hc.post("/admin/login",loginObj)
-  }
   addProduct(productObj):Observable<any>{
     return this.hc.post("/product/addproduct",productObj)
   }
   checkUser(userName):Observable<any>{
     return this.hc.post("/user/checkuser",userName)
+  }
+  checkAdminUser(userName):Observable<any>{
+    return this.hc.post("/user/checkadminuser",userName)
   }
 }

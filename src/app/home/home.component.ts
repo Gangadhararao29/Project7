@@ -1,4 +1,8 @@
+
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -6,15 +10,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  carouselimage=[
-    "../assets/farm-scene-with-red-barn-field-landscape_1308-54361.jpg",
-    "../assets/hand-drawn-farming-profession_23-2148885540.jpg",
-    "../assets/organic-flat-design-farming-profession-collection_23-2148887073.jpg"
-  ]
 
-  constructor() { }
+  Name=localStorage.getItem("userName")
+  constructor(private router:Router, private us:UserService) { }
+  
+  ngOnInit(){
+    if(this.Name){
+      let value = {
+        userName: ""
+      }
+      
+      value.userName = this.Name;
+      
+      this.us.checkAdminUser(value).subscribe((res)=>{
+        // console.log("test1",res['message'])
+        if(res['message'] == "User is Admin"){
+          this.router.navigateByUrl('admin/home')
+        } else {
+          this.router.navigateByUrl('user/home')
+        }
+      })
 
-  ngOnInit(): void {
+      document.getElementById('mainNav').style.display="none"
+      
+    }
   }
 
 }
+  

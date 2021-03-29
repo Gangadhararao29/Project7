@@ -22,7 +22,7 @@ const userApiObject = express.Router();
 
 userApiObject.post('/checkuser', async (req, res) => {
   const user = await userModel.findOne({ "userName": req.body.userName})
- 
+  
   if (user != null) {
     try {
       res.send({ message: "Username already present" });
@@ -38,9 +38,27 @@ userApiObject.post('/checkuser', async (req, res) => {
       }} 
     })
 
+    userApiObject.post('/checkadminuser', async (req, res) => {
+      const user = await userModel.findOne({ "userName":req.body.userName })
+      // console.log("request",req.body)
+      // console.log("user",user)
+      if (user.userTypeAdmin) {
+        try {
+          res.send({ message: "User is Admin" });
+        }
+        catch (err) {
+          res.sendStatus(500).send(err);
+        }
+      }
+        else {
+          try{res.send({message:"Not Admin"})}
+          catch (err) {
+            res.sendStatus(500).send(err);
+          }} 
+        })
+
 userApiObject.post('/createuser', async (req, res) => {
   // const prevData = await userModel.findOne({ "Id": (req.body.Id * 1) })
-
   const prevData = await userModel.findOne({ "userName": req.body.userName })
   if (!prevData) {
 
@@ -88,7 +106,7 @@ userApiObject.post("/login", async (req, res) => {
   let loginObj = req.body;
   let userData = await userModel.findOne({ userName: loginObj.userName })
 
-  console.log("loginObj.userName")
+  // console.log("loginObj.userName")
 
   if(loginObj.userName == ""){
     res.send({message:"Please enter Username"})
@@ -101,7 +119,7 @@ userApiObject.post("/login", async (req, res) => {
   
   if (value) {
     let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 600 })
-    console.log(loginObj)
+    // console.log(loginObj)
     res.send({ message: "login successful", token: signedToken, userName: loginObj.userName ,userTypeAdmin : userData.userTypeAdmin})
   }
   else {

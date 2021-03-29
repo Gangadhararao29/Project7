@@ -1,5 +1,5 @@
-<div *ngIf="!Name">
-  <div class="container text-center text-light fst-italic p-3 mx-auto my-3" style="width: 50%; background-color: rgb(4,67,67)" > 
+<!-- LOGIN  PAGE -->
+<div class="container text-center text-light fst-italic p-3 mx-auto my-3" style="width: 50%; background-color: rgb(4,67,67)" > 
     <h5 style="width: 80%; margin: auto"> Please Login to continue</h5>
   </div>
   <!-- LOGIN DASHBOARD PAGE -->
@@ -48,7 +48,7 @@
       <label for="pw">Password</label>
     </div>
     <div class="m-3 text-center">
-      <button class="btn btn-primary">Login</button>
+      <button class="btn btn-success">Login</button>
     </div>
   </form>
 
@@ -63,18 +63,9 @@
       <a class="text-light" routerLink="register">Register</a>
     </h5>
   </div>
-
+<!-- REGISTRATION COMPONENT -->
   <router-outlet></router-outlet>
   <div>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <br /><br /><br />
   </div>
-</div>
 
-<div *ngIf="Name">
-  <div>
-    <app-adminuserdashboard></app-adminuserdashboard>
-  </div>
-  <div>
-    <app-userdashboard></app-userdashboard>
-  </div>
-</div>

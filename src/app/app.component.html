@@ -1,46 +1,11 @@
 <!-- LOGO -->
-<div class="title">
-  <div class="logo">
-    <img
-      src="../assets/logo_transparent.png"
-      alt="Farm Fresh Logo"
-      width= "100%"
-      height="auto"
-    />
-  </div>
-</div>
+<app-header></app-header>
 
 <!-- Nav Bar -->
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: rgb(4,67,67);">
-  <div class="container">
-    <a class="navbar-brand mx-4 my-2 fs-3" href="#">FarmFresh</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav fs-5">
-        <a class="nav-link" aria-current="page" routerLink="home" routerLinkActive="active"
-          >Home</a
-        >
-        <a class="nav-link" aria-current="page" routerLink="login" routerLinkActive="active"
-          >Dashboard</a
-        >
-        <a class="nav-link" aria-current="page" routerLink="about" routerLinkActive="active"
-          >About</a
-        >
-      </div>
-    </div>
-  </div>
-</nav>
+<app-mainnav></app-mainnav>
 
-<div class="container"><router-outlet></router-outlet></div>
+<!-- ROUTER OUTLET -->
+<router-outlet></router-outlet>
 
-
+<!-- FOOTER -->
+<app-footer></app-footer>

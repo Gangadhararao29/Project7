@@ -1,0 +1,36 @@
+<div class="container">
+    <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref.value)">
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="productId" placeholder="pid" name="productId" ngModel>
+                    <label for="productId">productId</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productname" placeholder="pname" name="productName" ngModel>
+                    <label for="productname">productname</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="productprice" placeholder="price" name="productPrice" ngModel>
+                    <label for="productprice">productprice</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productbrand" placeholder="pbrand" name="productBrand" ngModel>
+                    <label for="productbrand">productBrand</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productcategory" placeholder="pcategory" name="productCategory" ngModel>
+                    <label for="productcategory">productCategory</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productdescription" placeholder="pdescription" name="productDescription" ngModel>
+                    <label for="productdescription">productDescription</label>
+        </div>
+        <div class="form-group mb-3">
+            <label for="uploadphoto" class="form-label">
+              <input type="file" class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*" placeholder="Upload file">
+            </label>
+          </div> 
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" value="submit">Submit</button>
+        </div>
+    </form>
+</div>
