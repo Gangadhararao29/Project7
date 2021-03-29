@@ -45,7 +45,7 @@ productApiObj.post("/addproduct", upload.single('photo'), errorHandler(async (re
     let productObj = JSON.parse(req.body.userObj);
     productObj.productImage = req.file.path;
 
-    console.log("productObj", productObj)
+    // console.log("productObj", productObj)
     //search for product in db with productId
     let productObjFromDb = await Product.findOne({ productId: productObj.productId })
     //if product doesn't exists
