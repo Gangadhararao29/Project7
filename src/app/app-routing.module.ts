@@ -14,6 +14,7 @@ import { UserComponent } from './user/user.component';
 import { EditproductComponent } from './admin/editproduct/editproduct.component';
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
+import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
     children:[
       {path: 'home', component:HomeComponent},
       {path: 'editproduct',component:EditproductComponent},
+      {path: 'editdetails/:id',component:EditdetailsComponent},
       {path: 'updateprices',component:UpdatepricesComponent},
       {path: 'addproduct',component:AddproductComponent},
       { path: 'productdetails/:id', component:ProductdetailsComponent},

@@ -26,6 +26,7 @@ import { AdminnavComponent } from './admin/adminnav/adminnav.component';
 import { EditproductComponent } from './admin/editproduct/editproduct.component';
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
+import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProductdetailsComponent } from './products/productdetails/productdetail
     AdminnavComponent,
     EditproductComponent,
     UpdatepricesComponent,
-    ProductdetailsComponent
+    ProductdetailsComponent,
+    EditdetailsComponent
   ],
   imports: [
     BrowserModule,

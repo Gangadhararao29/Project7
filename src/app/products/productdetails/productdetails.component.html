@@ -3,7 +3,7 @@
     <div class="m-3">
       <img
         class="center "
-        src="{{product.productImage}}"
+        [src]="product.productImage"
         alt=""
       />
     </div>
@@ -17,8 +17,8 @@
     <p><span class="fs-5 fw-bold">Description:</span>{{product.productDescription}}</p>
     </div>
     <div style="width: 50%; height: 50%;" class="container">
-      <p><span class="fs-5 fw-bold">Rating:</span>⭐⭐⭐⭐⭐{{product.productRating.userRating}}</p>
-      <p><span class="fs-5 fw-bold">Comments:</span><br>demoName1{{product.productRating.userName}}:demoComment1{{product.productRating.userComments}}</p>
+      <p><span class="fs-5 fw-bold">Rating:</span>⭐⭐⭐⭐⭐ {{product.productRating.userRating}}</p>
+      <p><span class="fs-5 fw-bold">Comments:</span><br>demoName1 {{product.productRating.userName}}:demoComment1 {{product.productRating.userComments}}</p>
     </div>
 
     <div style="width: 50%; height: 50%;"  class="container">

@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
         userRating:Number,
         userComments:String
     }],
-    default:undefined
+    default:null
     
  },
     productImage:String
