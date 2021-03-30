@@ -1,0 +1,79 @@
+<div class="continer">
+  <div class="container bg-light rounded">
+    <div class="m-3">
+      <img
+        class="center "
+        src="{{product.productImage}}"
+        alt=""
+      />
+    </div>
+    <div class="m-3 text-center">
+      <h1 class="text-success">{{ product.productName }}</h1>
+      <h3>Price:₹ {{ product.productPrice }}</h3>
+      <h5 class="text-warning">Type: {{ product.productBrand }}</h5>
+      <h5 class="text-info">Category : {{ product.productCategory }}</h5>
+    </div>
+    <div style="width: 50%; height: 50%;" class="container">
+    <p><span class="fs-5 fw-bold">Description:</span>{{product.productDescription}}</p>
+    </div>
+    <div style="width: 50%; height: 50%;" class="container">
+      <p><span class="fs-5 fw-bold">Rating:</span>⭐⭐⭐⭐⭐{{product.productRating.userRating}}</p>
+      <p><span class="fs-5 fw-bold">Comments:</span><br>demoName1{{product.productRating.userName}}:demoComment1{{product.productRating.userComments}}</p>
+    </div>
+
+    <div style="width: 50%; height: 50%;"  class="container">
+      <form #formRef=ngForm  >
+          <p class="d-inline-block">Please rate product</p>
+          <div class="d-inline-block">
+            <div class="d-flex justify-content-start">
+              <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
+              <label class="form-check-label" for="flexRadioDisabled">
+                1
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" disabled>
+              <label class="form-check-label" for="flexRadioCheckedDisabled">
+                2
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled"  disabled>
+              <label class="form-check-label" for="flexRadioDisabled">
+                3
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled"  disabled>
+              <label class="form-check-label" for="flexRadioCheckedDisabled">
+                4
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled"  disabled>
+              <label class="form-check-label" for="flexRadioCheckedDisabled">
+                5
+              </label>
+            </div></div>
+          </div>
+          
+
+            <div class="form-floating my-3">
+              <textarea type="text" class="form-control" id="productcomments" placeholder="Write Comments here" style="height: 100px" disabled></textarea>
+              <label for="productdescription">Comments</label>
+            </div>
+
+            <div class="text-center my-3">
+              <input type="submit"  class="btn btn-success" value="Submit Review">
+            </div>
+      </form>
+  </div>
+
+<br>
+<br>
+
+
+
+  </div>
+</div>

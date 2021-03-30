@@ -25,6 +25,7 @@ import { CartComponent } from './user/cart/cart.component';
 import { AdminnavComponent } from './admin/adminnav/adminnav.component';
 import { EditproductComponent } from './admin/editproduct/editproduct.component';
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
+import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UpdatepricesComponent } from './admin/updateprices/updateprices.compone
     CartComponent,
     AdminnavComponent,
     EditproductComponent,
-    UpdatepricesComponent
+    UpdatepricesComponent,
+    ProductdetailsComponent
   ],
   imports: [
     BrowserModule,

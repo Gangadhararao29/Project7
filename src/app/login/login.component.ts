@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   onSubmit(formRef) {
     if(formRef.valid){
       let loginObj = formRef.value;
-    console.log(loginObj);
+    // console.log(loginObj);
     this.us.loginUser(loginObj).subscribe((res) => {
       if (res['message'] == 'Please enter Username'){
         alert('Please enter Username');
