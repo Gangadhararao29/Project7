@@ -13,6 +13,7 @@ import { SearchComponent } from './search/search.component';
 import { UserComponent } from './user/user.component';
 import { EditproductComponent } from './admin/editproduct/editproduct.component';
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
+import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
       {path: 'cart',component:CartComponent},
       { path: 'about', component: AboutComponent },
       { path: 'search', component: SearchComponent },
+      { path: 'productdetails/:id', component:ProductdetailsComponent},
       { path: '', redirectTo:'user/home', pathMatch: 'prefix'}
     ]
   },
@@ -39,10 +41,11 @@ const routes: Routes = [
       {path: 'editproduct',component:EditproductComponent},
       {path: 'updateprices',component:UpdatepricesComponent},
       {path: 'addproduct',component:AddproductComponent},
+      { path: 'productdetails/:id', component:ProductdetailsComponent},
       { path: '', redirectTo:'admin/home', pathMatch: 'prefix'}
     ]
   },
-
+  { path: 'productdetails/:id', component:ProductdetailsComponent},
   { path: 'cart', component:CartComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

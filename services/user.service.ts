@@ -22,6 +22,7 @@ export class UserService {
   checkUser(userName):Observable<any>{
     return this.hc.post("/user/checkuser",userName)
   }
+  //used in home.component.ts
   checkAdminUser(userName):Observable<any>{
     return this.hc.post("/user/checkadminuser",userName)
   }

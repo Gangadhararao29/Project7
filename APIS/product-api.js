@@ -74,7 +74,7 @@ productApiObj.get("/getproducts", errorHandler(async (req, res) => {
 
 
   productApiObj.post('/updateprice',errorHandler(async (req, res) => {
-      console.log(req.body)
+    //   console.log(req.body)
     const product = await Product.findOneAndUpdate({"productName" : req.body.productName},{"productPrice":req.body.productPrice},{returnOriginal:false})
 
     res.send({message:"Update Successful", productName:req.body.productName})
@@ -88,6 +88,12 @@ productApiObj.get("/getproducts", errorHandler(async (req, res) => {
   res.send({product})
 })
 )
+
+productApiObj.get('/getproduct/:id',errorHandler(async (req,res) => {
+const product = await Product.findOne({'productId': req.params.id})
+res.send({product})
+}))
+
 
 
 //export
