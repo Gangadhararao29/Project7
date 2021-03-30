@@ -65,13 +65,29 @@ productApiObj.post("/addproduct", upload.single('photo'), errorHandler(async (re
 //get all products
 
 
-productApiObj.get("/productsget", errorHandler(async (req, res) => {
+productApiObj.get("/getproducts", errorHandler(async (req, res) => {
     //get all products from db
     let productsArray = await Product.find()
 
     res.send({ message: productsArray })
 }))
 
+
+  productApiObj.post('/updateprice',errorHandler(async (req, res) => {
+      console.log(req.body)
+    const product = await Product.findOneAndUpdate({"productName" : req.body.productName},{"productPrice":req.body.productPrice},{returnOriginal:false})
+
+    res.send({message:"Update Successful", productName:req.body.productName})
+  })
+  )
+
+  productApiObj.post('/deleteproduct',errorHandler(async (req, res) => {
+    console.log(req.body)
+  const product = await Product.findOneAndDelete({"productName" : req.body.productName},{returnOriginal:false})
+
+  res.send({product})
+})
+)
 
 
 //export
