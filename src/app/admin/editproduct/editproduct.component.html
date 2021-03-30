@@ -1,1 +1,88 @@
-<p>editproduct works!</p>
+
+<!-- ORIGINAL CONTENT -->
+<div class="container">
+    <p class="text-light fs-5 p-2 my-2 " style="background-color: rgb(4,67,67);">Organic</p>
+    <div class="container my-3">
+      
+      <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Organic:Fruits</span></p>
+      <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
+        <div class="col" *ngFor = "let product of productsOrgaincFruits">
+          <div class="card" >
+            <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{product.productName}}</h5>
+              <p class="card-text text-center"> ₹{{product.productPrice}} </p>
+              <div class="d-flex justify-content-between ">
+                <button class="btn btn-info" (click)="edit(product.productId)">Edit</button>
+                <button class="btn btn-danger" (click)="delete(product)">Delete</button></div>
+              </div>
+            </div>
+            
+        </div>
+      </div>
+    
+      <div class="my-3">
+        <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Organic:Vegetables</span></p>
+        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
+          <div class="col" *ngFor = "let product of productsOrgaincVegetables">
+            <div class="card" >
+              <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">{{product.productName}}</h5>
+                <p class="card-text text-center"> ₹{{product.productPrice}} </p>
+                <div class="d-flex justify-content-between ">
+                  <button class="btn btn-info" (click)="edit(product.productId)">Edit</button>
+                  <button class="btn btn-danger" (click)="delete(product)">Delete</button>
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+       
+       
+      <div class="container">
+        <p class="text-light fs-5 p-2 my-2 " style="background-color: rgb(4,67,67);">Inorganic</p>
+        <div class="container my-3">
+          
+          <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Inorganic:Fruits</span></p>
+          <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
+            <div class="col" *ngFor = "let product of productsInorgaincFruits">
+              <div class="card" >
+                <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{product.productName}}</h5>
+                  <p class="card-text text-center"> ₹{{product.productPrice}} </p>
+                  <div class="d-flex justify-content-between ">
+                    <button class="btn btn-info" (click)="edit(product.productId)">Edit</button>
+                    <button class="btn btn-danger" (click)="delete(product)">Delete</button></div>
+                  </div>
+                </div>
+                
+            </div>
+          </div>
+        
+          <div class="my-3">
+            <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Inorganic:Vegetables</span></p>
+            <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
+              <div class="col" *ngFor = "let product of productsInorgaincVegetables">
+                <div class="card" >
+                  <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">{{product.productName}}</h5>
+                    <p class="card-text text-center"> ₹{{product.productPrice}} </p>
+                    <div class="d-flex justify-content-between ">
+                      <button class="btn btn-info" (click)="edit(product.productId)">Edit</button>
+                      <button class="btn btn-danger" (click)="delete(product)">Delete</button>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+           
+    
