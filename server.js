@@ -5,7 +5,7 @@ const path = require("path")
 require("dotenv").config();
 
 const mongoose =require("mongoose")
-mongoose.connect(process.env.dburl,{useNewUrlParser:true, useUnifiedTopology:true})
+mongoose.connect(process.env.dburl,{useNewUrlParser:true, useUnifiedTopology:true , useFindAndModify: false })
 const db = mongoose.connection;
 
 
@@ -22,10 +22,6 @@ app.use("/product",productApiObj)
 
 db.on('error',()=>console.log("error connecting db"))
 db.once("open",()=>console.log("Connected to Db"))
-
-
-
-
 
 
 const port = process.env.PORT;

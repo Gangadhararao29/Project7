@@ -14,9 +14,12 @@ const ProductSchema = new mongoose.Schema({
         userComments:String
     }],
     default:null
-    
  },
-    productImage:String
+    productImage:String,
+    status:{
+        type:Boolean,
+        default:true
+    }
 })
 
 const Product = mongoose.model('product',ProductSchema)

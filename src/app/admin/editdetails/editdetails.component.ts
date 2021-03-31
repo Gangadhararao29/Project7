@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service'
 
 
@@ -12,23 +13,37 @@ export class EditdetailsComponent implements OnInit {
 
   product:any;
 
-  constructor(private ar:ActivatedRoute, private ps:ProductService, private router: Router) { }
+  constructor(private ar:ActivatedRoute, private ps:ProductService, private router: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.ar.params.subscribe((data)=>{
       this.ps.getProductById(data.id).subscribe((obj)=>{
         this.product = obj.product;
-        console.log(this.product);
+        //  console.log("product ngonint",this.product);
       })
     })
   }
 
   submitData(ref){
-    // console.log("from edit component",ref)
-    this.ps.updateProduct(ref).subscribe(res=>{
+    let newData = ref.value;
+
+    // console.log("from component",newData)
+  
+    this.ps.updateProduct(newData).subscribe(res=>{
       if(res['message'] == 'Update Successful') {
-        alert("Updated Successfully")
+        this.toastr.success("Updated Successfully")
         this.router.navigateByUrl('/admin/editproduct')
+      }
+      else if(res['message'] == "Unauthorised access"){
+        this.toastr.warning("Unauthorised access","Please login to access")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res['message'] == "Session Expired"){
+        this.toastr.warning("Session Expired","Please relogin to continue")
+        this.router.navigateByUrl("/login")
+      }
+      else{
+        this.toastr.warning(res["message"])
       }
     })
 

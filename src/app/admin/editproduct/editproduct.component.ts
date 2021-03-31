@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class EditproductComponent implements OnInit {
   productsInorgaincFruits = [];
   productsInorgaincVegetables = [];
 
-  constructor(private ps:ProductService, private router:Router) { }
+  constructor(private ps:ProductService, private router:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
@@ -53,7 +54,26 @@ export class EditproductComponent implements OnInit {
     this.router.navigateByUrl(`admin/editdetails/${id}`)
   }
 
-  delete(){
+  delete(id){
+    this.ps.deleteProduct(id).subscribe(res=>{
+      if(res['message']=="Product deleted")
+      {
+        this.toastr.success("Product deleted Successfully")
+        this.router.navigateByUrl('/admin/home')
+      }
+      else if(res['message'] == "Unauthorised access"){
+        this.toastr.warning("Unauthorised access","Please login to access")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res['message'] == "Session Expired"){
+        this.toastr.warning("Session Expired","Please relogin to continue")
+        this.router.navigateByUrl("/login")
+      }
+      else
+      {
+        this.toastr.warning("Something went wrong in deleting the Product")
+      }
 
+    })
   }
 }

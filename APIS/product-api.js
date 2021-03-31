@@ -5,9 +5,12 @@ const productApiObj = exp.Router()
 //import express-async-handler
 const errorHandler = require("express-async-handler")
 const Product = require("../models/product-model")
-const jwt = require("jsonwebtoken");
-//import
+//import body parser
 productApiObj.use(exp.json())
+
+// import validate token middleware
+const validateToken=require("./middlewares/verifyToken")
+
 
 //imports
 const cloudinary = require("cloudinary").v2
@@ -38,7 +41,7 @@ var upload = multer({ storage: storage })
 
 //create a product
 
-productApiObj.post("/addproduct", upload.single('photo'), errorHandler(async (req, res) => {
+productApiObj.post("/addproduct",validateToken, upload.single('photo'), errorHandler(async (req, res) => {
 
     //console.log("url path is ",req.file.path); 
 
@@ -67,25 +70,25 @@ productApiObj.post("/addproduct", upload.single('photo'), errorHandler(async (re
 
 productApiObj.get("/getproducts", errorHandler(async (req, res) => {
     //get all products from db
-    let productsArray = await Product.find()
+    let productsArray = await Product.find({"status":true})
 
     res.send({ message: productsArray })
 }))
 
 
-productApiObj.post('/updateprice', errorHandler(async (req, res) => {
+productApiObj.post('/updateprice',validateToken, errorHandler(async (req, res) => {
     //   console.log(req.body)
-    const product = await Product.findOneAndUpdate({ "productName": req.body.productName }, { "productPrice": req.body.productPrice }, { returnOriginal: false })
+    const product = await Product.findOneAndUpdate({ "productName": req.body.productName, "status":true }, { "productPrice": req.body.productPrice }, { returnOriginal: false })
 
     res.send({ message: "Update Successful", productName: req.body.productName })
 })
 )
 
-productApiObj.post('/deleteproduct', errorHandler(async (req, res) => {
+productApiObj.post('/deleteproduct',validateToken, errorHandler(async (req, res) => {
     console.log(req.body)
-    const product = await Product.findOneAndDelete({ "productName": req.body.productName }, { returnOriginal: false })
+    const product = await Product.findOneAndUpdate({ "productId": req.body.productId,  }, { "status" : false })
 
-    res.send({ product })
+    res.send({ message:"Product deleted"})
 })
 )
 
@@ -94,11 +97,13 @@ productApiObj.get('/getproduct/:id', errorHandler(async (req, res) => {
     res.send({ product })
 }))
 
-productApiObj.post('/updateproduct', errorHandler(async (req, res) => {
-      console.log(req.body)
-    const product = await Product.findOneAndUpdate({ "productId": req.body.productId }, { "productName": req.body.productName, "productPrice": req.body.productPrice, "productBrand" : req.body.productBrand, "productCategory": req.body.productCategory , "productDescription": req.body.productDescription }, { returnOriginal: false })
-
-    res.send({ message: "Update Successful"})
+productApiObj.post('/updateproduct',validateToken, errorHandler(async (req, res) => {
+    //   console.log(req.body)
+      let newDataObj = (req.body)
+    //   console.log("recieved data",newDataObj)
+     const product = await Product.findOneAndUpdate({"productId": req.body.productId , "status":true}, { $set : newDataObj}, {new:true})
+    // console.log("Product is",product)
+        res.send({ message: "Update Successful"})
 })
 )
 

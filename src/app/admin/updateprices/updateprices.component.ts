@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ProductService } from 'services/product.service';
   styleUrls: ['./updateprices.component.css'],
 })
 export class UpdatepricesComponent implements OnInit{
-  constructor(private ps: ProductService, private router: Router) {}
+  constructor(private ps: ProductService, private router: Router, private toastr:ToastrService) {}
   productsArray = [];
   arrItems = [];
   text1 = '';
@@ -37,7 +38,16 @@ export class UpdatepricesComponent implements OnInit{
         this.ps.updateProductsPrice(productValue).subscribe((res) => {
           if (res['message'] == 'Update Successful') {
             this.text1 += `<p style="color:green"> ${res['productName']} price updated successfully </p> `;
-          } else {
+          }
+          else if(res['message'] == "Unauthorised access"){
+            this.toastr.warning("Unauthorised access","Please login to access")
+            this.router.navigateByUrl("/login")
+          }
+          else if(res['message'] == "Session Expired"){
+            this.toastr.warning("Session Expired","Please relogin to continue")
+            this.router.navigateByUrl("/login")
+          }
+          else {
             this.text1 += `<p style="color:red"> ${res['productName']} price update failed</p>`;
           }
           document.getElementById('status').innerHTML = this.text1;
@@ -47,6 +57,6 @@ export class UpdatepricesComponent implements OnInit{
     
     // console.log(this.text1)
     document.getElementById('status').innerHTML = this.text1;
-    alert("Updated Successfully")
+    this.toastr.success("Updated Successfully")
   }
 }
