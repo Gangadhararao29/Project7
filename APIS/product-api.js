@@ -73,27 +73,34 @@ productApiObj.get("/getproducts", errorHandler(async (req, res) => {
 }))
 
 
-  productApiObj.post('/updateprice',errorHandler(async (req, res) => {
+productApiObj.post('/updateprice', errorHandler(async (req, res) => {
     //   console.log(req.body)
-    const product = await Product.findOneAndUpdate({"productName" : req.body.productName},{"productPrice":req.body.productPrice},{returnOriginal:false})
+    const product = await Product.findOneAndUpdate({ "productName": req.body.productName }, { "productPrice": req.body.productPrice }, { returnOriginal: false })
 
-    res.send({message:"Update Successful", productName:req.body.productName})
-  })
-  )
-
-  productApiObj.post('/deleteproduct',errorHandler(async (req, res) => {
-    console.log(req.body)
-  const product = await Product.findOneAndDelete({"productName" : req.body.productName},{returnOriginal:false})
-
-  res.send({product})
+    res.send({ message: "Update Successful", productName: req.body.productName })
 })
 )
 
-productApiObj.get('/getproduct/:id',errorHandler(async (req,res) => {
-const product = await Product.findOne({'productId': req.params.id})
-res.send({product})
+productApiObj.post('/deleteproduct', errorHandler(async (req, res) => {
+    console.log(req.body)
+    const product = await Product.findOneAndDelete({ "productName": req.body.productName }, { returnOriginal: false })
+
+    res.send({ product })
+})
+)
+
+productApiObj.get('/getproduct/:id', errorHandler(async (req, res) => {
+    const product = await Product.findOne({ 'productId': req.params.id })
+    res.send({ product })
 }))
 
+productApiObj.post('/updateproduct', errorHandler(async (req, res) => {
+      console.log(req.body)
+    const product = await Product.findOneAndUpdate({ "productId": req.body.productId }, { "productName": req.body.productName, "productPrice": req.body.productPrice, "productBrand" : req.body.productBrand, "productCategory": req.body.productCategory , "productDescription": req.body.productDescription }, { returnOriginal: false })
+
+    res.send({ message: "Update Successful"})
+})
+)
 
 
 //export

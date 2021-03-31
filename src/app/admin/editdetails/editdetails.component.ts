@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'services/product.service'
 
 
@@ -12,7 +12,7 @@ export class EditdetailsComponent implements OnInit {
 
   product:any;
 
-  constructor(private ar:ActivatedRoute, private ps:ProductService) { }
+  constructor(private ar:ActivatedRoute, private ps:ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.ar.params.subscribe((data)=>{
@@ -24,7 +24,14 @@ export class EditdetailsComponent implements OnInit {
   }
 
   submitData(ref){
-    console.log("from edit component",ref)
+    // console.log("from edit component",ref)
+    this.ps.updateProduct(ref).subscribe(res=>{
+      if(res['message'] == 'Update Successful') {
+        alert("Updated Successfully")
+        this.router.navigateByUrl('/admin/editproduct')
+      }
+    })
+
     
   }
 
