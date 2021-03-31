@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
-
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,6 +27,9 @@ import { EditproductComponent } from './admin/editproduct/editproduct.component'
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
+import { AuthorisationService } from 'services/authorisation.service';
+import { ToastrModule } from 'ngx-toastr';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -56,9 +59,11 @@ import { EditdetailsComponent } from './admin/editdetails/editdetails.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthorisationService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

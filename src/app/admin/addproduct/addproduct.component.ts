@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -29,13 +29,20 @@ export class AddproductComponent implements OnInit {
  this.formData.append('photo',this.file,this.file.name);
  this.formData.append("userObj",JSON.stringify(userObj))
  
- this.us.addProduct(this.formData).subscribe(
-  res=>{
-    console.log(res['message'])
+ this.us.addProduct(this.formData).subscribe(res=>{
+   // console.log(res['message'])
       if(res['message'] == "Product added"){
         alert(res['message'])
         //navigate to add product
         this.router.navigateByUrl("/admin/home")
+      }
+      else if(res['message'] == "Unauthorised access"){
+        alert("Please login to access")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res['message'] == "Session Expired"){
+        alert("Please relogin to continue")
+        this.router.navigateByUrl("/login")
       }
       else{
         alert(res['message'])

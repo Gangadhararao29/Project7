@@ -18,17 +18,31 @@ export class EditdetailsComponent implements OnInit {
     this.ar.params.subscribe((data)=>{
       this.ps.getProductById(data.id).subscribe((obj)=>{
         this.product = obj.product;
-        console.log(this.product);
+        //  console.log("product ngonint",this.product);
       })
     })
   }
 
   submitData(ref){
-    // console.log("from edit component",ref)
-    this.ps.updateProduct(ref).subscribe(res=>{
+    let newData = ref.value;
+
+    // console.log("from component",newData)
+  
+    this.ps.updateProduct(newData).subscribe(res=>{
       if(res['message'] == 'Update Successful') {
         alert("Updated Successfully")
         this.router.navigateByUrl('/admin/editproduct')
+      }
+      else if(res['message'] == "Unauthorised access"){
+        alert("Please login to access")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res['message'] == "Session Expired"){
+        alert("Please relogin to continue")
+        this.router.navigateByUrl("/login")
+      }
+      else{
+        alert(res["message"])
       }
     })
 

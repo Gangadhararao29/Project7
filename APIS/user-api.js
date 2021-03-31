@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken")
 const userApiObject = express.Router();
 
 
-//import validate token middleware
-// const validateToken=require("./middlewares/verifyToken")
+// import validate token middleware
+const validateToken=require("./middlewares/verifyToken")
 
 // userApiObject.get('/getuser', async (req, res) => {
 //   const user = await userModel.find()
@@ -118,7 +118,7 @@ userApiObject.post("/login", async (req, res) => {
   let value= await bcrypt.compare(loginObj.password,userData.password)
   
   if (value) {
-    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 600 })
+    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 100 })
     // console.log(loginObj)
     res.send({ message: "login successful", token: signedToken, userName: loginObj.userName ,userTypeAdmin : userData.userTypeAdmin})
   }

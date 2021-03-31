@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { UserService } from 'services/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private us: UserService, private router: Router) {}
+  constructor(private us: UserService, private router: Router, private toastr:ToastrService) {}
 
   Name: string;
 
@@ -22,16 +23,16 @@ export class LoginComponent implements OnInit {
     // console.log(loginObj);
     this.us.loginUser(loginObj).subscribe((res) => {
       if (res['message'] == 'Please enter Username'){
-        alert('Please enter Username');
+        this.toastr.success('Please enter Username');
       }
       else if (res['message'] == 'Username not found') {
-        alert('Incorrect Username');
+        this.toastr.warning('Incorrect Username');
         formRef.reset();
       } else if (res['message'] == 'Invalid password') {
-        alert('Please enter correct password');
+        this.toastr.warning('Please enter correct password');
         formRef.reset();
       } else if (res['message'] == 'login successful') {
-        
+        this.toastr.success('Login Successful');
         localStorage.setItem('token', res['token']);
         localStorage.setItem('userName', res['userName']);
 

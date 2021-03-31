@@ -37,7 +37,16 @@ export class UpdatepricesComponent implements OnInit{
         this.ps.updateProductsPrice(productValue).subscribe((res) => {
           if (res['message'] == 'Update Successful') {
             this.text1 += `<p style="color:green"> ${res['productName']} price updated successfully </p> `;
-          } else {
+          }
+          else if(res['message'] == "Unauthorised access"){
+            alert("Please login to access")
+            this.router.navigateByUrl("/login")
+          }
+          else if(res['message'] == "Session Expired"){
+            alert("Please relogin to continue")
+            this.router.navigateByUrl("/login")
+          }
+          else {
             this.text1 += `<p style="color:red"> ${res['productName']} price update failed</p>`;
           }
           document.getElementById('status').innerHTML = this.text1;

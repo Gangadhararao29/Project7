@@ -53,7 +53,26 @@ export class EditproductComponent implements OnInit {
     this.router.navigateByUrl(`admin/editdetails/${id}`)
   }
 
-  delete(){
+  delete(id){
+    this.ps.deleteProduct(id).subscribe(res=>{
+      if(res['message']=="Product deleted")
+      {
+        alert("Product deleted Successfully")
+        this.router.navigateByUrl('/admin/home')
+      }
+      else if(res['message'] == "Unauthorised access"){
+        alert("Please login to access")
+        this.router.navigateByUrl("/login")
+      }
+      else if(res['message'] == "Session Expired"){
+        alert("Please relogin to continue")
+        this.router.navigateByUrl("/login")
+      }
+      else
+      {
+        alert("Something went wrong in deleting the Product")
+      }
 
+    })
   }
 }
