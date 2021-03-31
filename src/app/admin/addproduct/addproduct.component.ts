@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 import { UserService } from '../../../../services/user.service';
 
@@ -11,7 +12,7 @@ import { UserService } from '../../../../services/user.service';
 })
 export class AddproductComponent implements OnInit {
 
-  constructor(private us:UserService,private router:Router) { }
+  constructor(private us:UserService,private router:Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -32,25 +33,25 @@ export class AddproductComponent implements OnInit {
  this.us.addProduct(this.formData).subscribe(res=>{
    // console.log(res['message'])
       if(res['message'] == "Product added"){
-        alert(res['message'])
+        this.toastr.success("Product added Successfully")
         //navigate to add product
         this.router.navigateByUrl("/admin/home")
       }
       else if(res['message'] == "Unauthorised access"){
-        alert("Please login to access")
+        this.toastr.warning("Unauthorised access","Please login to access")
         this.router.navigateByUrl("/login")
       }
       else if(res['message'] == "Session Expired"){
-        alert("Please relogin to continue")
+        this.toastr.warning("Session Expired","Please relogin to continue")
         this.router.navigateByUrl("/login")
       }
       else{
-        alert(res['message'])
+        this.toastr.warning(res['message'])
       }
     
     },
     err=>{
-      alert("Something went wrong")
+      this.toastr.warning("Something went wrong")
       console.log(err)
     }
   )

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service'
 
 
@@ -12,7 +13,7 @@ export class EditdetailsComponent implements OnInit {
 
   product:any;
 
-  constructor(private ar:ActivatedRoute, private ps:ProductService, private router: Router) { }
+  constructor(private ar:ActivatedRoute, private ps:ProductService, private router: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.ar.params.subscribe((data)=>{
@@ -30,19 +31,19 @@ export class EditdetailsComponent implements OnInit {
   
     this.ps.updateProduct(newData).subscribe(res=>{
       if(res['message'] == 'Update Successful') {
-        alert("Updated Successfully")
+        this.toastr.success("Updated Successfully")
         this.router.navigateByUrl('/admin/editproduct')
       }
       else if(res['message'] == "Unauthorised access"){
-        alert("Please login to access")
+        this.toastr.warning("Unauthorised access","Please login to access")
         this.router.navigateByUrl("/login")
       }
       else if(res['message'] == "Session Expired"){
-        alert("Please relogin to continue")
+        this.toastr.warning("Session Expired","Please relogin to continue")
         this.router.navigateByUrl("/login")
       }
       else{
-        alert(res["message"])
+        this.toastr.warning(res["message"])
       }
     })
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ProductService } from 'services/product.service';
   styleUrls: ['./updateprices.component.css'],
 })
 export class UpdatepricesComponent implements OnInit{
-  constructor(private ps: ProductService, private router: Router) {}
+  constructor(private ps: ProductService, private router: Router, private toastr:ToastrService) {}
   productsArray = [];
   arrItems = [];
   text1 = '';
@@ -39,11 +40,11 @@ export class UpdatepricesComponent implements OnInit{
             this.text1 += `<p style="color:green"> ${res['productName']} price updated successfully </p> `;
           }
           else if(res['message'] == "Unauthorised access"){
-            alert("Please login to access")
+            this.toastr.warning("Unauthorised access","Please login to access")
             this.router.navigateByUrl("/login")
           }
           else if(res['message'] == "Session Expired"){
-            alert("Please relogin to continue")
+            this.toastr.warning("Session Expired","Please relogin to continue")
             this.router.navigateByUrl("/login")
           }
           else {
@@ -56,6 +57,6 @@ export class UpdatepricesComponent implements OnInit{
     
     // console.log(this.text1)
     document.getElementById('status').innerHTML = this.text1;
-    alert("Updated Successfully")
+    this.toastr.success("Updated Successfully")
   }
 }
