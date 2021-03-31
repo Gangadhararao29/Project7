@@ -18,5 +18,8 @@ export class ProductService {
 
   getProductById(id):Observable<any> {
     return this.hc.get(`/product/getproduct/${id}`)
-}
+  }
+  updateProduct(ref):Observable<any> {
+    return this.hc.post('/product/updateproduct',ref)
+  }
 }

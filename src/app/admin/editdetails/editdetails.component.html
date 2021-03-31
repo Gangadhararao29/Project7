@@ -14,10 +14,6 @@
     </div>
     <form class="form" #ref="ngForm" (ngSubmit)="submitData(ref.value)">
         <div class=" mb-3">
-            <input type="number" #id class="form-control" id="productId" placeholder="pid" name="productId"  [ngModel]="product.productId"/>
-            <label for="productId">Product Id</label>
-        </div>
-        <div class=" mb-3">
             <input type="text" #name class="form-control" id="productname" placeholder="pname" name="productName" [ngModel]="product.productName"  />
             <label for="productname">Product Name</label>
         </div>
