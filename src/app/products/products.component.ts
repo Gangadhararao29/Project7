@@ -85,28 +85,32 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product) {
-    console.log("is this working")
+    
     let productObj = {
       userName: ' ',
       productId: Number,
+      quantity:1
     };
     productObj.userName = localStorage.getItem('userName');
     productObj.productId = product.productId;
 
-    console.log('productObj',productObj)
 
     if (productObj.userName) {
       this.us.addToCart(productObj).subscribe((res) => {
         if (res['message'] == 'Product added to the cart Successful') {
           this.toastr.success('Product added to the cart Successful');
-        } else {
+        } 
+        else if(res['message'] == 'Product quantity updated'){
+          this.toastr.success('Product quantity updated');
+        } 
+        else{
           this.toastr.warning('Something went wrong');
           console.log(res['err']);
         }
       });
     }
     else{
-      this.toastr.warning('Please login to add to cart')
+      this.toastr.warning('Please login to Add to your cart')
       this.router.navigateByUrl('/login')
     }
   }

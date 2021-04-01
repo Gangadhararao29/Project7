@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'services/user.service';
 
 @Component({
   selector: 'app-usernav',
@@ -9,14 +10,19 @@ import { Router } from '@angular/router';
 export class UsernavComponent implements OnInit {
 
   Name="";
-  constructor(private router:Router) { }
+  constructor(private router:Router, private us:UserService) { }
 
   num=0;
 
   ngOnInit(): void {
     //get username from localstorage
    this.Name= localStorage.getItem("userName")
+    let nameOrg = this.Name;
    this.Name = this.Name.charAt(0).toUpperCase() + this.Name.slice(1)
+
+    this.us.getCount(nameOrg).subscribe(res=>{
+      this.num =res['message']
+    })
   }
 
   logOut(){
