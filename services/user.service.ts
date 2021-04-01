@@ -26,4 +26,11 @@ export class UserService {
   checkAdminUser(userName):Observable<any>{
     return this.hc.post("/user/checkadminuser",userName)
   }
+  getCart(userName):Observable<any>{
+    // console.log("from service",userObj)
+    return this.hc.get(`/user/getcart/${userName}`)
+  }
+  addToCart(productObj):Observable<any>{
+    return this.hc.post('/user/addtocart',productObj)
+  }
 }

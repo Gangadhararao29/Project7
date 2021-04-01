@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service';
 import { UserService } from 'services/user.service';
 
@@ -20,7 +21,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private ps: ProductService,
     private us: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -60,8 +62,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  addToCart(product) {}
-
   details(id) {
     let user = localStorage.getItem('userName');
     if (user) {
@@ -81,6 +81,33 @@ export class ProductsComponent implements OnInit {
       });
     } else {
       this.router.navigateByUrl(`/productdetails/${id}`);
+    }
+  }
+
+  addToCart(product) {
+    console.log("is this working")
+    let productObj = {
+      userName: ' ',
+      productId: Number,
+    };
+    productObj.userName = localStorage.getItem('userName');
+    productObj.productId = product.productId;
+
+    console.log('productObj',productObj)
+
+    if (productObj.userName) {
+      this.us.addToCart(productObj).subscribe((res) => {
+        if (res['message'] == 'Product added to the cart Successful') {
+          this.toastr.success('Product added to the cart Successful');
+        } else {
+          this.toastr.warning('Something went wrong');
+          console.log(res['err']);
+        }
+      });
+    }
+    else{
+      this.toastr.warning('Please login to add to cart')
+      this.router.navigateByUrl('/login')
     }
   }
 }

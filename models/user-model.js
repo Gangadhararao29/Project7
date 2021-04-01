@@ -10,7 +10,8 @@ const UserSchema = new mongoose.Schema({
     userTypeAdmin: {
         type:Boolean,
         default:false
-    }
+    },
+    cart:[Number],
 })
 
 const User = mongoose.model('user',UserSchema)

@@ -4,6 +4,7 @@ const userModel = require('../models/user-model')
 const jwt = require("jsonwebtoken")
 
 const userApiObject = express.Router();
+const errorHandler = require("express-async-handler")
 
 
 // import validate token middleware
@@ -127,6 +128,20 @@ userApiObject.post("/login", async (req, res) => {
   }
 
 })
+
+userApiObject.post('/addtocart', errorHandler(async(req,res)=>{
+
+  const cart = await userModel.findOneAndUpdate({"userName": req.body.userName}, {$push: {"cart": req.body.productId}}, { returnOriginal: false })
+
+  res.send({ message: "Product added to the cart Successful" })
+  
+}))
+
+userApiObject.get('/getcart/:userName', errorHandler(async (req, res) => {
+ 
+  const user = await userModel.findOne({ 'userName': req.params.userName })
+  res.send({message:user.cart})
+}))
 
 
 module.exports = userApiObject;
