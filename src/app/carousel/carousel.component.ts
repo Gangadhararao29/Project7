@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
   carouselimage=[
-    "../assets/farm-scene-with-red-barn-field-landscape_1308-54361.jpg",
-    "../assets/hand-drawn-farming-profession_23-2148885540.jpg",
-    "../assets/organic-flat-design-farming-profession-collection_23-2148887073.jpg"
+    "../../assets/bg_1.jpg",
+    "../../assets/bg_2.jpg",
+    "../../assets/bg_3.jpg"
   ]
 
   constructor() { }
