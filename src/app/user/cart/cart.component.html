@@ -27,7 +27,7 @@
             />
           </td>
           <td>{{ product.productName }}</td>
-          <td>{{ product.productPrice }}</td>
+          <td>₹{{ product.productPrice }}</td>
           <td>{{ product.productBrand }}</td>
           <td>{{ product.quantity}}</td>
           <td><button class="btn btn-danger" (click)='deleteCartItem(product.productId)'>Remove</button></td>
@@ -37,7 +37,7 @@
           <td></td>
           <td></td>
           <th>Total:</th>
-          <th>{{sum}}</th>
+          <th>₹{{sum}}</th>
           <td></td>
           <td></td>
           <td></td>

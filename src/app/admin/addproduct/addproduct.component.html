@@ -5,11 +5,11 @@
                 List</span>
         </h3>
     </div>
-    <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref.value)">
-        <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="productId" placeholder="pid" name="productId" ngModel />
+    <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref)">
+         <div class="form-floating mb-3">
+            <input type="number"  class="form-control" id="productId" placeholder="pid" name="productId" [ngModel]='uniqueId()' readonly />
             <label for="productId">Product Id</label>
-        </div>
+        </div> 
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="productname" placeholder="pname" name="productName" ngModel />
             <label for="productname">Product Name</label>
@@ -48,7 +48,7 @@
 
         <div class="form-group mb-3">
             <label for="uploadphoto" class="form-label rounded bg-light m-0 px-2">Upload picture of the Product</label>
-                <input type="file" class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*"/>
+                <input type="file" #photo  id="uploadphoto"  class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*"/>
         </div>
 
         <div class="text-center mb-3">

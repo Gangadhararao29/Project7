@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'services/cart.service';
 import { UserService } from 'services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserService } from 'services/user.service';
 export class UsernavComponent implements OnInit {
 
   Name="";
-  constructor(private router:Router, private us:UserService) { }
+  constructor(private router:Router, private us:UserService,private cs:CartService) { }
 
   num=0;
 
@@ -22,7 +23,9 @@ export class UsernavComponent implements OnInit {
 
     this.us.getCount(nameOrg).subscribe(res=>{
       this.num =res['message']
+      // this.cs.setNum(res['message'])
     })
+    this.cs.getNum().subscribe(numValue=>this.num=numValue);
   }
 
   logOut(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'services/cart.service';
 import { ProductService } from 'services/product.service';
 import { UserService } from 'services/user.service';
 
@@ -14,26 +15,27 @@ export class CartComponent implements OnInit {
   cartsArray = [];
   notFoundItems = [];
   cart = [];
-  sum=0;
+  sum = 0;
   userName = localStorage.getItem('userName');
 
   constructor(
     private ps: ProductService,
     private us: UserService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private cs: CartService
   ) {}
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
       // console.log("mes1",res['message'])
       this.productsArray = res['message'];
-     // console.log('in product dispaly', this.productsArray);
+      // console.log('in product dispaly', this.productsArray);
     });
 
     this.us.getCart(this.userName).subscribe((res) => {
       this.cart = res['message'];
-     // console.log('in cart display ids', this.cart);
+      // console.log('in cart display ids', this.cart);
     });
 
     // setTimeout(() => {document.getElementById('spinner').style.display='none'}, 1000);
@@ -44,9 +46,9 @@ export class CartComponent implements OnInit {
     // this.loadValues();
     setTimeout(() => {
       document.getElementById('spinner').style.display = 'none';
-      console.log(this.cartsArray.length)
-      if(this.cartsArray.length==0){
-      document.getElementById('noitems').style.display = 'block';
+      console.log(this.cartsArray.length);
+      if (this.cartsArray.length == 0) {
+        document.getElementById('noitems').style.display = 'block';
       }
     }, 1000);
   }
@@ -83,12 +85,15 @@ export class CartComponent implements OnInit {
       }
       this.totalsum();
     });
+    this.us.getCount(this.userName).subscribe((res) => {
+      this.cs.setNum(res['message'] - 1);
+    });
   }
 
   totalsum() {
-    this.sum =0;
-    for(let x of this.cartsArray){
-      this.sum += x.productPrice * x.quantity
+    this.sum = 0;
+    for (let x of this.cartsArray) {
+      this.sum += x.productPrice * x.quantity;
     }
   }
 }

@@ -121,7 +121,7 @@ userApiObject.post("/login", async (req, res) => {
   let value = await bcrypt.compare(loginObj.password, userData.password)
 
   if (value) {
-    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 100 })
+    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 1000 })
     // console.log(loginObj)
     res.send({ message: "login successful", token: signedToken, userName: loginObj.userName, userTypeAdmin: userData.userTypeAdmin })
   }

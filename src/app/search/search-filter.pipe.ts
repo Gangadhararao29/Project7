@@ -9,7 +9,7 @@ export class SearchFilterPipe implements PipeTransform {
     if(!productsArray || !searchText){
       return productsArray;
     }
-    console.log(searchText)
+    //console.log(searchText)
     return productsArray.filter(product => product.productName.toString().toLowerCase().includes(searchText.toString().toLowerCase()))
   }
 

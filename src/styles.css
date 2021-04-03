@@ -14,3 +14,8 @@ body{
     top: 0;
     z-index: 10;
 }
+
+.navbar-brand{
+    font-family: 'Galada', cursive;
+    font-size: larger;
+    }
