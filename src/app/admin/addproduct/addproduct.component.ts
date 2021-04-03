@@ -21,7 +21,7 @@ export class AddproductComponent implements OnInit {
   file: File;
   incomingfile(event) {
     this.file = event.target.files[0];
-    console.log('file', this.file);
+    //console.log('file', this.file);
   }
 
   submitUserData(userObj) {
@@ -36,7 +36,7 @@ export class AddproductComponent implements OnInit {
         if (res['message'] == 'Product added') {
           this.toastr.success('Product added Successfully');
           userObj.reset();
-          this.photoRef.nativeElement.value = "";
+          this.photoRef.nativeElement.value = '';
 
           //navigate to add product
           // this.router.navigateByUrl("/admin/home")
@@ -56,9 +56,4 @@ export class AddproductComponent implements OnInit {
       }
     );
   }
-
-  uniqueId(){
-   return Date.now();
-}
-
 }
