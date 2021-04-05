@@ -15,6 +15,9 @@ export class UserService {
   getUser(userName):Observable<any>{
     return this.hc.get(`/user/getuser/${userName}`)
   }
+  updateUserDetails(userObj):Observable<any>{
+    return this.hc.post("/user/updateuserdetails",userObj)
+  }
   loginUser(loginObj):Observable<any>{
     return this.hc.post("/user/login",loginObj)
   }

@@ -22,37 +22,37 @@
     </div>
 
     <div style="width: 50%; height: 50%;"  class="container">
-      <form #formRef="ngForm"  >
+      <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
           <p class="d-inline-block">Please rate product</p>
           <div class="d-inline-block">
             <div class="d-flex justify-content-start">
               <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" disabled>
-              <label class="form-check-label" for="flexRadioDisabled">
+              <input class="form-check-input" type="radio" name="productRating" id="productRating" value="1" ngModel  >
+              <label class="form-check-label" for="productRating">
                 1
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" disabled>
-              <label class="form-check-label" for="flexRadioCheckedDisabled">
+              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="2" ngModel >
+              <label class="form-check-label" for=" productRating">
                 2
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled"  disabled>
-              <label class="form-check-label" for="flexRadioDisabled">
+              <input class="form-check-input" type="radio" name="productRating" id="productRating" value="1" ngModel  >
+              <label class="form-check-label" for="productRating">
                 3
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled"  disabled>
-              <label class="form-check-label" for="flexRadioCheckedDisabled">
+              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="1" ngModel  >
+              <label class="form-check-label" for=" productRating">
                 4
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled"  disabled>
-              <label class="form-check-label" for="flexRadioCheckedDisabled">
+              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="1" ngModel  >
+              <label class="form-check-label" for=" productRating">
                 5
               </label>
             </div></div>
@@ -60,8 +60,8 @@
           
 
             <div class="form-floating my-3">
-              <textarea type="text" class="form-control" id="productcomments" placeholder="Write Comments here" style="height: 100px" disabled></textarea>
-              <label for="productdescription">Comments</label>
+              <textarea type="text" class="form-control" id="productComments" name="productComments" placeholder="Write Comments here" style="height: 100px"  ></textarea>
+              <label for="productComments">Comments</label>
             </div>
 
             <div class="text-center my-3">

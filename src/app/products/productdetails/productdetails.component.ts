@@ -22,4 +22,8 @@ export class ProductdetailsComponent implements OnInit {
     })
   }
 
+  onSubmit(formRef){
+    console.log(formRef.value)
+  }
+
 }

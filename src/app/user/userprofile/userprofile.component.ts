@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'services/user.service';
 
 @Component({
@@ -8,14 +9,20 @@ import { UserService } from 'services/user.service';
   styleUrls: ['./userprofile.component.css'],
 })
 export class UserprofileComponent implements OnInit {
-  constructor(private us: UserService, private router: Router) {}
+
+  @ViewChild('phone') phoneRef: ElementRef
+  constructor(
+    private us: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   userObj: any;
+  key = false;
+  userName = localStorage.getItem('userName');
 
   ngOnInit(): void {
-    let userName = localStorage.getItem('userName');
-
-    this.us.getUser(userName).subscribe(
+    this.us.getUser(this.userName).subscribe(
       (res) => {
         if (res['message'] == 'failed') {
           alert(res['reason']);
@@ -32,7 +39,29 @@ export class UserprofileComponent implements OnInit {
       }
     );
   }
-  onSubmit(formRef){
-  
+
+  onSubmit(formRef) {
+    console.log(formRef.value);
+    let userObj = {
+      userName: '',
+      phone: Number,
+    };
+    userObj.userName = this.userName;
+    userObj.phone = formRef.value.phone;
+    this.us.updateUserDetails(userObj).subscribe((res) => {
+      if (res['message'] == 'User phone number updated') {
+        this.toastr.success('User phone number updated');
+        this.phoneRef.nativeElement.value = userObj.phone;
+      } else {
+        this.toastr.warning('Something went wrong');
+        console.log(res['err']);
+      }
+    });
+
+    this.key = false;
+  }
+
+  updateProfile() {
+    this.key = true;
   }
 }

@@ -31,6 +31,11 @@ userApiObject.get('/getuser/:userName', errorHandler(async (req, res) => {
   }
 }))
 
+userApiObject.post('/updateuserdetails',errorHandler(async (req,res)=>{
+  const user = await userModel.findOneAndUpdate({ 'userName': req.body.userName },{'phone' : req.body.phone})
+  res.send({message:"User phone number updated"})
+}))
+
 userApiObject.post('/checkuser', async (req, res) => {
   const user = await userModel.findOne({ "userName": req.body.userName })
 
