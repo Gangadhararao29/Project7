@@ -12,7 +12,9 @@ export class UserService {
   createUser(userObj):Observable<any>{
     return this.hc.post("/user/createuser",userObj)
   }
-
+  getUser(userName):Observable<any>{
+    return this.hc.get(`/user/getuser/${userName}`)
+  }
   loginUser(loginObj):Observable<any>{
     return this.hc.post("/user/login",loginObj)
   }
@@ -33,8 +35,11 @@ export class UserService {
   addToCart(productObj):Observable<any>{
     return this.hc.post('/user/addtocart',productObj)
   }
-  deleteCart(userName,id):Observable<any>{
-    return this.hc.post(`/user/deletecart/${userName}/${id}`,"")
+  removeQuantity(userName,id):Observable<any>{
+    return this.hc.post(`/user/removequantity/${userName}/${id}`,"")
+  }
+  removeCartItem(userName,id):Observable<any>{
+    return this.hc.post(`/user/removecartitem/${userName}/${id}`,"")
   }
   getCount(userName):Observable<any>{
     // console.log("from service",userObj)

@@ -20,6 +20,16 @@ const validateToken = require("./middlewares/verifyToken")
 //     res.sendStatus(500).send(err);
 //   }
 // })
+userApiObject.get('/getuser/:userName', errorHandler(async (req, res) => {
+  const user = await userModel.findOne({ 'userName': req.params.userName })
+  // console.log(user)
+  if (user) {
+    res.send({ message: user })
+  }
+  else {
+    res.send({ message: "No user found" })
+  }
+}))
 
 userApiObject.post('/checkuser', async (req, res) => {
   const user = await userModel.findOne({ "userName": req.body.userName })
@@ -162,22 +172,20 @@ userApiObject.get('/getcart/:userName', errorHandler(async (req, res) => {
   res.send({ message: user.cart })
 }))
 
-userApiObject.post('/deletecart/:userName/:id', errorHandler(async (req, res) => {
+userApiObject.post('/removequantity/:userName/:id', errorHandler(async (req, res) => {
 
   const cartObj = await userModel.findOne({ "userName": req.params.userName, cart: { $elemMatch: { productId: req.params.id } } })
 
-  
   if (cartObj.cart) {
 
     for (let x of cartObj.cart) {
       if (x.productId == req.params.id) {
         x.quantity--;
-        if(x.quantity<1)
-        {
+        if (x.quantity < 1) {
           const newItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
-          { $pull: { 'cart': { productId: req.params.id } } }, { returnOriginal: false, upsert: true, new: true })
-    
-        res.send({ message: "Product deleted from the cart Successful" })
+            { $pull: { 'cart': { productId: req.params.id } } }, { returnOriginal: false, upsert: true, new: true })
+
+          res.send({ message: "Product deleted from the cart Successful" })
         }
       }
     }
@@ -187,13 +195,23 @@ userApiObject.post('/deletecart/:userName/:id', errorHandler(async (req, res) =>
   }
 }))
 
-userApiObject.get('/getcount/:userName',errorHandler(async(req,res)=>{
-  let count=0;
-  const cartObj = await userModel.findOne({"userName":req.params.userName})
-  for (let x of cartObj.cart){
+userApiObject.post('/removecartitem/:userName/:id', errorHandler(async (req, res) => {
+
+  const findItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
+    { $pull: { 'cart': { productId: req.params.id } } }, { returnOriginal: false, upsert: true, new: true })
+
+  // console.log(findItem);
+  res.send({ message: "Product deleted from the cart Successful" })
+
+}))
+
+userApiObject.get('/getcount/:userName', errorHandler(async (req, res) => {
+  let count = 0;
+  const cartObj = await userModel.findOne({ "userName": req.params.userName })
+  for (let x of cartObj.cart) {
     count += x.quantity;
   }
-  res.send({message:count})
+  res.send({ message: count })
 }))
 
 

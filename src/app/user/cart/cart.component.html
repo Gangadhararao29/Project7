@@ -8,7 +8,7 @@
 </div>
 
   <div class="table-responsive mt-2">
-    <table class="table table-striped table-hover text-center">
+    <table class="table table-striped table-hover text-center align-middle">
       <thead>
         <th>Sno.</th>
         <th>Product Image</th>
@@ -29,8 +29,11 @@
           <td>{{ product.productName }}</td>
           <td>₹{{ product.productPrice }}</td>
           <td>{{ product.productBrand }}</td>
-          <td>{{ product.quantity}}</td>
-          <td><button class="btn btn-danger" (click)='deleteCartItem(product)'>Remove</button></td>
+          <td>
+              <button class="btn btn-danger rounded-circle" (click)='removeQuantity(product)'> – </button>&nbsp; {{ product.quantity}} &nbsp;
+              <button class="btn btn-danger rounded-circle" (click)='addQuantity(product)'> + </button>
+          </td>
+          <td><button class="btn btn-close" (click)='deleteCartItem(product)'></button></td>
         </tr>
 
         <tr>
@@ -49,28 +52,31 @@
 
 <!-- EXTRA -->
 <div id="spinner">
+  <!-- <div class="d-flex align-items-center text-success">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div> -->
   <div class="d-flex justify-content-center">
     <div class="spinner-grow text-primary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
     <div class="spinner-grow text-secondary" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
     <div class="spinner-grow text-success" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
     <div class="spinner-grow text-danger" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
     <div class="spinner-grow text-warning" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
     <div class="spinner-grow text-info" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
-
     <div class="spinner-grow text-dark" role="status">
-      <span class="sr-only">Loading...</span>
+      <span class="visually-hidden">Loading...</span>
     </div>
   </div>
 </div>

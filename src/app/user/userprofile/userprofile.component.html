@@ -1,0 +1,50 @@
+<div class="container bg-light rounded">
+    <h3 class="fw-bold mt-3 text-center">User Profile</h3>
+   <div class="row my-3">
+       <div class="col-sm-4 mt-3">
+           <img [src]="userObj?.image" width="60px" height="80px" class="d-block mx-auto img-fluid">
+       </div>
+       <div class="col-sm-6">
+           <form  #formRef="ngForm" (ngSubmit)="onSubmit(formRef)" class="form">
+               <div class="form-group mb-2">
+                   <label for="username" class="form-label">Username</label>
+                   <input type="text" class="form-control" id="username" placeholder="username" name="username" [value]="userObj.userName" disabled>
+               </div>
+               <div class="form-group mb-2">
+                   <label for="email" class="form-label">Email</label>
+                   <input type="email" class="form-control" id="email" name="email" placeholder="email" [value]="userObj.email" disabled>
+               </div>
+
+               <div class="form-group mb-2">
+                <label for="phone" class="form-label">Phone :</label>
+                <input type="phone" class="form-control" id="phone" name="phone" placeholder="0123456789" ngModel>
+            </div>
+            <hr>
+            <fieldset ngModelGroup="address">
+                <h3>Address:</h3>
+                <div class="form-group mb-2">
+                    <label for="house" class="form-label">House No. :</label>
+                    <input type="text" class="form-control" id="house" name="house" placeholder="house" ngModel>
+                  </div>
+                <div class="form-group mb-2">
+                    <label for="street" class="form-label">Street:</label>
+                    <input type="text" class="form-control" id="street" name="street" placeholder="street" ngModel>
+                  </div>
+                  <div class="form-group mb-2">
+                    <label for="city" class="form-label">City:</label>
+                    <input type="text" class="form-control" id="city" name="city" placeholder="city" ngModel>
+                  </div>
+                  <div class="form-group mb-2">
+                    <label for="zip" class="form-label">Zip:</label>
+                    <input type="text" class="form-control" id="zip" name="zip" placeholder="500090" ngModel>
+                  </div>
+              </fieldset>
+              <div class="my-3 text-center">
+                <button class="btn btn-success">Submit</button>
+              </div>
+           </form>
+       </div>
+       <div class="col-sm-2"></div>
+   </div>
+   <br><br><br><br><br>
+</div>
