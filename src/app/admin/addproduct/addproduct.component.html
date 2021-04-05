@@ -5,13 +5,13 @@
                 List</span>
         </h3>
     </div>
-    <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref.value)">
-        <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="productId" placeholder="pid" name="productId" ngModel />
+    <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref)">
+         <!-- <div class="form-floating mb-3">
+            <input type="number"  class="form-control" id="productId" placeholder="pid" name="productId" [ngModel]='uniqueId()' readonly />
             <label for="productId">Product Id</label>
-        </div>
+        </div>  -->
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productname" placeholder="pname" name="productName" ngModel />
+            <input type="text" class="form-control" id="productname" placeholder="pname" name="productName" ngModel required />
             <label for="productname">Product Name</label>
         </div>
         <div class="form-floating mb-3">
@@ -22,7 +22,7 @@
         <div class="form-floating mb-3">
             <!-- <input type="text" class="form-control" id="productbrand" placeholder="pbrand" name="productBrand" ngModel>
                     <label for="productbrand">productBrand</label> -->
-            <select class="form-select" id="productbrand" name="productBrand" ngModel>
+            <select class="form-select" id="productbrand" name="productBrand" ngModel required >
                 <option value="">Select Product Type</option>
                 <option value="Organic">Organic</option>
                 <option value="Inorganic">Inorganic</option>
@@ -33,7 +33,7 @@
         <div class="form-floating mb-3">
             <!-- <input type="text" class="form-control" id="productcategory" placeholder="pcategory" name="productCategory"
                 ngModel /> -->
-                <select class="form-select" id="productcategory" name="productCategory" ngModel>
+                <select class="form-select" id="productcategory" name="productCategory" ngModel required >
                     <option value="">Select Category Type</option>
                     <option value="Fruits">Fruits</option>
                     <option value="Vegetables">Vegetables</option>
@@ -42,13 +42,13 @@
         </div>
 
         <div class="form-floating mb-3">
-            <textarea type="text" class="form-control" id="productdescription" placeholder="Product Description here" name="productDescription" ngModel style="height: 100px"></textarea>
+            <textarea type="text" class="form-control" id="productdescription" placeholder="Product Description here" name="productDescription" ngModel required  style="height: 100px"></textarea>
             <label for="productdescription">Product Description</label>
           </div>
 
         <div class="form-group mb-3">
             <label for="uploadphoto" class="form-label rounded bg-light m-0 px-2">Upload picture of the Product</label>
-                <input type="file" class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*"/>
+                <input type="file" #photo  id="uploadphoto"  class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*" required />
         </div>
 
         <div class="text-center mb-3">

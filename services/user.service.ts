@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +25,19 @@ export class UserService {
   //used in home.component.ts
   checkAdminUser(userName):Observable<any>{
     return this.hc.post("/user/checkadminuser",userName)
+  }
+  getCart(userName):Observable<any>{
+    // console.log("from service",userObj)
+    return this.hc.get(`/user/getcart/${userName}`)
+  }
+  addToCart(productObj):Observable<any>{
+    return this.hc.post('/user/addtocart',productObj)
+  }
+  deleteCart(userName,id):Observable<any>{
+    return this.hc.post(`/user/deletecart/${userName}/${id}`,"")
+  }
+  getCount(userName):Observable<any>{
+    // console.log("from service",userObj)
+    return this.hc.get(`/user/getcount/${userName}`)
   }
 }

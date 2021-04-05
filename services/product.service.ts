@@ -22,7 +22,7 @@ export class ProductService {
   updateProduct(newData):Observable<any> {
     return this.hc.post('/product/updateproduct',newData)
   }
-  deleteProduct(id):Observable<any> {
-    return this.hc.post('/product/deleteproduct',id)
+  deleteProduct(productObj):Observable<any> {
+    return this.hc.post('/product/deleteproduct',productObj)
   }
 }

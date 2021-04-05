@@ -12,7 +12,7 @@ export class UpdatepricesComponent implements OnInit{
   constructor(private ps: ProductService, private router: Router, private toastr:ToastrService) {}
   productsArray = [];
   arrItems = [];
-  text1 = '';
+  text = '';
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
@@ -28,16 +28,20 @@ export class UpdatepricesComponent implements OnInit{
       //Check for new Prices
       if (this.arrItems[`newPrice${i}`]) {
         let productValue = {
+          productId:Number,
           productName: String,
           productPrice: Number,
         };
-
+        productValue.productId = product.productId;
         productValue.productName = product.productName;
         productValue.productPrice = this.arrItems[`newPrice${i}`];
 
+        //assigning ProductPriice to html(DOM)
+        product.productPrice = this.arrItems[`newPrice${i}`];
+
         this.ps.updateProductsPrice(productValue).subscribe((res) => {
           if (res['message'] == 'Update Successful') {
-            this.text1 += `<p style="color:green"> ${res['productName']} price updated successfully </p> `;
+            this.text += `<p style="color:green;"> ${res['productName']} price updated successfully </p> `;
           }
           else if(res['message'] == "Unauthorised access"){
             this.toastr.warning("Unauthorised access","Please login to access")
@@ -48,15 +52,16 @@ export class UpdatepricesComponent implements OnInit{
             this.router.navigateByUrl("/login")
           }
           else {
-            this.text1 += `<p style="color:red"> ${res['productName']} price update failed</p>`;
+            this.text += `<p style="color:red"> ${res['productName']} price update failed</p>`;
           }
-          document.getElementById('status').innerHTML = this.text1;
+          document.getElementById('status').innerHTML = this.text;
         })
       }
     }
-    
+    this.text = ""
+    formRef.reset();
     // console.log(this.text1)
-    document.getElementById('status').innerHTML = this.text1;
+    document.getElementById('status').innerHTML = this.text;
     this.toastr.success("Updated Successfully")
   }
 }

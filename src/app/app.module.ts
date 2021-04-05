@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +29,8 @@ import { ProductdetailsComponent } from './products/productdetails/productdetail
 import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
 import { AuthorisationService } from 'services/authorisation.service';
 import { ToastrModule } from 'ngx-toastr';
-import { from } from 'rxjs';
+
+import { SearchFilterPipe } from './search/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -53,12 +54,14 @@ import { from } from 'rxjs';
     EditproductComponent,
     UpdatepricesComponent,
     ProductdetailsComponent,
-    EditdetailsComponent
+    EditdetailsComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule

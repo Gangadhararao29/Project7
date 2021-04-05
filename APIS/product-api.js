@@ -9,7 +9,7 @@ const Product = require("../models/product-model")
 productApiObj.use(exp.json())
 
 // import validate token middleware
-const validateToken=require("./middlewares/verifyToken")
+const validateToken = require("./middlewares/verifyToken")
 
 
 //imports
@@ -41,20 +41,23 @@ var upload = multer({ storage: storage })
 
 //create a product
 
-productApiObj.post("/addproduct",validateToken, upload.single('photo'), errorHandler(async (req, res) => {
+productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHandler(async (req, res) => {
 
     //console.log("url path is ",req.file.path); 
-
     let productObj = JSON.parse(req.body.userObj);
     productObj.productImage = req.file.path;
-
-    // console.log("productObj", productObj)
+    //Adding unique Id to the productObj
+    productObj.productId = Date.now();
+    console.log("productObj", productObj)
     //search for product in db with productId
-    let productObjFromDb = await Product.findOne({ productId: productObj.productId })
+    let productObjFromDb = await Product.findOne({ productName: productObj.productName, productBrand: productObj.productBrand, productCategory: productObj.productCategory, status: true })
+    //console.log(productObjFromDb);
+
     //if product doesn't exists
     if (productObjFromDb == null) {
         //create a new object
         let newProductObj = new Product(productObj)
+
         //console.log(newProductObj)
         //save it 
         await newProductObj.save()
@@ -70,25 +73,25 @@ productApiObj.post("/addproduct",validateToken, upload.single('photo'), errorHan
 
 productApiObj.get("/getproducts", errorHandler(async (req, res) => {
     //get all products from db
-    let productsArray = await Product.find({"status":true})
+    let productsArray = await Product.find({ "status": true })
 
     res.send({ message: productsArray })
 }))
 
 
-productApiObj.post('/updateprice',validateToken, errorHandler(async (req, res) => {
+productApiObj.post('/updateprice', validateToken, errorHandler(async (req, res) => {
     //   console.log(req.body)
-    const product = await Product.findOneAndUpdate({ "productName": req.body.productName, "status":true }, { "productPrice": req.body.productPrice }, { returnOriginal: false })
+    const product = await Product.findOneAndUpdate({ "productId": req.body.productId, "status": true }, { "productPrice": req.body.productPrice }, { returnOriginal: false })
 
     res.send({ message: "Update Successful", productName: req.body.productName })
 })
 )
 
-productApiObj.post('/deleteproduct',validateToken, errorHandler(async (req, res) => {
-    console.log(req.body)
-    const product = await Product.findOneAndUpdate({ "productId": req.body.productId,  }, { "status" : false })
+productApiObj.post('/deleteproduct', validateToken, errorHandler(async (req, res) => {
+    //console.log(req.body)
+    const product = await Product.findOneAndUpdate({ "productId": req.body.productId, }, { "status": false })
 
-    res.send({ message:"Product deleted"})
+    res.send({ message: "Product deleted" })
 })
 )
 
@@ -97,13 +100,13 @@ productApiObj.get('/getproduct/:id', errorHandler(async (req, res) => {
     res.send({ product })
 }))
 
-productApiObj.post('/updateproduct',validateToken, errorHandler(async (req, res) => {
+productApiObj.post('/updateproduct', validateToken, errorHandler(async (req, res) => {
     //   console.log(req.body)
-      let newDataObj = (req.body)
+    let newDataObj = (req.body)
     //   console.log("recieved data",newDataObj)
-     const product = await Product.findOneAndUpdate({"productId": req.body.productId , "status":true}, { $set : newDataObj}, {new:true})
+    const product = await Product.findOneAndUpdate({ "productId": req.body.productId, "status": true }, { $set: newDataObj }, { new: true })
     // console.log("Product is",product)
-        res.send({ message: "Update Successful"})
+    res.send({ message: "Update Successful" })
 })
 )
 

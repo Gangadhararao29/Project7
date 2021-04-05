@@ -54,12 +54,37 @@ export class EditproductComponent implements OnInit {
     this.router.navigateByUrl(`admin/editdetails/${id}`)
   }
 
-  delete(id){
-    this.ps.deleteProduct(id).subscribe(res=>{
+  delete(product){
+
+    // DOM 
+    let index = this.productsArray.findIndex(x => x == product);
+   
+    if(this.productsArray[index].productBrand == 'Organic'){
+      if(this.productsArray[index].productCategory == 'Fruits'){
+        let index = this.productsOrgaincFruits.findIndex(x => x == product);
+        this.productsOrgaincFruits.splice(index,1)
+      }
+      else if(this.productsArray[index].productCategory == 'Vegetables'){
+        let index = this.productsOrgaincVegetables.findIndex(x => x == product);
+        this.productsOrgaincVegetables.splice(index,1)
+      }
+    }
+    else {
+      if(this.productsArray[index].productCategory == 'Fruits'){
+        let index = this.productsInorgaincFruits.findIndex(x => x == product);
+        this.productsInorgaincFruits.splice(index,1)
+      }
+      else if(this.productsArray[index].productCategory == 'Vegetables'){
+        let index = this.productsInorgaincVegetables.findIndex(x => x == product);
+        this.productsInorgaincVegetables.splice(index,1)
+      }
+    }
+
+    this.ps.deleteProduct(product).subscribe(res=>{
       if(res['message']=="Product deleted")
       {
         this.toastr.success("Product deleted Successfully")
-        this.router.navigateByUrl('/admin/home')
+        //this.router.navigateByUrl('/admin/home')
       }
       else if(res['message'] == "Unauthorised access"){
         this.toastr.warning("Unauthorised access","Please login to access")
