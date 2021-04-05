@@ -25,6 +25,8 @@ export class AddproductComponent implements OnInit {
   }
 
   submitUserData(userObj) {
+    if(userObj.valid){
+
     let formData = new FormData();
     //adding image and other data to FormData object
     formData.append('photo', this.file, this.file.name);
@@ -56,4 +58,8 @@ export class AddproductComponent implements OnInit {
       }
     );
   }
+  else{
+    this.toastr.warning("Please fill all the details in their respective fields")
+  }
+}
 }

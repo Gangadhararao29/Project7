@@ -73,12 +73,19 @@ export class CartComponent implements OnInit {
     //console.log('CartArray', this.cartsArray);
   }
 
-  deleteCartItem(id) {
+  deleteCartItem(product) {
+    let id = product.productId;
     this.us.deleteCart(this.userName, id).subscribe((res) => {
       if (res['message'] == 'Reduced Quantity') {
         this.toastr.success('Reduced Quantity of Item successfully');
+        // let index = this.cartsArray.findIndex((x) => x == product);
+        product.quantity -= 1
+        // this.cartsArray[index].quantity= this.cartsArray[index].quantity-1;
       } else if (res['message'] == 'Product deleted from the cart Successful') {
         this.toastr.success('Product deleted from the cart Successfully');
+        //DOM
+        let index = this.cartsArray.findIndex((x) => x == product);
+        this.cartsArray.splice(index, 1);
       } else {
         this.toastr.warning('Something went wrong');
         console.log(res['err']);
