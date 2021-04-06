@@ -3,64 +3,85 @@
     <div class="m-3">
       <img
         class="center "
-        [src]="product.productImage"
+        [src]="product?.productImage"
         alt=""
       />
     </div>
     <div class="m-3 text-center">
-      <h1 class="text-success">{{ product.productName }}</h1>
-      <h3>Price:₹ {{ product.productPrice }}</h3>
-      <h5 class="text-warning">Type: {{ product.productBrand }}</h5>
-      <h5 class="text-info">Category : {{ product.productCategory }}</h5>
+      <h1 class="text-success">{{ product?.productName }}</h1>
+      <h3>Price:₹ {{ product?.productPrice }}</h3>
+      <h5 class="text-warning">Type: {{ product?.productBrand }}</h5>
+      <h5 class="text-info">Category : {{ product?.productCategory }}</h5>
     </div>
     <div style="width: 50%; height: 50%;" class="container">
-    <p><span class="fs-5 fw-bold">Description:</span>{{product.productDescription}}</p>
+    <p><span class="fs-5 fw-bold">Description:</span>{{product?.productDescription}}</p>
     </div>
-    <div style="width: 50%; height: 50%;" class="container">
-      <p><span class="fs-5 fw-bold">Rating:</span>⭐⭐⭐⭐⭐ {{product.productRating.userRating}}</p>
-      <p><span class="fs-5 fw-bold">Comments:</span><br>demoName1 {{product.productRating.userName}}:demoComment1 {{product.productRating.userComments}}</p>
+<hr>
+<h3 style="width: 50%; height: 50%;" class="container">Overall Product Rating :
+  <span *ngIf=(!overallRating)>No Rating</span>
+  <span *ngIf="overallRating >=0.5 && overallRating<= 1.4 ">⭐({{overallRating}})</span>
+  <span *ngIf="overallRating >=1.5 && overallRating<= 2.4">⭐⭐({{overallRating}})</span>
+  <span *ngIf="overallRating >=2.5 && overallRating<= 3.4">⭐⭐⭐({{overallRating}})</span>
+  <span *ngIf="overallRating >=3.5 && overallRating<= 4.4">⭐⭐⭐⭐({{overallRating}})</span>
+  <span *ngIf="overallRating >=4.5 && overallRating<= 5">⭐⭐⭐⭐⭐({{overallRating}})</span>
+</h3>
+    <!-- ITerable user reviews on product -->
+    <div *ngFor="let review of product?.productReview" style="width: 50%; height: 50%;" class="container">
+     
+      <p><span class="fs-6 fw-bold">User:</span> {{review.userName}}</p>
+      <p><span class="fs-6 fw-bold">Rating:</span>
+        <span *ngIf="review.productRating == 1">⭐({{review.productRating}})</span>
+        <span *ngIf="review.productRating == 2">⭐⭐({{review.productRating}})</span>
+        <span *ngIf="review.productRating == 3">⭐⭐⭐({{review.productRating}})</span>
+        <span *ngIf="review.productRating == 4">⭐⭐⭐⭐({{review.productRating}})</span>
+        <span *ngIf="review.productRating == 5">⭐⭐⭐⭐⭐({{review.productRating}})</span>
+      </p>
+    
+      <p><span class="fs-6 fw-bold">Comments:</span> {{review.productComments}}</p>
+      <hr>
     </div>
-
+<hr>
     <div style="width: 50%; height: 50%;"  class="container">
-      <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)">
-          <p class="d-inline-block">Please rate product</p>
+      <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef,product?.productId)">
+          <p class="d-inline-block fs-5 fw-bold">Please rate product:</p>
+          <br>
           <div class="d-inline-block">
             <div class="d-flex justify-content-start">
               <div class="form-check">
               <input class="form-check-input" type="radio" name="productRating" id="productRating" value="1" ngModel  >
               <label class="form-check-label" for="productRating">
-                1
+                1 &nbsp;&nbsp;
               </label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="2" ngModel >
               <label class="form-check-label" for=" productRating">
-                2
+                2 &nbsp;&nbsp;
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="productRating" id="productRating" value="1" ngModel  >
+              <input class="form-check-input" type="radio" name="productRating" id="productRating" value="3" ngModel  >
               <label class="form-check-label" for="productRating">
-                3
+                3 &nbsp;&nbsp;
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="1" ngModel  >
+              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="4" ngModel  >
               <label class="form-check-label" for=" productRating">
-                4
+                4 &nbsp;&nbsp;
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="1" ngModel  >
+              <input class="form-check-input" type="radio" name="productRating" id=" productRating" value="5" ngModel  >
               <label class="form-check-label" for=" productRating">
-                5
+                5 &nbsp;&nbsp;
               </label>
             </div></div>
           </div>
           
 
             <div class="form-floating my-3">
-              <textarea type="text" class="form-control" id="productComments" name="productComments" placeholder="Write Comments here" style="height: 100px"  ></textarea>
+              <textarea type="text" class="form-control" id="productComments" name="productComments" placeholder="Write Comments here" style="height: 100px" ngModel  ></textarea>
               <label for="productComments">Comments</label>
             </div>
 
