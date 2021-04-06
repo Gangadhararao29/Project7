@@ -48,7 +48,7 @@ productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHa
     productObj.productImage = req.file.path;
     //Adding unique Id to the productObj
     productObj.productId = Date.now();
-    console.log("productObj", productObj)
+    //console.log("productObj", productObj)
     //search for product in db with productId
     let productObjFromDb = await Product.findOne({ productName: productObj.productName, productBrand: productObj.productBrand, productCategory: productObj.productCategory, status: true })
     //console.log(productObjFromDb);
@@ -109,6 +109,36 @@ productApiObj.post('/updateproduct', validateToken, errorHandler(async (req, res
     res.send({ message: "Update Successful" })
 })
 )
+
+productApiObj.post('/addproductreview', errorHandler(async (req, res) => {
+
+    const reviewObj = await Product.findOne({ "productId": req.body.productId, productReview: { $elemMatch: { userName: req.body.userName } } })
+
+    if (reviewObj == null) {
+
+        const newReview = await Product.findOneAndUpdate({ "productId": req.body.productId },
+            { $push: { "productReview": { userName: req.body.userName, productRating: req.body.productRating, productComments: req.body.productComments } } }, { returnOriginal: false, upsert: true, new: true })
+
+        res.send({ message: "Product review submitted" })
+        // console.log('reviewObj',cartObj)
+    }
+    else {
+        //console.log(reviewObj)
+        for (let review of reviewObj.productReview) {
+            if (review.userName == req.body.userName) {
+                review.productRating = req.body.productRating;
+                review.productComments = req.body.productComments;
+            }   
+        }
+        res.send({ message: "Product review updated" })
+            await reviewObj.save();
+    }
+}))
+
+// productApiObj.get('/getproductreviews/:id', errorHandler(async (req, res) => {
+//     const reviews = await Product.find({ "productId": req.params.id })
+//     res.send({ message: reviews.productRating })
+//   }))
 
 
 //export

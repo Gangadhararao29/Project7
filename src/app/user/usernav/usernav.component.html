@@ -41,11 +41,11 @@
         >
       </div>
       <div class="ms-auto me-3">
-        <p class="fs-4 text-light">Hai {{Name}}</p>
+        <p class="fs-4 text-light" style="margin-top: 0.5rem;">Hai <a class='text-light' routerLink="userprofile"> {{Name}}</a></p>
             
       </div>
       <div class="ms-2">
-        <a class="btn btn-success" routerLink="cart">Cart 🛒{{num}}</a>
+        <a class="btn btn-success" routerLink="cart">Cart <span class="badge rounded">🛒{{num}}</span></a>
       </div>
       <div class="ms-2">
         <button class="btn btn-danger" (click)="logOut()">Logout</button>

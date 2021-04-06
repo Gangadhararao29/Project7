@@ -7,19 +7,18 @@ const ProductSchema = new mongoose.Schema({
     productBrand:String,
     productCategory:String,
     productDescription:String,
-    productRating:{
-        type:[{
-        userName:String,
-        userRating:Number,
-        userComments:String
-    }],
-    default:null
- },
     productImage:String,
     status:{
         type:Boolean,
         default:true
-    }
+    },
+    productReview:[{ 
+        userName:String,
+        productRating:Number,
+        productComments:String
+
+ }
+]
 })
 
 const Product = mongoose.model('product',ProductSchema)

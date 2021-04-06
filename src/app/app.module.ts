@@ -31,6 +31,7 @@ import { AuthorisationService } from 'services/authorisation.service';
 import { ToastrModule } from 'ngx-toastr';
 
 import { SearchFilterPipe } from './search/search-filter.pipe';
+import { UserprofileComponent } from './user/userprofile/userprofile.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { SearchFilterPipe } from './search/search-filter.pipe';
     UpdatepricesComponent,
     ProductdetailsComponent,
     EditdetailsComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    UserprofileComponent
   ],
   imports: [
     BrowserModule,

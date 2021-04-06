@@ -25,10 +25,9 @@ export class EditdetailsComponent implements OnInit {
   }
 
   submitData(ref){
+    if(ref.valid){
     let newData = ref.value;
-
     // console.log("from component",newData)
-  
     this.ps.updateProduct(newData).subscribe(res=>{
       if(res['message'] == 'Update Successful') {
         this.toastr.success("Updated Successfully")
@@ -47,7 +46,10 @@ export class EditdetailsComponent implements OnInit {
       }
     })
 
-    
+  }
+  else{
+    this.toastr.warning("Please fill all the details in their respective fields")
+  }
   }
 
 }

@@ -15,6 +15,7 @@ import { EditproductComponent } from './admin/editproduct/editproduct.component'
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
+import { UserprofileComponent } from './user/userprofile/userprofile.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'about', component: AboutComponent },
       { path: 'search', component: SearchComponent },
       { path: 'productdetails/:id', component:ProductdetailsComponent},
+      { path: 'userprofile', component:UserprofileComponent},
       { path: '', redirectTo:'user/home', pathMatch: 'prefix'}
     ]
   },

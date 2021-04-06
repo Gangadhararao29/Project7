@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
     // this.loadValues();
     setTimeout(() => {
       document.getElementById('spinner').style.display = 'none';
-      console.log(this.cartsArray.length);
+      // console.log(this.cartsArray.length);
       if (this.cartsArray.length == 0) {
         document.getElementById('noitems').style.display = 'block';
       }
@@ -73,27 +73,83 @@ export class CartComponent implements OnInit {
     //console.log('CartArray', this.cartsArray);
   }
 
-  deleteCartItem(product) {
-    let id = product.productId;
-    this.us.deleteCart(this.userName, id).subscribe((res) => {
-      if (res['message'] == 'Reduced Quantity') {
-        this.toastr.success('Reduced Quantity of Item successfully');
-        // let index = this.cartsArray.findIndex((x) => x == product);
-        product.quantity -= 1
-        // this.cartsArray[index].quantity= this.cartsArray[index].quantity-1;
-      } else if (res['message'] == 'Product deleted from the cart Successful') {
-        this.toastr.success('Product deleted from the cart Successfully');
-        //DOM
-        let index = this.cartsArray.findIndex((x) => x == product);
-        this.cartsArray.splice(index, 1);
-      } else {
-        this.toastr.warning('Something went wrong');
-        console.log(res['err']);
-      }
-      this.totalsum();
-    });
+  removeQuantity(product) {
+    this.us
+      .removeQuantity(this.userName, product.productId)
+      .subscribe((res) => {
+        if (res['message'] == 'Reduced Quantity') {
+          this.toastr.success('Reduced Quantity of Item successfully');
+          // let index = this.cartsArray.findIndex((x) => x == product);
+          product.quantity -= 1;
+          // this.cartsArray[index].quantity= this.cartsArray[index].quantity-1;
+        } else if (
+          res['message'] == 'Product deleted from the cart Successful'
+        ) {
+          this.toastr.success('Product deleted from the cart Successfully');
+          //DOM
+          let index = this.cartsArray.findIndex((x) => x == product);
+          this.cartsArray.splice(index, 1);
+        } else {
+          this.toastr.warning('Something went wrong');
+          console.log(res['err']);
+        }
+        this.totalsum();
+      });
     this.us.getCount(this.userName).subscribe((res) => {
       this.cs.setNum(res['message'] - 1);
+    });
+  }
+
+  addQuantity(product) {
+    let CartObj = {
+      userName: ' ',
+      productId: Number,
+    };
+    CartObj.userName = localStorage.getItem('userName');
+    CartObj.productId = product.productId;
+
+    if (CartObj.userName) {
+      this.us.addToCart(CartObj).subscribe((res) => {
+        if (res['message'] == 'Product quantity updated') {
+          this.toastr.success('Added product quantity successfully');
+          product.quantity += 1;
+        } else {
+          this.toastr.warning('Something went wrong');
+          console.log(res['err']);
+        }
+        this.totalsum();
+      });
+    } else {
+      this.toastr.warning('Please login to Add to your cart');
+      this.router.navigateByUrl('/login');
+    }
+
+    this.us.getCount(CartObj.userName).subscribe((res) => {
+      // this.num =res['message']
+      // this.cs.setNum(this.num)
+      this.cs.setNum(res['message'] + 1);
+    });
+  }
+
+  deleteCartItem(product) {
+    
+    let quantity =1;
+    this.us.removeCartItem(this.userName, product.productId).subscribe((res) => {
+        if (res['message'] == 'Product deleted from the cart Successful') {
+          this.toastr.success('Product deleted from the cart Successfully');
+          //DOM
+          let index = this.cartsArray.findIndex((x) => x == product);
+          quantity= this.cartsArray[index].quantity;
+          console.log(quantity)
+          this.cartsArray.splice(index, 1);
+        } else {
+          this.toastr.warning('Something went wrong');
+          console.log(res['err']);
+        }
+        this.totalsum();
+      });
+    this.us.getCount(this.userName).subscribe((res) => {
+      this.cs.setNum(res['message'] );
     });
   }
 

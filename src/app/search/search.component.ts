@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'services/cart.service';
 import { ProductService } from 'services/product.service';
 import { UserService } from 'services/user.service';
 
@@ -12,7 +13,7 @@ import { UserService } from 'services/user.service';
 export class SearchComponent implements OnInit {
   productsArray=[];
 
-  constructor(private ps:ProductService, private router:Router,private us:UserService, private toastr:ToastrService) { }
+  constructor(private ps:ProductService, private router:Router,private us:UserService, private toastr:ToastrService,private cs:CartService) { }
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
@@ -30,34 +31,38 @@ export class SearchComponent implements OnInit {
   }
 
   addToCart(product) {
-    
-    let productObj = {
+    let CartObj = {
       userName: ' ',
       productId: Number,
-      quantity:1
+      quantity: 1,
     };
-    productObj.userName = localStorage.getItem('userName');
-    productObj.productId = product.productId;
+    CartObj.userName = localStorage.getItem('userName');
+    CartObj.productId = product.productId;
 
-
-    if (productObj.userName) {
-      this.us.addToCart(productObj).subscribe((res) => {
+    if (CartObj.userName) {
+      this.us.addToCart(CartObj).subscribe((res) => {
         if (res['message'] == 'Product added to the cart Successful') {
           this.toastr.success('Product added to the cart Successful');
-        } 
-        else if(res['message'] == 'Product quantity updated'){
-          this.toastr.success('Product quantity updated');
-        } 
-        else{
+        } else if (res['message'] == 'Product quantity updated') {
+          this.toastr.success(
+            'Product quantity updated',
+            'Product already exists'
+          );
+        } else {
           this.toastr.warning('Something went wrong');
           console.log(res['err']);
         }
       });
+    } else {
+      this.toastr.warning('Please login to Add to your cart');
+      this.router.navigateByUrl('/login');
     }
-    else{
-      this.toastr.warning('Please login to Add to your cart')
-      this.router.navigateByUrl('/login')
-    }
+
+    this.us.getCount(CartObj.userName).subscribe((res) => {
+      // this.num =res['message']
+      // this.cs.setNum(this.num)
+      this.cs.setNum(res['message'] + 1);
+    });
   }
 
 }
