@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   notFoundItems = [];
   cart = [];
   sum = 0;
+  quantity =0;
   userName = localStorage.getItem('userName');
 
   constructor(
@@ -155,8 +156,10 @@ export class CartComponent implements OnInit {
 
   totalsum() {
     this.sum = 0;
+    this.quantity=0;
     for (let x of this.cartsArray) {
       this.sum += x.productPrice * x.quantity;
+      this.quantity += x.quantity
     }
   }
 }
