@@ -120,18 +120,18 @@ productApiObj.post('/addproductreview', errorHandler(async (req, res) => {
             { $push: { "productReview": { userName: req.body.userName, productRating: req.body.productRating, productComments: req.body.productComments } } }, { returnOriginal: false, upsert: true, new: true })
 
         res.send({ message: "Product review submitted" })
-        // console.log('cartObj',cartObj)
+        // console.log('reviewObj',cartObj)
     }
     else {
-        console.log(reviewObj)
+        //console.log(reviewObj)
         for (let review of reviewObj.productReview) {
             if (review.userName == req.body.userName) {
                 review.productRating = req.body.productRating;
-                review.productComments = req.body.productComments
-            }
-            res.send({ message: "Product review updated" })
-            await reviewObj.save();
+                review.productComments = req.body.productComments;
+            }   
         }
+        res.send({ message: "Product review updated" })
+            await reviewObj.save();
     }
 }))
 

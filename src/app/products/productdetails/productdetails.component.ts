@@ -11,7 +11,8 @@ import { ProductService } from 'services/product.service';
 })
 export class ProductdetailsComponent implements OnInit {
   product: any;
-  overallRating=0;
+  overallRating = 0;
+  Rating :any;
 
   constructor(
     private ar: ActivatedRoute,
@@ -35,7 +36,8 @@ export class ProductdetailsComponent implements OnInit {
       total += review.productRating;
       count ++;
     }
-    this.overallRating = total/count;
+    this.overallRating = (total/count)
+    this.Rating =this.overallRating.toFixed(2);
     //console.log(this.overallRating)
       
     }, 200);

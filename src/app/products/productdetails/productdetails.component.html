@@ -19,11 +19,11 @@
 <hr>
 <h3 style="width: 50%; height: 50%;" class="container">Overall Product Rating :
   <span *ngIf=(!overallRating)>No Rating</span>
-  <span *ngIf="overallRating >=0.5 && overallRating<= 1.4 ">⭐({{overallRating}})</span>
-  <span *ngIf="overallRating >=1.5 && overallRating<= 2.4">⭐⭐({{overallRating}})</span>
-  <span *ngIf="overallRating >=2.5 && overallRating<= 3.4">⭐⭐⭐({{overallRating}})</span>
-  <span *ngIf="overallRating >=3.5 && overallRating<= 4.4">⭐⭐⭐⭐({{overallRating}})</span>
-  <span *ngIf="overallRating >=4.5 && overallRating<= 5">⭐⭐⭐⭐⭐({{overallRating}})</span>
+  <span *ngIf="overallRating >=0.5 && overallRating<= 1.4 ">⭐({{Rating}})</span>
+  <span *ngIf="overallRating >=1.5 && overallRating<= 2.4">⭐⭐({{Rating}})</span>
+  <span *ngIf="overallRating >=2.5 && overallRating<= 3.4">⭐⭐⭐({{Rating}})</span>
+  <span *ngIf="overallRating >=3.5 && overallRating<= 4.4">⭐⭐⭐⭐({{Rating}})</span>
+  <span *ngIf="overallRating >=4.5 && overallRating<= 5">⭐⭐⭐⭐⭐({{Rating}})</span>
 </h3>
     <!-- ITerable user reviews on product -->
     <div *ngFor="let review of product?.productReview" style="width: 50%; height: 50%;" class="container">
