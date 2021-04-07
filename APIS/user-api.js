@@ -10,17 +10,9 @@ const errorHandler = require("express-async-handler")
 // import validate token middleware
 const validateToken = require("./middlewares/verifyToken")
 
-// userApiObject.get('/getuser', async (req, res) => {
-//   const user = await userModel.find()
 
-//   try {
-//     res.send({ user });
-//   }
-//   catch (err) {
-//     res.sendStatus(500).send(err);
-//   }
-// })
-userApiObject.get('/getuser/:userName', errorHandler(async (req, res) => {
+//in userprofile
+userApiObject.get('/getuser/:userName', validateToken, errorHandler(async (req, res) => {
   const user = await userModel.findOne({ 'userName': req.params.userName })
   // console.log(user)
   if (user) {
@@ -31,127 +23,78 @@ userApiObject.get('/getuser/:userName', errorHandler(async (req, res) => {
   }
 }))
 
-userApiObject.post('/updateuserdetails',errorHandler(async (req,res)=>{
-  const user = await userModel.findOneAndUpdate({ 'userName': req.body.userName },{'phone' : req.body.phone})
-  res.send({message:"User phone number updated"})
+//update user phone number in usernav-> userprofile component
+userApiObject.post('/updateuserdetails', validateToken, errorHandler(async (req, res) => {
+  const user = await userModel.findOneAndUpdate({ 'userName': req.body.userName }, { 'phone': req.body.phone })
+  res.send({ message: "User phone number updated" })
 }))
 
-userApiObject.post('/checkuser', async (req, res) => {
+//check username in register component in login page
+userApiObject.post('/checkuser', errorHandler(async (req, res) => {
   const user = await userModel.findOne({ "userName": req.body.userName })
-
-  if (user != null) {
-    try {
-      res.send({ message: "Username already present" });
-    }
-    catch (err) {
-      res.sendStatus(500).send(err);
-    }
+  if (user) {
+    res.send({ message: "Username already present" });
   }
   else {
-    try { res.send({ message: "Continue......." }) }
-    catch (err) {
-      res.sendStatus(500).send(err);
-    }
+    res.send({ message: "Continue......." })
   }
-})
+}))
 
-userApiObject.post('/checkadminuser', async (req, res) => {
+//check admin in router home component.ts for navigation
+userApiObject.post('/checkadminuser', errorHandler(async (req, res) => {
   const user = await userModel.findOne({ "userName": req.body.userName })
-  // console.log("request",req.body)
-  // console.log("user",user)
   if (user.userTypeAdmin) {
-    try {
-      res.send({ message: "User is Admin" });
-    }
-    catch (err) {
-      res.sendStatus(500).send(err);
-    }
+    res.send({ message: "User is Admin" });
   }
   else {
-    try { res.send({ message: "Not Admin" }) }
-    catch (err) {
-      res.sendStatus(500).send(err);
-    }
+    res.send({ message: "Not Admin" })
   }
-})
+}))
 
-userApiObject.post('/createuser', async (req, res) => {
+//In register page to create new user
+userApiObject.post('/createuser', errorHandler(async (req, res) => {
   // const prevData = await userModel.findOne({ "Id": (req.body.Id * 1) })
   const prevData = await userModel.findOne({ "userName": req.body.userName })
   if (!prevData) {
-
     let hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;
     const user = new userModel(req.body);
-
-    try {
-      await user.save();
-      res.send({ message: "New User Added" });
-    }
-    catch (err) {
-      res.status(500).send(err);
-    }
+    await user.save();
+    res.send({ message: "New User Added" });
   }
   else {
     res.status(200).send({ message: "User Id already exists" })
   }
-});
+}));
 
-// userApiObject.delete('/getuser/:Id', async (req, res) => {
-//   try {
-//     const user = await userModel.deleteOne({ "Id": (req.params.Id * 1) })
-//     if (!user) res.status(404).send("No item found")
-//     res.status(200).send({ message: "User deleted successfully", user });
-//   } catch (err) {
-//     res.status(500).send(err)
-//   }
-// })
+//In login page MAIN ROUTE
+userApiObject.post("/login", errorHandler(async (req, res) => {
 
-// userApiObject.patch('/getuser/:Id', async (req, res) => {
-//   try {
-//     const user = await userModel.updateOne({ Id: req.params.Id * 1 }, { Name: req.body.Name, Price: req.body.Price, Brand: req.body.Brand })
-//     await userModel.save()
-//     res.status(200).send(user)
-//   }
-//   catch (err) {
-//     res.status(500).send(err)
-//   }
-// })
-
-
-userApiObject.post("/login", async (req, res) => {
-
-  let loginObj = req.body;
-  let userData = await userModel.findOne({ userName: loginObj.userName })
-
-  // console.log("loginObj.userName")
-
-  if (loginObj.userName == "") {
+  let userData = await userModel.findOne({ userName: req.body.userName })
+  // console.log("req.body.userName")
+  if (req.body.userName == "") {
     res.send({ message: "Please enter Username" })
   }
   if (!userData) {
     res.send({ message: "Username not found" })
   }
 
-  let value = await bcrypt.compare(loginObj.password, userData.password)
+  let value = await bcrypt.compare(req.body.password, userData.password)
 
   if (value) {
-    let signedToken = await jwt.sign({ userName: loginObj.userName }, process.env.SECRET, { expiresIn: 1000 })
-    // console.log(loginObj)
-    res.send({ message: "login successful", token: signedToken, userName: loginObj.userName, userTypeAdmin: userData.userTypeAdmin })
+    let signedToken = await jwt.sign({ userName: req.body.userName }, process.env.SECRET, { expiresIn: 30 })
+    res.send({ message: "login successful", token: signedToken, userName: req.body.userName, userTypeAdmin: userData.userTypeAdmin })
   }
   else {
     res.send({ message: "Invalid password" })
   }
+}))
 
-})
-
-userApiObject.post('/addtocart', errorHandler(async (req, res) => {
+//Add to cart functionality in products page and cart
+userApiObject.post('/addtocart', validateToken, errorHandler(async (req, res) => {
 
   const cartObj = await userModel.findOne({ "userName": req.body.userName, cart: { $elemMatch: { productId: req.body.productId } } })
-
   if (cartObj) {
-
     for (let x of cartObj.cart) {
       if (x.productId == req.body.productId) {
         x.quantity++;
@@ -167,22 +110,21 @@ userApiObject.post('/addtocart', errorHandler(async (req, res) => {
 
     res.send({ message: "Product added to the cart Successful" })
   }
-
-
 }))
 
-userApiObject.get('/getcart/:userName', errorHandler(async (req, res) => {
+//read cart in Cart componentt
+userApiObject.get('/getcart/:userName', validateToken, errorHandler(async (req, res) => {
 
   const user = await userModel.findOne({ 'userName': req.params.userName })
   res.send({ message: user.cart })
 }))
 
-userApiObject.post('/removequantity/:userName/:id', errorHandler(async (req, res) => {
+//reduce number in cart component
+userApiObject.post('/removequantity/:userName/:id', validateToken, errorHandler(async (req, res) => {
 
   const cartObj = await userModel.findOne({ "userName": req.params.userName, cart: { $elemMatch: { productId: req.params.id } } })
 
   if (cartObj.cart) {
-
     for (let x of cartObj.cart) {
       if (x.productId == req.params.id) {
         x.quantity--;
@@ -200,14 +142,13 @@ userApiObject.post('/removequantity/:userName/:id', errorHandler(async (req, res
   }
 }))
 
-userApiObject.post('/removecartitem/:userName/:id', errorHandler(async (req, res) => {
+//Completely remove cart item from the cart in the cart component
+userApiObject.post('/removecartitem/:userName/:id', validateToken, errorHandler(async (req, res) => {
 
   const findItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
     { $pull: { 'cart': { productId: req.params.id } } }, { returnOriginal: false, upsert: true, new: true })
-
   // console.log(findItem);
   res.send({ message: "Product deleted from the cart Successful" })
-
 }))
 
 userApiObject.get('/getcount/:userName', errorHandler(async (req, res) => {

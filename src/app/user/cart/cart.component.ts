@@ -16,6 +16,7 @@ export class CartComponent implements OnInit {
   notFoundItems = [];
   cart = [];
   sum = 0;
+  quantity = 0;
   userName = localStorage.getItem('userName');
 
   constructor(
@@ -34,7 +35,16 @@ export class CartComponent implements OnInit {
     });
 
     this.us.getCart(this.userName).subscribe((res) => {
-      this.cart = res['message'];
+      if (res['message'] == 'Unauthorised access') {
+        this.toastr.warning('Unauthorised access', 'Please login to access');
+        this.router.navigateByUrl('/login');
+      } else if (res['message'] == 'Session Expired') {
+        this.toastr.warning('Session Expired', 'Please relogin to continue');
+        this.router.navigateByUrl('/login');
+      } else {
+        this.cart = res['message'];
+      }
+
       // console.log('in cart display ids', this.cart);
     });
 
@@ -42,7 +52,7 @@ export class CartComponent implements OnInit {
 
     setTimeout(() => {
       this.loadValues();
-    }, 1000);
+    }, 2000);
     // this.loadValues();
     setTimeout(() => {
       document.getElementById('spinner').style.display = 'none';
@@ -50,7 +60,7 @@ export class CartComponent implements OnInit {
       if (this.cartsArray.length == 0) {
         document.getElementById('noitems').style.display = 'block';
       }
-    }, 1000);
+    }, 2000);
   }
 
   loadValues() {
@@ -89,9 +99,15 @@ export class CartComponent implements OnInit {
           //DOM
           let index = this.cartsArray.findIndex((x) => x == product);
           this.cartsArray.splice(index, 1);
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
+          this.router.navigateByUrl('/login');
         } else {
           this.toastr.warning('Something went wrong');
-          console.log(res['err']);
+          console.log(res['message']);
         }
         this.totalsum();
       });
@@ -113,9 +129,15 @@ export class CartComponent implements OnInit {
         if (res['message'] == 'Product quantity updated') {
           this.toastr.success('Added product quantity successfully');
           product.quantity += 1;
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
+          this.router.navigateByUrl('/login');
         } else {
           this.toastr.warning('Something went wrong');
-          console.log(res['err']);
+          console.log(res['message']);
         }
         this.totalsum();
       });
@@ -132,31 +154,40 @@ export class CartComponent implements OnInit {
   }
 
   deleteCartItem(product) {
-    
-    let quantity =1;
-    this.us.removeCartItem(this.userName, product.productId).subscribe((res) => {
+    let quantity = 1;
+    this.us
+      .removeCartItem(this.userName, product.productId)
+      .subscribe((res) => {
         if (res['message'] == 'Product deleted from the cart Successful') {
           this.toastr.success('Product deleted from the cart Successfully');
           //DOM
           let index = this.cartsArray.findIndex((x) => x == product);
-          quantity= this.cartsArray[index].quantity;
-          console.log(quantity)
+          quantity = this.cartsArray[index].quantity;
+          console.log(quantity);
           this.cartsArray.splice(index, 1);
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
+          this.router.navigateByUrl('/login');
         } else {
           this.toastr.warning('Something went wrong');
-          console.log(res['err']);
+          console.log(res['message']);
         }
         this.totalsum();
       });
     this.us.getCount(this.userName).subscribe((res) => {
-      this.cs.setNum(res['message'] );
+      this.cs.setNum(res['message']);
     });
   }
 
   totalsum() {
     this.sum = 0;
+    this.quantity = 0;
     for (let x of this.cartsArray) {
       this.sum += x.productPrice * x.quantity;
+      this.quantity += x.quantity;
     }
   }
 }

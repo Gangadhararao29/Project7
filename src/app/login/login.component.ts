@@ -9,7 +9,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private us: UserService, private router: Router, private toastr:ToastrService) {}
+  constructor(
+    private us: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   Name: string;
 
@@ -19,32 +23,30 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formRef) {
-    if(formRef.valid){
+    if (formRef.valid) {
       let loginObj = formRef.value;
-    // console.log(loginObj);
-    this.us.loginUser(loginObj).subscribe((res) => {
-      if (res['message'] == 'Please enter Username'){
-        this.toastr.success('Please enter Username');
-      }
-      else if (res['message'] == 'Username not found') {
-        this.toastr.warning('Incorrect Username');
-        formRef.reset();
-      } else if (res['message'] == 'Invalid password') {
-        this.toastr.warning('Please enter correct password');
-        formRef.reset();
-      } else if (res['message'] == 'login successful') {
-        this.toastr.success('Login Successful');
-        localStorage.setItem('token', res['token']);
-        localStorage.setItem('userName', res['userName']);
+      // console.log(loginObj);
+      this.us.loginUser(loginObj).subscribe((res) => {
+        if (res['message'] == 'Please enter Username') {
+          this.toastr.success('Please enter Username');
+        } else if (res['message'] == 'Username not found') {
+          this.toastr.warning('Incorrect Username');
+          formRef.reset();
+        } else if (res['message'] == 'Invalid password') {
+          this.toastr.warning('Please enter correct password');
+          formRef.reset();
+        } else if (res['message'] == 'login successful') {
+          this.toastr.success('Login Successful');
+          localStorage.setItem('token', res['token']);
+          localStorage.setItem('userName', res['userName']);
 
-        if (res['userTypeAdmin']) {
-          this.router.navigateByUrl('/admin/home');
+          if (res['userTypeAdmin']) {
+            this.router.navigateByUrl('/admin/home');
+          } else {
+            this.router.navigateByUrl('/user/home');
+          }
         }
-        else {
-          this.router.navigateByUrl('/user/home');
-        }
-      }
-    });
+      });
     }
   }
 }

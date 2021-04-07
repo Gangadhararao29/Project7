@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    phone:Number,
+    phone: Number,
     cart: [
         {
             productId: Number,

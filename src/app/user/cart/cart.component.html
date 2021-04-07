@@ -16,6 +16,7 @@
         <th>Price</th>
         <th>Type</th>
         <th>Quantity</th>
+        <th>Amount</th>
       </thead>
       <tbody>
         <tr *ngFor="let product of cartsArray; let i = index">
@@ -33,16 +34,18 @@
               <button class="btn btn-danger rounded-circle" (click)='removeQuantity(product)'> – </button>&nbsp; {{ product.quantity}} &nbsp;
               <button class="btn btn-danger rounded-circle" (click)='addQuantity(product)'> + </button>
           </td>
+          <td>₹{{ product.productPrice * product.quantity  }}</td>
           <td><button class="btn btn-close" (click)='deleteCartItem(product)'></button></td>
         </tr>
 
         <tr>
           <td></td>
           <td></td>
-          <th>Total:</th>
-          <th>₹{{sum}}</th>
           <td></td>
           <td></td>
+          <td></td>
+          <th>Total Quantity: {{quantity}}</th>
+          <th>Total Amount: ₹{{sum}}</th>
           <td></td>
         </tr>
       </tbody>
@@ -52,10 +55,6 @@
 
 <!-- EXTRA -->
 <div id="spinner">
-  <!-- <div class="d-flex align-items-center text-success">
-    <strong>Loading...</strong>
-    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-  </div> -->
   <div class="d-flex justify-content-center">
     <div class="spinner-grow text-primary" role="status">
       <span class="visually-hidden">Loading...</span>
