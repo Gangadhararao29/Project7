@@ -14,7 +14,6 @@ export class ProductService {
   updateProductsPrice(productValue): Observable<any> {
     return this.hc.post('/product/updateprice', productValue);
   }
-
   getProductById(id): Observable<any> {
     return this.hc.get(`/product/getproduct/${id}`);
   }
@@ -27,7 +26,4 @@ export class ProductService {
   addProductReview(reviewObj): Observable<any> {
     return this.hc.post('/product/addproductreview', reviewObj);
   }
-  // getProductReviews(id): Observable<any> {
-  //   return this.hc.get(`/product/getproductreview/${id}`);
-  //}
 }

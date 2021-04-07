@@ -25,37 +25,32 @@ export class EditproductComponent implements OnInit {
       // console.log("mes1",res['message'])
       this.productsArray = res['message'];
       // console.log("mes2",this.productsArray)
-
-      // Organic and Inorganic
       this.productsOrgainc = this.productsArray.filter((item) => {
         return item.productBrand == 'Organic';
       });
       this.productsInorgainc = this.productsArray.filter((item) => {
         return item.productBrand == 'Inorganic';
       });
-
       this.productsOrgaincFruits = this.productsOrgainc.filter((item) => {
         return item.productCategory == 'Fruits';
       });
-
       this.productsOrgaincVegetables = this.productsOrgainc.filter((item) => {
         return item.productCategory == 'Vegetables';
       });
       this.productsInorgaincFruits = this.productsInorgainc.filter((item) => {
         return item.productCategory == 'Fruits';
       });
-
       this.productsInorgaincVegetables = this.productsInorgainc.filter((item) => {
         return item.productCategory == 'Vegetables';
       });
     });
   }
+
   edit(id){
     this.router.navigateByUrl(`admin/editdetails/${id}`)
   }
 
   delete(product){
-
     // DOM 
     let index = this.productsArray.findIndex(x => x == product);
    
@@ -84,7 +79,6 @@ export class EditproductComponent implements OnInit {
       if(res['message']=="Product deleted")
       {
         this.toastr.success("Product deleted Successfully")
-        //this.router.navigateByUrl('/admin/home')
       }
       else if(res['message'] == "Unauthorised access"){
         this.toastr.warning("Unauthorised access","Please login to access")
@@ -97,8 +91,8 @@ export class EditproductComponent implements OnInit {
       else
       {
         this.toastr.warning("Something went wrong in deleting the Product")
+        console.log(res['message']); 
       }
-
     })
   }
 }

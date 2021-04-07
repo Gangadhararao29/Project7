@@ -104,9 +104,15 @@ export class ProductsComponent implements OnInit {
             'Product quantity updated',
             'Product already exists'
           );
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
+          this.router.navigateByUrl('/login');
         } else {
           this.toastr.warning('Something went wrong');
-          console.log(res['err']);
+          console.log(res['message']);
         }
       });
     } else {

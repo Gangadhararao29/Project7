@@ -26,8 +26,6 @@
             <label for="productprice">Product Price</label>
         </div>
         <div class=" mb-3">
-            <!-- <input type="text" class="form-control" id="productbrand" placeholder="pbrand" name="productBrand" ngModel>
-                    <label for="productbrand">productBrand</label> -->
             <select class="form-select" #brand id="productbrand" name="productBrand" [ngModel]="product?.productBrand" required>
                 <option value="">Select Product Type</option>
                 <option value="Organic">Organic</option>
@@ -37,8 +35,6 @@
         </div>
 
         <div class=" mb-3">
-            <!-- <input type="text" class="form-control" id="productcategory" placeholder="pcategory" name="productCategory"
-                ngModel /> -->
                 <select class="form-select" #category id="productcategory" name="productCategory" [ngModel]="product?.productCategory" required>
                     <option value="">Select Category Type</option>
                     <option value="Fruits">Fruits</option>

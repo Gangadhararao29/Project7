@@ -1,15 +1,10 @@
 <div class="container">
     <div class="p-3 m-2 text-center">
         <h3 class="text-light">
-            <span class="p-2" style="background-color: rgb(4, 67, 67)">Add new product to the existing Product
-                List</span>
+            <span class="p-2" style="background-color: rgb(4, 67, 67)">Add new product to the existing Product List</span>
         </h3>
     </div>
     <form class="form" #ref="ngForm" (ngSubmit)="submitUserData(ref)">
-         <!-- <div class="form-floating mb-3">
-            <input type="number"  class="form-control" id="productId" placeholder="pid" name="productId" [ngModel]='uniqueId()' readonly />
-            <label for="productId">Product Id</label>
-        </div>  -->
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="productname" placeholder="pname" name="productName" ngModel required />
             <label for="productname">Product Name</label>
@@ -20,8 +15,6 @@
             <label for="productprice">Product Price</label>
         </div>
         <div class="form-floating mb-3">
-            <!-- <input type="text" class="form-control" id="productbrand" placeholder="pbrand" name="productBrand" ngModel>
-                    <label for="productbrand">productBrand</label> -->
             <select class="form-select" id="productbrand" name="productBrand" ngModel required >
                 <option value="">Select Product Type</option>
                 <option value="Organic">Organic</option>
@@ -31,8 +24,6 @@
         </div>
 
         <div class="form-floating mb-3">
-            <!-- <input type="text" class="form-control" id="productcategory" placeholder="pcategory" name="productCategory"
-                ngModel /> -->
                 <select class="form-select" id="productcategory" name="productCategory" ngModel required >
                     <option value="">Select Category Type</option>
                     <option value="Fruits">Fruits</option>
@@ -48,7 +39,7 @@
 
         <div class="form-group mb-3">
             <label for="uploadphoto" class="form-label rounded bg-light m-0 px-2">Upload picture of the Product</label>
-                <input type="file" #photo  id="uploadphoto"  class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*" required />
+                <input type="file" #photo  id="uploadphoto"  class="form-control" (change)="incomingfile($event)" name="photo" accept="image/*" ngModel required />
         </div>
 
         <div class="text-center mb-3">

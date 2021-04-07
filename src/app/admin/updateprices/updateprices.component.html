@@ -1,45 +1,51 @@
 <div class="container mb-3">
-    <div class="p-3 m-2 text-center">
-        <h3 class="text-light">
-            <span class="p-2" style="background-color: rgb(4, 67, 67)">Update prices of the Item
-            </span>
-        </h3>
-    </div>
-    
-    <form #formRef="ngForm"  (ngSubmit)="updatePrices(formRef)">
-<table class="table text-center table-striped m-3 bg-light">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Type</th>
-        <th scope="col">Category</th>
-        <th scope="col">Old price</th>
-        <th scope="col">New Price</th>
-      </tr>
-    </thead>
-    
-    <tbody>
-        
-      <tr *ngFor="let product of productsArray let i =index">
-        <th scope="row">{{i+1}}</th>
-        <td>{{product.productName}}</td>
-        <td>{{product.productBrand}}</td>
-        <td>{{product.productCategory}}</td>
-        <td id="{{product.productId}}">{{product.productPrice}}</td>
-        <td><input name="newPrice{{i}}" id="item{{product.productId}}" type="number" ngModel #newPrice="ngModel" ></td>
-         </tr>
-    
+  <div class="p-3 m-2 text-center">
+    <h3 class="text-light">
+      <span class="p-2" style="background-color: rgb(4, 67, 67)"
+        >Update prices of the Item
+      </span>
+    </h3>
+  </div>
+
+  <form #formRef="ngForm" (ngSubmit)="updatePrices(formRef)">
+    <table class="table text-center table-striped m-3 bg-light">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Type</th>
+          <th scope="col">Category</th>
+          <th scope="col">Old price</th>
+          <th scope="col">New Price</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let product of productsArray; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ product.productName }}</td>
+          <td>{{ product.productBrand }}</td>
+          <td>{{ product.productCategory }}</td>
+          <td id="{{ product.productId }}">{{ product.productPrice }}</td>
+          <td>
+            <input
+              name="newPrice{{ i }}"
+              id="item{{ product.productId }}"
+              type="number"
+              ngModel
+              #newPrice="ngModel"
+            />
+          </td>
+        </tr>
       </tbody>
-      </table>
+    </table>
 
     <div class="text-center">
-        <input type="submit"  class="btn btn-success" value="Update Prices">
-
+      <input type="submit" class="btn btn-success" value="Update Prices" />
     </div>
-    </form>
-    </div>
-    
-    <div class="container bg-light text-center fs-4 fw-bolder" id="status"></div>
+  </form>
+</div>
 
-  <!-- (value)="newPrice" on line30 -->
+<div class="container bg-light text-center fs-4 fw-bolder" id="status"></div>
+
+<!-- (value)="newPrice" on line30 -->

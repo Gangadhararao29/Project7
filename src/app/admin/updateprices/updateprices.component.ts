@@ -60,8 +60,6 @@ export class UpdatepricesComponent implements OnInit{
     }
     this.text = ""
     formRef.reset();
-    // console.log(this.text1)
-    document.getElementById('status').innerHTML = this.text;
     this.toastr.success("Updated Successfully")
   }
 }

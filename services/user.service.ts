@@ -1,51 +1,50 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  constructor(private hc: HttpClient) {}
 
-  constructor(private hc :HttpClient) { }
-
-  createUser(userObj):Observable<any>{
-    return this.hc.post("/user/createuser",userObj)
+  createUser(userObj): Observable<any> {
+    return this.hc.post('/user/createuser', userObj);
   }
-  getUser(userName):Observable<any>{
-    return this.hc.get(`/user/getuser/${userName}`)
+  getUser(userName): Observable<any> {
+    return this.hc.get(`/user/getuser/${userName}`);
   }
-  updateUserDetails(userObj):Observable<any>{
-    return this.hc.post("/user/updateuserdetails",userObj)
+  updateUserDetails(userObj): Observable<any> {
+    return this.hc.post('/user/updateuserdetails', userObj);
   }
-  loginUser(loginObj):Observable<any>{
-    return this.hc.post("/user/login",loginObj)
+  loginUser(loginObj): Observable<any> {
+    return this.hc.post('/user/login', loginObj);
   }
-  addProduct(productObj):Observable<any>{
-    return this.hc.post("/product/addproduct",productObj)
+  addProduct(productObj): Observable<any> {
+    return this.hc.post('/product/addproduct', productObj);
   }
-  checkUser(userName):Observable<any>{
-    return this.hc.post("/user/checkuser",userName)
+  checkUser(userName): Observable<any> {
+    return this.hc.post('/user/checkuser', userName);
   }
   //used in home.component.ts
-  checkAdminUser(userName):Observable<any>{
-    return this.hc.post("/user/checkadminuser",userName)
+  checkAdminUser(userName): Observable<any> {
+    return this.hc.post('/user/checkadminuser', userName);
   }
-  getCart(userName):Observable<any>{
+  getCart(userName): Observable<any> {
     // console.log("from service",userObj)
-    return this.hc.get(`/user/getcart/${userName}`)
+    return this.hc.get(`/user/getcart/${userName}`);
   }
-  addToCart(productObj):Observable<any>{
-    return this.hc.post('/user/addtocart',productObj)
+  addToCart(productObj): Observable<any> {
+    return this.hc.post('/user/addtocart', productObj);
   }
-  removeQuantity(userName,id):Observable<any>{
-    return this.hc.post(`/user/removequantity/${userName}/${id}`,"")
+  removeQuantity(userName, id): Observable<any> {
+    return this.hc.post(`/user/removequantity/${userName}/${id}`, '');
   }
-  removeCartItem(userName,id):Observable<any>{
-    return this.hc.post(`/user/removecartitem/${userName}/${id}`,"")
+  removeCartItem(userName, id): Observable<any> {
+    return this.hc.post(`/user/removecartitem/${userName}/${id}`, '');
   }
-  getCount(userName):Observable<any>{
+  getCount(userName): Observable<any> {
     // console.log("from service",userObj)
-    return this.hc.get(`/user/getcount/${userName}`)
+    return this.hc.get(`/user/getcount/${userName}`);
   }
 }

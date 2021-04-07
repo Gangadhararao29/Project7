@@ -65,7 +65,10 @@ import { UserprofileComponent } from './user/userprofile/userprofile.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass:'toast-top-center',
+      progressBar:true
+    }),
     BrowserAnimationsModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthorisationService,multi:true}],

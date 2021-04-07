@@ -20,11 +20,11 @@ const userApiObject = require("./APIS/user-api")
 app.use("/user",userApiObject)
 app.use("/product",productApiObj)
 
-db.on('error',()=>console.log("error connecting db"))
-db.once("open",()=>console.log("Connected to Db"))
+db.on('error',()=>console.log("Error connecting to Database"))
+db.once("open",()=>console.log("Connected to Database"))
 
 
 const port = process.env.PORT;
 app.listen(port,()=>{
-    console.log("the server started at port "+port)
+    console.log("The server started on port "+port)
 })

@@ -9,8 +9,7 @@ import { UserService } from 'services/user.service';
   styleUrls: ['./userprofile.component.css'],
 })
 export class UserprofileComponent implements OnInit {
-
-  @ViewChild('phone') phoneRef: ElementRef
+  @ViewChild('phone') phoneRef: ElementRef;
   constructor(
     private us: UserService,
     private router: Router,
@@ -24,10 +23,15 @@ export class UserprofileComponent implements OnInit {
   ngOnInit(): void {
     this.us.getUser(this.userName).subscribe(
       (res) => {
-        if (res['message'] == 'failed') {
+        if (res['message'] == 'No user found') {
           alert(res['reason']);
-          localStorage.clear();
-          //navigate to loin
+          // localStorage.clear();
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
           this.router.navigateByUrl('/login');
         } else {
           this.userObj = res['message'];
@@ -52,12 +56,18 @@ export class UserprofileComponent implements OnInit {
       if (res['message'] == 'User phone number updated') {
         this.toastr.success('User phone number updated');
         this.phoneRef.nativeElement.value = userObj.phone;
-      } else {
-        this.toastr.warning('Something went wrong');
-        console.log(res['err']);
-      }
-    });
-
+      } else if (res['message'] == 'Unauthorised access') {
+        this.toastr.warning('Unauthorised access', 'Please login to access');
+        this.router.navigateByUrl('/login');
+      } else if(res['message'] == 'Session Expired') {
+        this.toastr.warning('Session Expired', 'Please relogin to continue');
+        this.router.navigateByUrl('/login');
+      } 
+    (err) => {
+      this.toastr.warning('Something went wrong');
+      console.log(err);
+    }
+    })
     this.key = false;
   }
 

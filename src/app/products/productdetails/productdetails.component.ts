@@ -1,6 +1,6 @@
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ProductService } from 'services/product.service';
 
@@ -12,12 +12,13 @@ import { ProductService } from 'services/product.service';
 export class ProductdetailsComponent implements OnInit {
   product: any;
   overallRating = 0;
-  Rating :any;
+  Rating: any;
 
   constructor(
     private ar: ActivatedRoute,
     private ps: ProductService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,17 +30,16 @@ export class ProductdetailsComponent implements OnInit {
     });
 
     setTimeout(() => {
-
-      let total=0, count=0;
-    // console.log(this.product.productReview)
-    for(let review of this.product?.productReview){
-      total += review.productRating;
-      count ++;
-    }
-    this.overallRating = (total/count)
-    this.Rating =this.overallRating.toFixed(2);
-    //console.log(this.overallRating)
-      
+      let total = 0,
+        count = 0;
+      // console.log(this.product.productReview)
+      for (let review of this.product?.productReview) {
+        total += review.productRating;
+        count++;
+      }
+      this.overallRating = total / count;
+      this.Rating = this.overallRating.toFixed(2);
+      //console.log(this.overallRating)
     }, 200);
   }
 
@@ -58,18 +58,20 @@ export class ProductdetailsComponent implements OnInit {
     // console.log(formRef.value,userRatingObj)
 
     this.ps.addProductReview(userRatingObj).subscribe((res) => {
-     // console.log(res['message'])
+      // console.log(res['message'])
       if (res['message'] == 'Product review submitted') {
         this.toastr.success('Product review submitted');
-      } else if(res['message'] == 'Product review updated'){
+      } else if (res['message'] == 'Product review updated') {
         this.toastr.success('Product review updated');
-      }
-      else {
+      } else if (res['message'] == 'Unauthorised access') {
+        this.toastr.warning('Unauthorised access', 'Please login to access');
+        this.router.navigateByUrl('/login');
+      } else if (res['message'] == 'Session Expired') {
+        this.toastr.warning('Session Expired', 'Please relogin to continue');
+        this.router.navigateByUrl('/login');
+      } else {
         this.toastr.warning('Something went wrong');
       }
     });
   }
-
-  
 }
-

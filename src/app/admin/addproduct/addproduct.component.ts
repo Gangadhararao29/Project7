@@ -9,8 +9,6 @@ import { UserService } from '../../../../services/user.service';
   styleUrls: ['./addproduct.component.css'],
 })
 export class AddproductComponent implements OnInit {
-  @ViewChild('photo') photoRef: ElementRef;
-
   constructor(
     private us: UserService,
     private router: Router,
@@ -25,41 +23,47 @@ export class AddproductComponent implements OnInit {
   }
 
   submitUserData(userObj) {
-    if(userObj.valid){
+    if (userObj.valid) {
+      let formData = new FormData();
+      console.log(userObj)
+      //adding image and other data to FormData object
+      formData.append('photo', this.file, this.file.name);
+      formData.append('userObj', JSON.stringify(userObj.value));
 
-    let formData = new FormData();
-    //adding image and other data to FormData object
-    formData.append('photo', this.file, this.file.name);
-    formData.append('userObj', JSON.stringify(userObj.value));
-
-    this.us.addProduct(formData).subscribe(
-      (res) => {
-        // console.log(res['message'])
-        if (res['message'] == 'Product added') {
-          this.toastr.success('Product added Successfully');
-          userObj.reset();
-          this.photoRef.nativeElement.value = '';
-
-          //navigate to add product
-          // this.router.navigateByUrl("/admin/home")
-        } else if (res['message'] == 'Unauthorised access') {
-          this.toastr.warning('Unauthorised access', 'Please login to access');
-          this.router.navigateByUrl('/login');
-        } else if (res['message'] == 'Session Expired') {
-          this.toastr.warning('Session Expired', 'Please relogin to continue');
-          this.router.navigateByUrl('/login');
-        } else {
-          this.toastr.warning(res['message']);
+      this.us.addProduct(formData).subscribe(
+        (res) => {
+          // console.log(res['message'])
+          if (res['message'] == 'Product added') {
+            this.toastr.success('Product added Successfully');
+            userObj.reset();
+           // this.photoRef.nativeElement.value = '';
+            //navigate to add product
+            // this.router.navigateByUrl("/admin/home")
+          } else if (res['message'] == 'Unauthorised access') {
+            this.toastr.warning(
+              'Unauthorised access',
+              'Please login to access'
+            );
+            this.router.navigateByUrl('/login');
+          } else if (res['message'] == 'Session Expired') {
+            this.toastr.warning(
+              'Session Expired',
+              'Please relogin to continue'
+            );
+            this.router.navigateByUrl('/login');
+          } else {
+            this.toastr.warning(res['message']);
+          }
+        },
+        (err) => {
+          this.toastr.warning('Something went wrong');
+          console.log(err);
         }
-      },
-      (err) => {
-        this.toastr.warning('Something went wrong');
-        console.log(err);
-      }
-    );
+      );
+    } else {
+      this.toastr.warning(
+        'Please fill all the details in their respective fields'
+      );
+    }
   }
-  else{
-    this.toastr.warning("Please fill all the details in their respective fields")
-  }
-}
 }
