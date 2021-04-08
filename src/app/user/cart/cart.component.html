@@ -81,15 +81,40 @@
 </div>
 <!--  EXTRA-->
 
+<!-- CHECKOUT -->
+<div class="text-center" *ngIf='cartsArray.length'>
+  <button class="btn btn-success" (click)="checkOut(cartsArray)">Checkout</button>
+</div>
 
+<!-- No items banner -->
 <div id="noitems" style="display:none;" class="bg-warning text-center p-3 rounded m-2 text-light">
   <h2> Oops!! <br>There are no items in the Cart </h2>
+</div>
+
+
+<!-- NOT FOUND ITEMS -->
+<div class="text-center" *ngIf='notFoundItems.length'>
+  <h2 class="bg-danger text-center p-3 rounded m-2 text-light"> We are really sorry!! <br>These items are deleted by Admin or Out of Stock </h2>
+  <table class="table table-striped table-hover text-center align-middle">
+    <thead>
+      <th>Sno.</th>
+      <th>Product Id</th>
+      <th>Product Quantity</th>
+      <th></th>
+      
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of notFoundItems; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{product.productId}}</td>
+        <td>{{product.quantity}}</td>
+        <td><button class="btn btn-close" (click)='deleteCartItem(product)'></button></td>
+      </tr>
+      </tbody>
+      </table>
   
 </div>
 
-<br>
-  <br><br><br>
-  <br>
-  <br><br><br>
+<br><br><br><br><br><br><br><br>
 
 </div>

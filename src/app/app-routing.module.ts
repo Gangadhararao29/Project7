@@ -16,6 +16,8 @@ import { UpdatepricesComponent } from './admin/updateprices/updateprices.compone
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
+import { CheckoutComponent } from './user/cart/checkout/checkout.component';
+import { PaymentComponent } from './user/cart/payment/payment.component';
 
 
 const routes: Routes = [
@@ -35,6 +37,8 @@ const routes: Routes = [
       { path: 'search', component: SearchComponent },
       { path: 'productdetails/:id', component:ProductdetailsComponent},
       { path: 'userprofile', component:UserprofileComponent},
+      { path: 'checkout', component: CheckoutComponent},
+      { path: 'payment', component: PaymentComponent},
       { path: '', redirectTo:'user/home', pathMatch: 'prefix'}
     ]
   },

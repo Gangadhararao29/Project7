@@ -32,6 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { SearchFilterPipe } from './search/search-filter.pipe';
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
+import { CheckoutComponent } from './user/cart/checkout/checkout.component';
+import { PaymentComponent } from './user/cart/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { UserprofileComponent } from './user/userprofile/userprofile.component';
     ProductdetailsComponent,
     EditdetailsComponent,
     SearchFilterPipe,
-    UserprofileComponent
+    UserprofileComponent,
+    CheckoutComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

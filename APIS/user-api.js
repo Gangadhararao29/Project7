@@ -82,7 +82,7 @@ userApiObject.post("/login", errorHandler(async (req, res) => {
   let value = await bcrypt.compare(req.body.password, userData.password)
 
   if (value) {
-    let signedToken = await jwt.sign({ userName: req.body.userName }, process.env.SECRET, { expiresIn: 30 })
+    let signedToken = await jwt.sign({ userName: req.body.userName }, process.env.SECRET, { expiresIn: 15000 })
     res.send({ message: "login successful", token: signedToken, userName: req.body.userName, userTypeAdmin: userData.userTypeAdmin })
   }
   else {
@@ -158,6 +158,15 @@ userApiObject.get('/getcount/:userName', errorHandler(async (req, res) => {
     count += x.quantity;
   }
   res.send({ message: count })
+}))
+
+//After payment of the order
+userApiObject.post('/resetcart/:userName',errorHandler(async(req,res)=>{
+  const newItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
+  { $set: { "cart":  [] }}, { multi:true })
+  
+  res.send({ message: "user cart got reset" })
+
 }))
 
 
