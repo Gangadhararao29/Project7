@@ -29,6 +29,7 @@ export class UsernavComponent implements OnInit {
       // this.cs.setNum(res['message'])
     });
     this.cs.getNum().subscribe((numValue) => (this.num = numValue));
+
   }
 
   logOut() {

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OrderService } from 'services/order.service';
 import { UserService } from 'services/user.service';
 
 @Component({
@@ -13,11 +14,13 @@ export class UserprofileComponent implements OnInit {
   constructor(
     private us: UserService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private os:OrderService
   ) {}
 
   userObj: any;
   key = false;
+  ordersArray=[];
   userName = localStorage.getItem('userName');
 
   ngOnInit(): void {
@@ -42,6 +45,14 @@ export class UserprofileComponent implements OnInit {
         console.log(err);
       }
     );
+
+    // Orders Loading
+    this.os.getOrders(this.userName).subscribe(res=>{
+      this.ordersArray = res['message']
+      for(let order of this.ordersArray){
+        order.dateNow = new Date(order.dateNow).toDateString();
+      }
+    })
   }
 
   onSubmit(formRef) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'services/cart.service';
+import { OrderService } from 'services/order.service';
 import { ProductService } from 'services/product.service';
 import { UserService } from 'services/user.service';
 
@@ -24,14 +25,13 @@ export class CartComponent implements OnInit {
     private us: UserService,
     private toastr: ToastrService,
     private router: Router,
-    private cs: CartService
+    private cs: CartService,
+    private os: OrderService
   ) {}
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
-      // console.log("mes1",res['message'])
       this.productsArray = res['message'];
-      // console.log('in product dispaly', this.productsArray);
     });
 
     this.us.getCart(this.userName).subscribe((res) => {
@@ -44,23 +44,20 @@ export class CartComponent implements OnInit {
       } else {
         this.cart = res['message'];
       }
-
       // console.log('in cart display ids', this.cart);
     });
-
     // setTimeout(() => {document.getElementById('spinner').style.display='none'}, 1000);
 
     setTimeout(() => {
       this.loadValues();
-    }, 2000);
-    // this.loadValues();
+    }, 1500);
+
     setTimeout(() => {
       document.getElementById('spinner').style.display = 'none';
-      // console.log(this.cartsArray.length);
       if (this.cartsArray.length == 0) {
         document.getElementById('noitems').style.display = 'block';
       }
-    }, 2000);
+    }, 1500);
   }
 
   loadValues() {
@@ -89,9 +86,7 @@ export class CartComponent implements OnInit {
       .subscribe((res) => {
         if (res['message'] == 'Reduced Quantity') {
           this.toastr.success('Reduced Quantity of Item successfully');
-          // let index = this.cartsArray.findIndex((x) => x == product);
           product.quantity -= 1;
-          // this.cartsArray[index].quantity= this.cartsArray[index].quantity-1;
         } else if (
           res['message'] == 'Product deleted from the cart Successful'
         ) {
@@ -162,9 +157,18 @@ export class CartComponent implements OnInit {
           this.toastr.success('Product deleted from the cart Successfully');
           //DOM
           let index = this.cartsArray.findIndex((x) => x == product);
-          quantity = this.cartsArray[index].quantity;
-          console.log(quantity);
-          this.cartsArray.splice(index, 1);
+          console.log(index);
+          
+          if (index>=0) {
+            //quantity = this.cartsArray[index].quantity;
+            // console.log(quantity);
+            this.cartsArray.splice(index, 1);
+          } else {
+            index = this.notFoundItems.findIndex(
+              (x) => x.productId == product.productId
+            );
+            this.notFoundItems.splice(index, 1);
+          }
         } else if (res['message'] == 'Unauthorised access') {
           this.toastr.warning('Unauthorised access', 'Please login to access');
           this.router.navigateByUrl('/login');
@@ -189,5 +193,18 @@ export class CartComponent implements OnInit {
       this.sum += x.productPrice * x.quantity;
       this.quantity += x.quantity;
     }
+  }
+
+  checkOut(cartArray) {
+    let cartObj = {};
+    cartObj['userName'] = this.userName;
+    cartObj['dateNow'] = Date.now();
+    cartObj['products'] = cartArray;
+    cartObj['orderStatus'] = false;
+    cartObj['total'] = this.sum;
+    //console.log(cartObj)
+
+    this.os.storeCart(cartObj);
+    this.router.navigateByUrl('/user/checkout');
   }
 }

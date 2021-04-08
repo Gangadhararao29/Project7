@@ -47,4 +47,7 @@ export class UserService {
     // console.log("from service",userObj)
     return this.hc.get(`/user/getcount/${userName}`);
   }
+  resetCart(userName): Observable<any> {
+    return this.hc.post(`/user/resetcart/${userName}`, '');
+  }
 }
