@@ -8,11 +8,16 @@ import { ProductService } from 'services/product.service';
   templateUrl: './updateprices.component.html',
   styleUrls: ['./updateprices.component.css'],
 })
-export class UpdatepricesComponent implements OnInit{
-  constructor(private ps: ProductService, private router: Router, private toastr:ToastrService) {}
+export class UpdatepricesComponent implements OnInit {
+  constructor(
+    private ps: ProductService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   productsArray = [];
   arrItems = [];
   text = '';
+  key=false;
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
@@ -23,12 +28,12 @@ export class UpdatepricesComponent implements OnInit{
 
   updatePrices(formRef) {
     this.arrItems = formRef.value;
-   
+
     for (let [i, product] of this.productsArray.entries()) {
       //Check for new Prices
       if (this.arrItems[`newPrice${i}`]) {
         let productValue = {
-          productId:Number,
+          productId: Number,
           productName: String,
           productPrice: Number,
         };
@@ -40,26 +45,33 @@ export class UpdatepricesComponent implements OnInit{
         product.productPrice = this.arrItems[`newPrice${i}`];
 
         this.ps.updateProductsPrice(productValue).subscribe((res) => {
-          if (res['message'] == 'Update Successful') {
+          if (res['message'] == 'Unauthorised access') {
+            this.toastr.warning(
+              'Unauthorised access',
+              'Please login to access'
+            );
+            this.router.navigateByUrl('/login');
+          } else if (res['message'] == 'Session Expired') {
+            this.toastr.warning(
+              'Session Expired',
+              'Please relogin to continue'
+            );
+            this.router.navigateByUrl('/login');
+          } else if (res['message'] == 'Update Successful') {
             this.text += `<p style="color:green;"> ${res['productName']} price updated successfully </p> `;
-          }
-          else if(res['message'] == "Unauthorised access"){
-            this.toastr.warning("Unauthorised access","Please login to access")
-            this.router.navigateByUrl("/login")
-          }
-          else if(res['message'] == "Session Expired"){
-            this.toastr.warning("Session Expired","Please relogin to continue")
-            this.router.navigateByUrl("/login")
-          }
-          else {
+            this.key=true;
+          } else {
             this.text += `<p style="color:red"> ${res['productName']} price update failed</p>`;
           }
           document.getElementById('status').innerHTML = this.text;
-        })
+        });
       }
     }
-    this.text = ""
+    if(this.key){
+      this.toastr.success('Updated Successfully');
+    }
+    this.text = '';
     formRef.reset();
-    this.toastr.success("Updated Successfully")
+    
   }
 }

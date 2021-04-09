@@ -83,7 +83,7 @@ productApiObj.post('/deleteproduct', validateToken, errorHandler(async (req, res
 })
 )
 
-//productDetails page
+//productDetails page || get product by id
 productApiObj.get('/getproduct/:id', errorHandler(async (req, res) => {
     const product = await Product.findOne({ 'productId': req.params.id })
     res.send({ product })

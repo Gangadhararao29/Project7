@@ -5,7 +5,6 @@ import { AddproductComponent } from './admin/addproduct/addproduct.component';
 import { AdminComponent } from './admin/admin.component';
 
 import { CartComponent } from './user/cart/cart.component';
-import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register/register.component';
