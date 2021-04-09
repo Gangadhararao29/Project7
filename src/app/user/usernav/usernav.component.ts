@@ -34,8 +34,8 @@ export class UsernavComponent implements OnInit {
 
   logOut() {
     localStorage.clear();
-    //navigate to home
     document.getElementById('mainNav').style.display = 'block';
+    //navigate to home
     this.router.navigateByUrl('/home');
   }
 }

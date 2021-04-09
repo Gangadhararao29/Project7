@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
           this.router.navigateByUrl('user/home');
         }
       });
-
       document.getElementById('mainNav').style.display = 'none';
     }
   }

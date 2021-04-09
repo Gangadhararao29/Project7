@@ -65,18 +65,38 @@
           <div class="row">
             <div class="col-md-8">
               <p class="text-center fw-bold fs-6">Items list</p>
-              <div class="row fw-bolder">
+              <!-- <div class="row fw-bolder">
                 <div class="col-md-3">Sno.</div>
                 <div class="col-md-3">Name</div>
                 <div class="col-md-3">Quantity*Price</div>
                 <div class="col-md-3">Price</div>
               </div>
               <div class="row" *ngFor="let product of order.products; let j = index">
-                <div class="col-md-3">{{ j + 1 }}</div>
+                <div class="col-md-3"></div>
                 <div class="col-md-3">{{ product.productName }}</div>
                 <div class="col-md-3">{{ product.quantity }} X {{ product.productPrice }}</div>
                 <div class="col-md-3">₹{{product.quantity * product.productPrice }}</div>
-              </div>
+              </div> -->
+
+              <table class="table table-borderless table-hover text-center">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Qty * Price</th>
+                    <th scope="col">Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of order.products; let j = index">
+                    <th scope="row">{{ j + 1 }}</th>
+                    <td>{{ product.productName }}</td>
+                    <td>{{ product.quantity }} X {{ product.productPrice }}</td>
+                    <td>₹{{product.quantity * product.productPrice }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
             </div>
             <div class="col-md-4 text-center lh-sm fs-6">
               <p class="text-center fw-bold">Address</p>
