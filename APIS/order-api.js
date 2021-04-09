@@ -9,8 +9,6 @@ const validateToken = require("./middlewares/verifyToken")
 
 orderApiObject.post('/createorder',errorHandler(async (req, res) => {
     
-    //console.log('Body',req.body)
-    //const prevData = await Order.findOne({ Object: req.body })
       const order = new Order(req.body);
      // console.log("Order",order)
       await order.save();

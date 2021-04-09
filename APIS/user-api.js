@@ -151,6 +151,7 @@ userApiObject.post('/removecartitem/:userName/:id', validateToken, errorHandler(
   res.send({ message: "Product deleted from the cart Successful" })
 }))
 
+//getting the length of the cart
 userApiObject.get('/getcount/:userName', errorHandler(async (req, res) => {
   let count = 0;
   const cartObj = await userModel.findOne({ "userName": req.params.userName })
