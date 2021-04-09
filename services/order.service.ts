@@ -25,7 +25,7 @@ export class OrderService {
 
   storeAddress(addressObj){
     this.orderObject['address']=addressObj;
-    console.log(this.orderObject)
+    //console.log(this.orderObject)
   }
 
   confirmedOrder(){
