@@ -15,12 +15,13 @@ export class UserprofileComponent implements OnInit {
     private us: UserService,
     private router: Router,
     private toastr: ToastrService,
-    private os:OrderService
+    private os: OrderService
   ) {}
 
   userObj: any;
-  key = false;
-  ordersArray=[];
+  keyPhone = false;
+  keyPassword = false;
+  ordersArray = [];
   userName = localStorage.getItem('userName');
 
   ngOnInit(): void {
@@ -47,16 +48,16 @@ export class UserprofileComponent implements OnInit {
     );
 
     // Orders Loading
-    this.os.getOrders(this.userName).subscribe(res=>{
-      this.ordersArray = res['message']
-      for(let order of this.ordersArray){
+    this.os.getOrders(this.userName).subscribe((res) => {
+      this.ordersArray = res['message'];
+      for (let order of this.ordersArray) {
         order.dateNow = new Date(order.dateNow).toDateString();
       }
-    })
+    });
   }
 
-  onSubmit(formRef) {
-    console.log(formRef.value);
+  onSubmitPhone(formRef) {
+    // console.log(formRef.value);
     let userObj = {
       userName: '',
       phone: Number,
@@ -70,19 +71,43 @@ export class UserprofileComponent implements OnInit {
       } else if (res['message'] == 'Unauthorised access') {
         this.toastr.warning('Unauthorised access', 'Please login to access');
         this.router.navigateByUrl('/login');
-      } else if(res['message'] == 'Session Expired') {
+      } else if (res['message'] == 'Session Expired') {
         this.toastr.warning('Session Expired', 'Please relogin to continue');
         this.router.navigateByUrl('/login');
-      } 
-    (err) => {
-      this.toastr.warning('Something went wrong');
-      console.log(err);
-    }
-    })
-    this.key = false;
+      }
+      (err) => {
+        this.toastr.warning('Something went wrong');
+        console.log(err);
+      };
+    });
+    this.keyPhone = false;
+  }
+
+  onSubmitPassword(formRef) {
+    this.us.changePassword(this.userName, formRef.value).subscribe((res) => {
+      if (res['message'] == 'currentpwd is missing') {
+        this.toastr.warning('currentpwd is missing');
+      } else if (res['message'] == 'newpwd is missing') {
+        this.toastr.warning('newpwd is missing');
+      } else if (res['message'] == 'not matching') {
+        this.toastr.warning('New passwords are not matching');
+      }
+      else if (res['message'] == 'Invalid password') {
+        this.toastr.error('Current password is not valid');
+      }
+    else (res['message'] == 'Passsword updated succesfully') {
+      this.toastr.success('Password updated successfully')
+      }
+    });
   }
 
   updateProfile() {
-    this.key = true;
+    this.keyPhone = !this.keyPhone;
+    this.keyPassword = false;
+  }
+
+  updatePassword() {
+    this.keyPassword = !this.keyPassword;
+    this.keyPhone = false;
   }
 }

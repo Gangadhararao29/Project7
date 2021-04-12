@@ -170,5 +170,32 @@ userApiObject.post('/resetcart/:userName',errorHandler(async(req,res)=>{
 
 }))
 
+//password changing
+userApiObject.post('/changepassword/:userName',validateToken,errorHandler(async(req,res)=>{
+
+  const userObj = await userModel.findOne({ "userName": req.params.userName })
+
+  if(!req.body.currentpwd) {
+    res.send({message:"currentpwd is missing"})
+  }
+  else if (!req.body.newpwd) {
+    res.send({message:"newpwd is missing"})
+  }
+  else if (req.body.newpwd != req.body.newpwd2){
+    res.send({message:"not matching"})
+  }
+  else {
+    let value = await bcrypt.compare(req.body.currentpwd, userObj.password)
+    if (value) {
+      let hashedPassword = await bcrypt.hash(req.body.newpwd, 10);
+      userObj.password = hashedPassword;
+      await userObj.save();
+      res.send({ message: "Passsword updated succesfully" });
+    }
+    else {
+      res.send({ message: "Invalid password" })
+    }
+  }
+}))
 
 module.exports = userApiObject;
