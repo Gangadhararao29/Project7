@@ -95,8 +95,8 @@ export class UserprofileComponent implements OnInit {
       else if (res['message'] == 'Invalid password') {
         this.toastr.error('Current password is not valid');
       }
-    else (res['message'] == 'Passsword updated succesfully') {
-      this.toastr.success('Password updated successfully')
+    else if(res['message'] == 'Passsword updated succesfully') {
+      this.toastr.success('Password updated successfully');
       }
     });
   }
