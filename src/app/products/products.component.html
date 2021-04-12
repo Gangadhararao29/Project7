@@ -12,9 +12,10 @@
         <div class="card-body">
           <h5 class="card-title text-center">{{product.productName}}</h5>
           <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-          <div class="d-flex justify-content-between ">
-            <button class="btn btn-primary" (click)="details(product.productId)">More Details</button>
-            <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
+          <div class="row">
+            <div class="col text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
+            <div class="col text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
+          </div>
           </div>
         </div>
         
@@ -30,9 +31,9 @@
           <div class="card-body">
             <h5 class="card-title text-center">{{product.productName}}</h5>
             <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-            <div class="d-flex justify-content-between ">
-              <button class="btn btn-primary" (click)="details(product.productId)">More Details</button>
-              <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
+            <div class="row">
+              <div class="col text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
+              <div class="col text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
             </div>
           </div>
           </div>
@@ -55,9 +56,9 @@
             <div class="card-body">
               <h5 class="card-title text-center">{{product.productName}}</h5>
               <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-              <div class="d-flex justify-content-between ">
-                <button class="btn btn-primary" (click)="details(product.productId)">More Details</button>
-                <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
+              <div class="row">
+                <div class="col text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
+                <div class="col text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
               </div>
             </div>
             
@@ -73,9 +74,9 @@
               <div class="card-body">
                 <h5 class="card-title text-center">{{product.productName}}</h5>
                 <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-                <div class="d-flex justify-content-between ">
-                  <button class="btn btn-primary" (click)="details(product.productId)">More Details</button>
-                  <button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button>
+                <div class="row">
+                  <div class="col text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
+                  <div class="col text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
                 </div>
               </div>
               </div>
