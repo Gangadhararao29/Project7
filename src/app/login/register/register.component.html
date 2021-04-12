@@ -15,9 +15,7 @@
       ngModel
       #userName="ngModel"
       [class.is-valid]="userName.valid && !userFlag"
-      [class.is-invalid]="
-        (userName.invalid && userName.touched) || formRef.submitted || userFlag
-      "
+      [class.is-invalid]="(userName.invalid && userName.touched) || formRef.submitted || userFlag"
       (blur)="checkForUser(userName.value)"
     />
     <div id="un" class="invalid-feedback bg-warning m-0 fw-bolder">
@@ -59,14 +57,12 @@
       name="password"
       ngModel
       #password="ngModel"
-      pattern="[A-Za-z0-9.!@#%^&*_+-]{8,}"
+      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
       [class.is-valid]="password.valid"
-      [class.is-invalid]="
-        (password.invalid && password.touched) || formRef.submitted
-      "
+      [class.is-invalid]="(password.invalid && password.touched) || formRef.submitted"
     />
-    <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
-      Please Enter valid password (min length 8)
+    <div id="pw" class="invalid-feedback bg-warning m-0 fw-bolder">
+      Password must contain atleast one Lowercase, Uppercase, Number, Special-character and length should be minimum 8 characters
     </div>
     <label for="pw">Password</label>
   </div>

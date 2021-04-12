@@ -58,47 +58,53 @@ export class UserprofileComponent implements OnInit {
 
   onSubmitPhone(formRef) {
     // console.log(formRef.value);
-    let userObj = {
-      userName: '',
-      phone: Number,
-    };
-    userObj.userName = this.userName;
-    userObj.phone = formRef.value.phone;
-    this.us.updateUserDetails(userObj).subscribe((res) => {
-      if (res['message'] == 'User phone number updated') {
-        this.toastr.success('User phone number updated');
-        this.phoneRef.nativeElement.value = userObj.phone;
-      } else if (res['message'] == 'Unauthorised access') {
-        this.toastr.warning('Unauthorised access', 'Please login to access');
-        this.router.navigateByUrl('/login');
-      } else if (res['message'] == 'Session Expired') {
-        this.toastr.warning('Session Expired', 'Please relogin to continue');
-        this.router.navigateByUrl('/login');
-      }
-      (err) => {
-        this.toastr.warning('Something went wrong');
-        console.log(err);
+    if(formRef.valid){
+      let userObj = {
+        userName: '',
+        phone: Number,
       };
-    });
-    this.keyPhone = false;
+      userObj.userName = this.userName;
+      userObj.phone = formRef.value.phone;
+      this.us.updateUserDetails(userObj).subscribe((res) => {
+        if (res['message'] == 'User phone number updated') {
+          this.toastr.success('User phone number updated');
+          this.phoneRef.nativeElement.value = userObj.phone;
+        } else if (res['message'] == 'Unauthorised access') {
+          this.toastr.warning('Unauthorised access', 'Please login to access');
+          this.router.navigateByUrl('/login');
+        } else if (res['message'] == 'Session Expired') {
+          this.toastr.warning('Session Expired', 'Please relogin to continue');
+          this.router.navigateByUrl('/login');
+        }
+        (err) => {
+          this.toastr.warning('Something went wrong');
+          console.log(err);
+        };
+      });
+      this.keyPhone = false;
+    }
   }
 
   onSubmitPassword(formRef) {
-    this.us.changePassword(this.userName, formRef.value).subscribe((res) => {
-      if (res['message'] == 'currentpwd is missing') {
-        this.toastr.warning('currentpwd is missing');
-      } else if (res['message'] == 'newpwd is missing') {
-        this.toastr.warning('newpwd is missing');
-      } else if (res['message'] == 'not matching') {
-        this.toastr.warning('New passwords are not matching');
-      }
-      else if (res['message'] == 'Invalid password') {
-        this.toastr.error('Current password is not valid');
-      }
-    else if(res['message'] == 'Passsword updated succesfully') {
-      this.toastr.success('Password updated successfully');
-      }
-    });
+    if(formRef.valid){
+      this.us.changePassword(this.userName, formRef.value).subscribe((res) => {
+        if (res['message'] == 'currentpwd is missing') {
+          this.toastr.warning('currentpwd is missing');
+        } else if (res['message'] == 'newpwd is missing') {
+          this.toastr.warning('newpwd is missing');
+        } else if (res['message'] == 'not matching') {
+          this.toastr.warning('New passwords are not matching');
+        }
+        else if (res['message'] == 'Invalid password') {
+          this.toastr.error('Current password is not valid');
+        }
+      else if(res['message'] == 'Passsword updated succesfully') {
+        this.toastr.success('Password updated successfully');
+        }
+        localStorage.clear();
+        this.router.navigateByUrl('/login')
+      });
+    }
   }
 
   updateProfile() {

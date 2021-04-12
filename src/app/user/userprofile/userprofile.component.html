@@ -2,35 +2,62 @@
   <h3 class="fw-bold text-center p-3">User Profile</h3>
   <div class="row mt-3">
     <div class="col-sm-4 mt-3">
-      <img src="../../../assets/userprofile.jpg" style="max-height: 300px" class="d-block mx-auto img-fluid" />
+      <img
+        src="../../../assets/userprofile.jpg"
+        style="max-height: 300px"
+        class="d-block mx-auto img-fluid"
+      />
     </div>
     <div class="col-sm-6">
       <div class="form">
         <div class="form-group mb-2">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" placeholder="username" name="username"
-            [value]="userObj?.userName" disabled />
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="username"
+            name="username"
+            [value]="userObj?.userName"
+            disabled
+          />
         </div>
         <div class="form-group mb-2">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="email" [value]="userObj?.email"
-            disabled />
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="email"
+            [value]="userObj?.email"
+            disabled
+          />
         </div>
 
         <div class="form-group mb-2">
           <label for="phone" class="form-label">Phone :</label>
-          <input #phone type="phone" class="form-control" id="phone" name="phone" placeholder="Phone number"
-            [value]="userObj?.phone" ngModel readonly />
+          <input
+            #phone
+            type="phone"
+            class="form-control"
+            id="phone"
+            name="phone"
+            placeholder="Phone number"
+            [value]="userObj?.phone"
+            ngModel
+            readonly
+          />
         </div>
       </div>
 
-      <div class="d-flex">
-        <div class="my-3 text-center d-block">
+      <div class="row">
+        <div class="col-md-6 px-0 my-1 text-center">
           <button class="btn btn-success" (click)="updateProfile()">
             Update Phone Number
           </button>
         </div>
-        <div class="my-3 ms-auto text-center d-block">
+        <div class="col-md-6 px-0 my-1 text-center">
           <button class="btn btn-success" (click)="updatePassword()">
             Update Password
           </button>
@@ -38,38 +65,120 @@
       </div>
 
       <div *ngIf="keyPhone">
-        <form class="form" #phoneRef="ngForm" (ngSubmit)="onSubmitPhone(phoneRef)">
-          <div class="form-group mb-2">
-            <label for="phone" class="form-label">Phone :</label>
-            <input type="phone" class="form-control" id="phone" name="phone" placeholder="0123456789" ngModel />
+        <form
+          class="form"
+          #phoneRef="ngForm"
+          (ngSubmit)="onSubmitPhone(phoneRef)"
+        >
+          <div class="form-floating mb-2">
+            <input
+              type="phone"
+              class="form-control"
+              id="phone"
+              name="phone"
+              placeholder="Phone number"
+              ngModel
+              #phone="ngModel"
+              required
+              minlength="10"
+              maxlength="10"
+              [class.is-valid]="phone.valid"
+              [class.is-invalid]="
+                (phone.touched || phoneRef.submitted) && !phone.valid
+              "
+            />
+            <label for="phone">Phone</label>
+            <div class="invalid-feedback bg-warning m-0 fw-bolder">
+              Please enter valid phone number
+            </div>
+          </div>
+
+          <div class="my-3 text-center">
+            <button class="btn btn-success">Submit</button>
+          </div>
+        </form>
+      </div>
+      <!-- Old password -->
+      <div *ngIf="keyPassword">
+        <form
+          class="form"
+          #pwdRef="ngForm"
+          (ngSubmit)="onSubmitPassword(pwdRef)"
+        >
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="currentpwd"
+              name="currentpwd"
+              placeholder="Enter Current Password number"
+              ngModel
+              #currentpwd="ngModel"
+              required
+              [class.is-valid]="currentpwd.valid"
+              [class.is-invalid]="
+                (currentpwd.touched || pwdRef.submitted) && !currentpwd.valid
+              "
+            />
+            <label for="currentpwd">Current Password</label>
+            <div
+              id="currentpwd"
+              class="invalid-feedback bg-warning m-0 fw-bolder"
+            >
+              Current password is required
+            </div>
+          </div>
+          <!-- New Password -->
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="newpwd"
+              name="newpwd"
+              placeholder="Enter Current Password number"
+              ngModel
+              #newpwd="ngModel"
+              required
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+              [class.is-valid]="newpwd.valid"
+              [class.is-invalid]="
+                (newpwd.touched || pwdRef.submitted) && !newpwd.valid
+              "
+            />
+            <label for="newpwd">New Password</label>
+            <div id="newpwd" class="invalid-feedback bg-warning m-0 fw-bolder">
+              Password must contain atleast one Lowercase, Uppercase, Number,
+              Special-character and length should be minimum 8 characters
+            </div>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="newpwd2"
+              name="newpwd2"
+              placeholder="Enter Current Password number"
+              ngModel
+              #newpwd2="ngModel"
+              required
+              [class.is-valid]="newpwd2.valid"
+              [class.is-invalid]="
+                (newpwd2.touched || pwdRef.submitted) &&
+                newpwd.value == newpwd2.value
+              "
+            />
+            <label for="newpwd2">Retype new Password</label>
+            <div id="newpwd2" class="invalid-feedback bg-warning m-0 fw-bolder">
+              Passwords not matched
+            </div>
           </div>
           <div class="my-3 text-center">
             <button class="btn btn-success">Submit</button>
           </div>
         </form>
       </div>
-
-  <div *ngIf="keyPassword">
-    <form class="form" #pwdRef="ngForm" (ngSubmit)="onSubmitPassword(pwdRef)">
-      <div class="form-group mb-2">
-        <label for="currentpwd" class="form-label">Current Password</label>
-        <input type="password" class="form-control" id="currentpwd" name="currentpwd" placeholder="Please enter your Current Password" ngModel />
-      </div>
-      <div class="form-group mb-2">
-        <label for="newpwd" class="form-label">New password</label>
-        <input type="password" class="form-control" id="newpwd" name="newpwd" placeholder="Please enter your new Password" ngModel />
-      </div>
-      <div class="form-group mb-2">
-        <label for="newpwd2" class="form-label">Retype new password</label>
-        <input type="password" class="form-control" id="newpwd2" name="newpwd2" placeholder="Please retype your new Password" ngModel />
-      </div>
-      <div class="my-3 text-center">
-        <button class="btn btn-success">Submit</button>
-      </div>
-    </form>
+    </div>
   </div>
-</div>
-</div>
 
   <div class="col-sm-2"></div>
   <!-- <br /><br /><br /><br /><br /> -->
@@ -79,32 +188,34 @@
 <div class="container bg-light rounded p-3">
   <h3 class="fw-bold text-center p-3">Order History</h3>
   <div class="accordion" id="accordionExample">
-    <div class="accordion-item" *ngFor="let order of ordersArray; let i = index">
-      <h2 class="accordion-header" id="heading{{i}}">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]='"#collapse"+i' aria-expanded="false" aria-controls="collapse{{i}}">
-          <span class="d-block"> Order No. {{i+1}}</span>
+    <div
+      class="accordion-item"
+      *ngFor="let order of ordersArray; let i = index"
+    >
+      <h2 class="accordion-header" id="heading{{ i }}">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#collapse' + i"
+          aria-expanded="false"
+          aria-controls="collapse{{ i }}"
+        >
+          <span class="d-block"> Order No. {{ i + 1 }}</span>
           <span class="d-block ms-auto"> {{ order.dateNow }}</span>
           <span class="d-block ms-auto">₹{{ order.total }}</span>
         </button>
       </h2>
-      <div id="collapse{{i}}" class="accordion-collapse collapse" aria-labelledby="heading{{i}}" data-bs-parent="#accordionExample">
+      <div
+        id="collapse{{ i }}"
+        class="accordion-collapse collapse"
+        aria-labelledby="heading{{ i }}"
+        data-bs-parent="#accordionExample"
+      >
         <div class="accordion-body">
           <div class="row">
             <div class="col-md-8">
               <p class="text-center fw-bold fs-6">Items list</p>
-              <!-- <div class="row fw-bolder">
-                <div class="col-md-3">Sno.</div>
-                <div class="col-md-3">Name</div>
-                <div class="col-md-3">Quantity*Price</div>
-                <div class="col-md-3">Price</div>
-              </div>
-              <div class="row" *ngFor="let product of order.products; let j = index">
-                <div class="col-md-3"></div>
-                <div class="col-md-3">{{ product.productName }}</div>
-                <div class="col-md-3">{{ product.quantity }} X {{ product.productPrice }}</div>
-                <div class="col-md-3">₹{{product.quantity * product.productPrice }}</div>
-              </div> -->
-
               <table class="table table-borderless table-hover text-center">
                 <thead>
                   <tr>
@@ -119,20 +230,23 @@
                     <th scope="row">{{ j + 1 }}</th>
                     <td>{{ product.productName }}</td>
                     <td>{{ product.quantity }} X {{ product.productPrice }}</td>
-                    <td>₹{{product.quantity * product.productPrice }}</td>
+                    <td>₹{{ product.quantity * product.productPrice }}</td>
                   </tr>
                 </tbody>
               </table>
-
             </div>
             <div class="col-md-4 text-center lh-sm fs-6">
               <p class="text-center fw-bold">Address</p>
-              <p>{{order.address.firstName +' '+ order.address.lastName}}</p>
-              <p>{{order.address.email}}</p>
-              <p>{{order.address.address1}}</p>
-              <p>{{order.address.address2}}</p>
-              <p>{{order.address.City}}, {{order.address.State}} , {{order.address.Zip}}</p>
-
+              <p>
+                {{ order.address.firstName + " " + order.address.lastName }}
+              </p>
+              <p>{{ order.address.email }}</p>
+              <p>{{ order.address.address1 }}</p>
+              <p>{{ order.address.address2 }}</p>
+              <p>
+                {{ order.address.City }}, {{ order.address.State }} ,
+                {{ order.address.Zip }}
+              </p>
             </div>
           </div>
         </div>

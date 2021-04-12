@@ -21,9 +21,9 @@
           <h5 class="card-title text-center">{{product.productName}}</h5>
           <p class="card-text text-center fw-bolder mb-0"> ₹{{product.productPrice}} </p>
           <p class="card-text text-center "> {{product.productBrand}}: {{product.productCategory}} </p>
-            <div class="d-flex justify-content-between">
-            <button class="btn btn-success p-2" (click)="addToCart(product)">Add to Cart</button>
-            <button class="btn btn-info" (click)="link(product.productId)">More Details</button>
+            <div class="row">
+              <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
+              <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
           </div>
           </div>
         </div>
