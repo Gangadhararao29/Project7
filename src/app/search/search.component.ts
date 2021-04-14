@@ -70,4 +70,24 @@ export class SearchComponent implements OnInit {
       this.cs.setNum(res['message'] + 1);
     });
   }
+
+  details(id) {
+    let user = localStorage.getItem('userName');
+    if (user) {
+      let userObject = {
+        userName: '',
+      };
+      userObject.userName = user;
+
+      this.us.checkAdminUser(userObject).subscribe((res) => {
+        if (res['message'] == 'User is Admin') {
+          this.router.navigateByUrl(`admin/productdetails/${id}`);
+        } else {
+          this.router.navigateByUrl(`user/productdetails/${id}`);
+        }
+      });
+    } else {
+      this.router.navigateByUrl(`/productdetails/${id}`);
+    }
+  }
 }

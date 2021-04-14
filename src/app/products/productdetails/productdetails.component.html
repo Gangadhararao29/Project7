@@ -18,7 +18,7 @@
     </div>
 <hr>
 <h3 style="width: 50%; height: 50%;" class="container">Overall Product Rating :
-  <span *ngIf=(!overallRating)>No Rating</span>
+  <span *ngIf=(!overallRating)>Not Rated</span>
   <span *ngIf="overallRating >=0.5 && overallRating<= 1.4 ">⭐({{Rating}})</span>
   <span *ngIf="overallRating >=1.5 && overallRating<= 2.4">⭐⭐({{Rating}})</span>
   <span *ngIf="overallRating >=2.5 && overallRating<= 3.4">⭐⭐⭐({{Rating}})</span>
