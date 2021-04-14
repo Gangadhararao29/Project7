@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
     if (CartObj.userName) {
       this.us.addToCart(CartObj).subscribe((res) => {
         if (res['message'] == 'Product added to the cart Successful') {
-          this.toastr.success('Product added to the cart Successful');
+          this.toastr.success('  ','Product added to the cart Successful');
         } else if (res['message'] == 'Product quantity updated') {
           this.toastr.success(
             'Product quantity updated',
