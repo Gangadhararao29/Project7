@@ -21,10 +21,10 @@
       placeholder="Username"
       name="userName"
       ngModel
-      #userName1="ngModel"
-      [class.is-valid]="userName1.valid"
+      #userName="ngModel"
+      [class.is-valid]="userName.valid"
       [class.is-invalid]="
-        (userName1.invalid && userName1.touched) || formRef.submitted
+        (userName.invalid && userName.touched) || formRef.submitted
       "
     />
     <label for="un">Username</label>
@@ -41,9 +41,9 @@
       placeholder="Password"
       name="password"
       ngModel
-      #password1="ngModel"
-      [class.is-valid]="password1.valid"
-      [class.is-invalid]="(password1.invalid && password1.touched) || formRef.submitted"
+      #password="ngModel"
+      [class.is-valid]="password.valid"
+      [class.is-invalid]="(password.invalid && password.touched) || formRef.submitted"
     />
     <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
       Please Enter valid password
