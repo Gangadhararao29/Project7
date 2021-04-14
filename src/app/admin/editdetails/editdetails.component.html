@@ -13,19 +13,19 @@
         </h3>
     </div>
     <form class="form" #ref="ngForm" (ngSubmit)="submitData(ref)">
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
             <input type="text" #id class="form-control" id="productId" placeholder="pid" name="productId" [ngModel]="product?.productId" readonly />
             <label for="productname">Product Id</label>
         </div>
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
             <input type="text" #name class="form-control" id="productname" placeholder="pname" name="productName" [ngModel]="product?.productName"  required/>
             <label for="productname">Product Name</label>
         </div>
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
             <input type="number" #price class="form-control" id="productprice" placeholder="price" name="productPrice" [ngModel]="product?.productPrice" required />
             <label for="productprice">Product Price</label>
         </div>
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
             <select class="form-select" #brand id="productbrand" name="productBrand" [ngModel]="product?.productBrand" required>
                 <option value="">Select Product Type</option>
                 <option value="Organic">Organic</option>
@@ -34,7 +34,7 @@
             <label for="productbrand">Product Type</label>
         </div>
 
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
                 <select class="form-select" #category id="productcategory" name="productCategory" [ngModel]="product?.productCategory" required>
                     <option value="">Select Category Type</option>
                     <option value="Fruits">Fruits</option>
@@ -43,7 +43,7 @@
             <label for="productcategory">Product Category</label>
         </div>
 
-        <div class=" mb-3">
+        <div class="form-floating mb-3">
             <textarea type="text" #description class="form-control" id="productdescription" name="productDescription" placeholder="Product Description here" [ngModel]="product?.productDescription" style="height: 100px" required></textarea>
             <label for="productdescription">Product Description</label>
           </div>
