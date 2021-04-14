@@ -203,7 +203,6 @@ export class CartComponent implements OnInit {
     cartObj['orderStatus'] = false;
     cartObj['total'] = this.sum;
     //console.log(cartObj)
-
     this.os.storeCart(cartObj);
     this.router.navigateByUrl('/user/checkout');
   }

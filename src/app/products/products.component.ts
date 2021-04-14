@@ -73,7 +73,6 @@ export class ProductsComponent implements OnInit {
       userObject.userName = user;
 
       this.us.checkAdminUser(userObject).subscribe((res) => {
-        // console.log("test1",res['message'])
         if (res['message'] == 'User is Admin') {
           this.router.navigateByUrl(`admin/productdetails/${id}`);
         } else {

@@ -1,21 +1,19 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OrderService } from 'services/order.service';
 import { UserService } from 'services/user.service';
 
 @Component({
-  selector: 'app-userprofile',
-  templateUrl: './userprofile.component.html',
-  styleUrls: ['./userprofile.component.css'],
+  selector: 'app-adminprofile',
+  templateUrl: './adminprofile.component.html',
+  styleUrls: ['./adminprofile.component.css'],
 })
-export class UserprofileComponent implements OnInit {
+export class AdminprofileComponent implements OnInit {
   @ViewChild('phone') phoneRef: ElementRef;
   constructor(
     private us: UserService,
     private router: Router,
-    private toastr: ToastrService,
-    private os: OrderService
+    private toastr: ToastrService
   ) {}
 
   userObj: any;
@@ -46,14 +44,6 @@ export class UserprofileComponent implements OnInit {
         console.log(err);
       }
     );
-
-    // Orders Loading
-    this.os.getOrders(this.userName).subscribe((res) => {
-      this.ordersArray = res['message'];
-      for (let order of this.ordersArray) {
-        order.dateNow = new Date(order.dateNow).toDateString();
-      }
-    });
   }
 
   onSubmitPhone(formRef) {

@@ -34,6 +34,7 @@ import { SearchFilterPipe } from './search/search-filter.pipe';
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
 import { CheckoutComponent } from './user/cart/checkout/checkout.component';
 import { PaymentComponent } from './user/cart/payment/payment.component';
+import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PaymentComponent } from './user/cart/payment/payment.component';
     SearchFilterPipe,
     UserprofileComponent,
     CheckoutComponent,
-    PaymentComponent
+    PaymentComponent,
+    AdminprofileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,189 @@
+<div class="container bg-light rounded p-2">
+    <h3 class="fw-bold text-center p-3">User Profile</h3>
+    <div class="row mt-3">
+      <div class="col-sm-4 mt-3">
+        <img
+          src="../../../assets/userprofile.jpg"
+          style="max-height: 300px"
+          class="d-block mx-auto img-fluid"
+        />
+      </div>
+      <div class="col-sm-6">
+        <div class="form">
+          <div class="form-group mb-2">
+            <label for="username" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="username"
+              name="username"
+              [value]="userObj?.userName"
+              disabled
+            />
+          </div>
+          <div class="form-group mb-2">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="email"
+              [value]="userObj?.email"
+              disabled
+            />
+          </div>
+  
+          <div class="form-group mb-2">
+            <label for="phone" class="form-label">Phone :</label>
+            <input
+              #phone
+              type="phone"
+              class="form-control"
+              id="phone"
+              name="phone"
+              placeholder="Phone number"
+              [value]="userObj?.phone"
+              ngModel
+              readonly
+            />
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-6 px-0 my-1 text-center">
+            <button class="btn btn-success" (click)="updateProfile()">
+              Update Phone
+            </button>
+          </div>
+          <div class="col-md-6 px-0 my-1 text-center">
+            <button class="btn btn-success" (click)="updatePassword()">
+              Update Password
+            </button>
+          </div>
+        </div>
+  
+        <div *ngIf="keyPhone">
+          <hr>
+          <form
+            class="form"
+            #phoneRef="ngForm"
+            (ngSubmit)="onSubmitPhone(phoneRef)"
+          >
+            <div class="form-floating m-2">
+              <input
+                type="phone"
+                class="form-control"
+                id="phone"
+                name="phone"
+                placeholder="Phone number"
+                ngModel
+                #phone="ngModel"
+                required
+                minlength="10"
+                maxlength="10"
+                [class.is-valid]="phone.valid"
+                [class.is-invalid]="
+                  (phone.touched || phoneRef.submitted) && !phone.valid
+                "
+              />
+              <label for="phone">Phone</label>
+              <div class="invalid-feedback bg-warning m-0 fw-bolder">
+                Please enter valid phone number
+              </div>
+            </div>
+  
+            <div class="my-3 text-center">
+              <button class="btn btn-success">Submit</button>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Password Change HTML-->
+        <div *ngIf="keyPassword">
+          <hr>
+          <form
+            class="form"
+            #pwdRef="ngForm"
+            (ngSubmit)="onSubmitPassword(pwdRef)"
+          >
+          <!-- Old password -->
+            <div class="form-floating mb-2">
+              <input
+                type="password"
+                class="form-control"
+                id="currentpwd"
+                name="currentpwd"
+                placeholder="Enter Current Password number"
+                ngModel
+                #currentpwd="ngModel"
+                required
+                [class.is-valid]="currentpwd.valid"
+                [class.is-invalid]="
+                  (currentpwd.touched || pwdRef.submitted) && !currentpwd.valid
+                "
+              />
+              <label for="currentpwd">Current Password</label>
+              <div
+                id="currentpwd"
+                class="invalid-feedback bg-warning m-0 fw-bolder"
+              >
+                Current password is required
+              </div>
+            </div>
+            <!-- New Password -->
+            <div class="form-floating mb-2">
+              <input
+                type="password"
+                class="form-control"
+                id="newpwd"
+                name="newpwd"
+                placeholder="Enter Current Password number"
+                ngModel
+                #newpwd="ngModel"
+                required
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+                [class.is-valid]="newpwd.valid"
+                [class.is-invalid]="
+                  (newpwd.touched || pwdRef.submitted) && !newpwd.valid
+                "
+              />
+              <label for="newpwd">New Password</label>
+              <div id="newpwd" class="invalid-feedback bg-warning m-0 fw-bolder">
+                Password must contain atleast one Lowercase, Uppercase, Number,
+                Special-character and length should be minimum 8 characters
+              </div>
+            </div>
+            <div class="form-floating mb-2">
+              <input
+                type="password"
+                class="form-control"
+                id="newpwd2"
+                name="newpwd2"
+                placeholder="Enter Current Password number"
+                ngModel
+                #newpwd2="ngModel"
+                required
+                [class.is-valid]="newpwd2.valid && newpwd.value == newpwd2.value "
+                [class.is-invalid]="
+                  (newpwd2.touched || pwdRef.submitted) &&
+                  newpwd.value != newpwd2.value
+                "
+              />
+              <label for="newpwd2">Retype new Password</label>
+              <div id="newpwd2" class="invalid-feedback bg-warning m-0 fw-bolder">
+                Passwords not matched
+              </div>
+            </div>
+            <div class="my-3 text-center">
+              <button class="btn btn-success">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-sm-2"></div>
+    <!-- <br /><br /><br /><br /><br /> -->
+  </div>

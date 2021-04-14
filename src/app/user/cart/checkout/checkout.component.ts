@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit {
 
   order(checkOut) {
     if (checkOut.valid) {
-      console.log(checkOut.value);
+      //console.log(checkOut.value);
       this.os.storeAddress(checkOut.value);
       this.toastr.success("Address added successfully")
       this.router.navigateByUrl('/user/payment');

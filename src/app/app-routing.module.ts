@@ -17,6 +17,7 @@ import { EditdetailsComponent } from './admin/editdetails/editdetails.component'
 import { UserprofileComponent } from './user/userprofile/userprofile.component';
 import { CheckoutComponent } from './user/cart/checkout/checkout.component';
 import { PaymentComponent } from './user/cart/payment/payment.component';
+import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,7 @@ const routes: Routes = [
       {path: 'updateprices',component:UpdatepricesComponent},
       {path: 'addproduct',component:AddproductComponent},
       { path: 'productdetails/:id', component:ProductdetailsComponent},
+      { path: 'adminprofile', component: AdminprofileComponent},
       { path: '', redirectTo:'admin/home', pathMatch: 'prefix'}
     ]
   },

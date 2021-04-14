@@ -95,9 +95,9 @@ userApiObject.post('/addtocart', validateToken, errorHandler(async (req, res) =>
 
   const cartObj = await userModel.findOne({ "userName": req.body.userName, cart: { $elemMatch: { productId: req.body.productId } } })
   if (cartObj) {
-    for (let x of cartObj.cart) {
-      if (x.productId == req.body.productId) {
-        x.quantity++;
+    for (let cartItem of cartObj.cart) {
+      if (cartItem.productId == req.body.productId) {
+        cartItem.quantity++;
       }
     }
     // console.log('cartObj',cartObj)
