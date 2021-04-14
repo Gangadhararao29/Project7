@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../../services/user.service';
+import { ProductService } from 'services/product.service';
+
 
 @Component({
   selector: 'app-addproduct',
@@ -10,7 +11,7 @@ import { UserService } from '../../../../services/user.service';
 })
 export class AddproductComponent implements OnInit {
   constructor(
-    private us: UserService,
+    private ps:ProductService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -25,12 +26,12 @@ export class AddproductComponent implements OnInit {
   submitUserData(userObj) {
     if (userObj.valid) {
       let formData = new FormData();
-      console.log(userObj)
+      //console.log(userObj)
       //adding image and other data to FormData object
       formData.append('photo', this.file, this.file.name);
       formData.append('userObj', JSON.stringify(userObj.value));
 
-      this.us.addProduct(formData).subscribe(
+      this.ps.addProduct(formData).subscribe(
         (res) => {
           // console.log(res['message'])
           if (res['message'] == 'Product added') {

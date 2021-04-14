@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class ProductService {
   constructor(private hc: HttpClient) {}
 
+  addProduct(productObj): Observable<any> {
+    return this.hc.post('/product/addproduct', productObj);
+  }
   getProducts(): Observable<any> {
     return this.hc.get('/product/getproducts');
   }
