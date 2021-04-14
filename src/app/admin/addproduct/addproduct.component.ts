@@ -23,20 +23,20 @@ export class AddproductComponent implements OnInit {
     //console.log('file', this.file);
   }
 
-  submitUserData(userObj) {
-    if (userObj.valid) {
+  submitProductData(productObj) {
+    if (productObj.valid) {
       let formData = new FormData();
-      //console.log(userObj)
+      //console.log(productObj)
       //adding image and other data to FormData object
       formData.append('photo', this.file, this.file.name);
-      formData.append('userObj', JSON.stringify(userObj.value));
+      formData.append('productObj', JSON.stringify(productObj.value));
 
       this.ps.addProduct(formData).subscribe(
         (res) => {
           // console.log(res['message'])
           if (res['message'] == 'Product added') {
             this.toastr.success('Product added Successfully');
-            userObj.reset();
+            productObj.reset();
           } else if (res['message'] == 'Unauthorised access') {
             this.toastr.warning(
               'Unauthorised access',

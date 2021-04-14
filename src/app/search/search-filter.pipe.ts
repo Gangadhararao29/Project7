@@ -10,7 +10,6 @@ export class SearchFilterPipe implements PipeTransform {
       return productsArray;
     }
     //console.log(searchText)
-    return productsArray.filter(product => product.productName.toString().toLowerCase().includes(searchText.toString().toLowerCase()))
+    return productsArray.filter(product => product.productName.toLowerCase().includes(searchText.toLowerCase()))
   }
-
 }
