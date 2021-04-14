@@ -73,7 +73,9 @@ import { AdminprofileComponent } from './admin/adminprofile/adminprofile.compone
     HttpClientModule,
     ToastrModule.forRoot({
       positionClass:'toast-top-center',
-      progressBar:true
+      progressBar:true,
+      preventDuplicates:true,
+      countDuplicates:true
     }),
     BrowserAnimationsModule
   ],

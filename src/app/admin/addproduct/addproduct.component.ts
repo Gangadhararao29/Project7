@@ -37,9 +37,6 @@ export class AddproductComponent implements OnInit {
           if (res['message'] == 'Product added') {
             this.toastr.success('Product added Successfully');
             userObj.reset();
-           // this.photoRef.nativeElement.value = '';
-            //navigate to add product
-            // this.router.navigateByUrl("/admin/home")
           } else if (res['message'] == 'Unauthorised access') {
             this.toastr.warning(
               'Unauthorised access',

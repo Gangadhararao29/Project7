@@ -17,7 +17,7 @@ export class UpdatepricesComponent implements OnInit {
   productsArray = [];
   arrItems = [];
   text = '';
-  key=false;
+  key = false;
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
@@ -59,7 +59,7 @@ export class UpdatepricesComponent implements OnInit {
             this.router.navigateByUrl('/login');
           } else if (res['message'] == 'Update Successful') {
             this.text += `<p style="color:green;"> ${res['productName']} price updated successfully </p> `;
-            this.key=true;
+            this.toastr.success('  ','Updated Successfully');
           } else {
             this.text += `<p style="color:red"> ${res['productName']} price update failed</p>`;
           }
@@ -67,11 +67,7 @@ export class UpdatepricesComponent implements OnInit {
         });
       }
     }
-    if(this.key){
-      this.toastr.success('Updated Successfully');
-    }
     this.text = '';
     formRef.reset();
-    
   }
 }
