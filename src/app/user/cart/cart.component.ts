@@ -62,15 +62,15 @@ export class CartComponent implements OnInit {
 
   loadValues() {
     //actual code
-    
+    let found = false;
     for (let item of this.cart) {
-      let found = false;
+      found = false;
       for (let product of this.productsArray) {
         if (item.productId == product.productId) {
           product.quantity = item.quantity;
           this.cartsArray.push(product);
           found = true;
-        }
+        } 
       }
       if (!found) {
         console.log("from not found",item)
