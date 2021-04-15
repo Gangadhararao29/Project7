@@ -35,7 +35,7 @@ var upload = multer({ storage: storage })
 //create a product
 productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHandler(async (req, res) => {
     //console.log("url path is ",req.file.path); 
-    let productObj = JSON.parse(req.body.userObj);
+    let productObj = JSON.parse(req.body.productObj);
     productObj.productImage = req.file.path;
     //Adding unique Id to the productObj
     productObj.productId = Date.now();
