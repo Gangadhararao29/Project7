@@ -40,7 +40,7 @@ export class ProductdetailsComponent implements OnInit {
       this.overallRating = total / count;
       this.Rating = this.overallRating.toFixed(2);
       //console.log(this.overallRating)
-    }, 200);
+    }, 1000);
   }
 
   onSubmit(formRef, id) {
