@@ -28,22 +28,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Steps
 Run server using node server.js
-
 Build latest Angular application using ng build
 
-## For working
-create .env file in root directory
-
-add following variables to the .env with suitable value
-
-PORT = port_number
-
-dburl = mongodb_database_url
-
-SECRET = secret_key
-
-cloudName = cloudinary cloud_name
-
-apiKey = cloudinary apikey
-
-apiSecret = cloudinaryapisecret
