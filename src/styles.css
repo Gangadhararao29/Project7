@@ -1,21 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    /* background-color: #FDD887; */
-    background-image: url(./assets/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    font-family: 'Open Sans', sans-serif;
+body {
+  /* background-color: #FDD887; */
+  background-image: url(./assets/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Open Sans", sans-serif;
 }
 
-.navbar{
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.navbar-brand{
-    font-family: 'Galada', cursive;
-    font-size: larger;
-    }
+.navbar-brand {
+  font-family: "Galada", cursive;
+  font-size: larger;
+}

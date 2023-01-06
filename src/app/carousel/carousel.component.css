@@ -1,58 +1,55 @@
 /*---animista animation----*/
-    @-webkit-keyframes text-shadow-drop-top {
-        0% {
-          text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-        }
-        100% {
-          text-shadow: 0 -6px 18px rgba(0, 0, 0, 0.35);
-        }
-      }
-      @keyframes text-shadow-drop-top {
-        0% {
-          text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-        }
-        100% {
-          text-shadow: 0 -6px 18px rgba(0, 0, 0, 0.35);
-        }
-      }
+@-webkit-keyframes text-shadow-drop-top {
+  0% {
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    text-shadow: 0 -6px 18px rgba(0, 0, 0, 0.35);
+  }
+}
+@keyframes text-shadow-drop-top {
+  0% {
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    text-shadow: 0 -6px 18px rgba(0, 0, 0, 0.35);
+  }
+}
 
 .text-shadow-drop-top {
-	-webkit-animation: text-shadow-drop-top 0.8s both;
-	        animation: text-shadow-drop-top 0.8s both;
+  -webkit-animation: text-shadow-drop-top 0.8s both;
+  animation: text-shadow-drop-top 0.8s both;
 }
 /*----------*/
 
-
-.tag-line{
-    font-family: 'Kaushan Script', cursive;
-}
-  
-.tag-line h2{
-    font-size: 7vmin;
+.tag-line {
+  font-family: "Kaushan Script", cursive;
 }
 
-.c1{
-    position :absolute;
-    top: 20%;
-    left: 5%;
-    z-index: 2;
-    color: red ;
+.tag-line h2 {
+  font-size: 7vmin;
 }
 
-.c2{
-    position :absolute;
-    top: 20%;
-    right: 5%;
-    z-index: 2;
-    color: rgb(118, 176, 0) ;
+.c1 {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  z-index: 2;
+  color: red;
 }
 
-.c3{
+.c2 {
+  position: absolute;
+  top: 20%;
+  right: 12%;
+  z-index: 2;
+  color: rgb(118, 176, 0);
+}
+
+.c3 {
   position: absolute;
   right: 25%;
-  top: 20%;
+  top: 17%;
   z-index: 2;
-  color: rgb(133, 49, 38);
-    
+  color: rgb(212, 44, 22);
 }
-

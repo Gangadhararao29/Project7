@@ -1,37 +1,24 @@
-.gallery {
-  box-sizing: border-box;
+.bg-green {
+  background-color: rgb(4, 67, 67);
+  opacity: 80%;
 }
 
-.pic1,
-.pic2,
-.pic3,
-.pic4,
-.pic5,
-.pic6 {
-  padding-left: 0;
-  padding-right: 0;
+.imgGif {
+  width: 100%;
+  height: auto;
+}
+
+.flexItem {
+  width: 100%;
+}
+
+@media screen and (min-width: 445px) {
+  .flexItem {
+    width: 48%;
+  }
 }
 
 video {
   width: 100%;
   height: auto;
-}
-
-.cardGroup{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.item{
-    width:250px;
-    background-color: rgb(4,67,67);
-    border-radius: 10px;
-    opacity: 0.8; 
-    height: 225px;
-    margin: 15px 5px;
-    color: white;
-    padding: 5px;
 }

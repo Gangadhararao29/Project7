@@ -1,87 +1,141 @@
-
-<!-- ORIGINAL CONTENT -->
 <div class="container">
-<p class="text-light fs-5 p-2 my-2 " style="background-color: rgb(4,67,67);">Organic</p>
-<div class="container my-3">
-  
-  <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Organic:Fruits</span></p>
-  <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
-    <div class="col" *ngFor = "let product of productsOrgaincFruits">
-      <div class="card" >
-        <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{product.productName}}</h5>
-          <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-          <div class="row">
-            <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
-            <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
-          </div>
+  <div class="my-3">
+    <p class="text-light bg-green fs-5 p-2 my-2 rounded">
+      <span class="ms-2">Organic : Fruits</span>
+    </p>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
+      <div class="col" *ngFor="let product of productsOrgaincFruits">
+        <div class="card" style="cursor: pointer">
+          <img
+            [src]="product.productImage"
+            (click)="details(product.productId)"
+            class="card-img-top"
+            width="200px"
+            height="200px"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ product.productName }}</h5>
+            <p class="card-text text-center fw-bolder">
+              ₹ {{ product.productPrice }}
+            </p>
+            <div class="d-grid gap-1">
+              <button
+                class="btn btn-success"
+                type="button"
+                (click)="addToCart(product)"
+              >
+                Add to cart
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="my-3">
+      <p class="text-light bg-green fs-5 p-2 my-2 rounded">
+        <span class="ms-2">Organic : Vegetables</span>
+      </p>
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
+        <div class="col" *ngFor="let product of productsOrgaincVegetables">
+          <div class="card" style="cursor: pointer">
+            <img
+              [src]="product.productImage"
+              class="card-img-top"
+              (click)="details(product.productId)"
+              width="200px"
+              height="200px"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ product.productName }}</h5>
+              <p class="card-text text-center fw-bolder">
+                ₹ {{ product.productPrice }}
+              </p>
+              <div class="d-grid gap-1">
+                <button
+                  class="btn btn-success"
+                  type="button"
+                  (click)="addToCart(product)"
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="my-3">
-    <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Organic:Vegetables</span></p>
-    <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
-      <div class="col" *ngFor = "let product of productsOrgaincVegetables">
-        <div class="card" >
-          <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
+    <p class="text-light bg-green fs-5 p-2 my-2 rounded">
+      <span class="ms-2">Inorganic : Fruits</span>
+    </p>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
+      <div class="col" *ngFor="let product of productsInorgaincFruits">
+        <div class="card" style="cursor: pointer">
+          <img
+            [src]="product.productImage"
+            class="card-img-top"
+            (click)="details(product.productId)"
+            width="200px"
+            height="200px"
+            alt="..."
+          />
           <div class="card-body">
-            <h5 class="card-title text-center">{{product.productName}}</h5>
-            <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-            <div class="row">
-              <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
-              <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
+            <h5 class="card-title text-center">{{ product.productName }}</h5>
+            <p class="card-text text-center fw-bolder">
+              ₹ {{ product.productPrice }}
+            </p>
+            <div class="d-grid gap-1">
+              <button
+                class="btn btn-success"
+                type="button"
+                (click)="addToCart(product)"
+              >
+                Add to cart
+              </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-3">
+      <p class="text-light bg-green fs-5 p-2 my-2 rounded">
+        <span class="ms-2">Inorganic : Vegetables</span>
+      </p>
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
+        <div class="col" *ngFor="let product of productsInorgaincVegetables">
+          <div class="card" style="cursor: pointer">
+            <img
+              [src]="product.productImage"
+              (click)="details(product.productId)"
+              class="card-img-top"
+              width="200px"
+              height="200px"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ product.productName }}</h5>
+              <p class="card-text text-center fw-bolder">
+                ₹ {{ product.productPrice }}
+              </p>
+              <div class="d-grid gap-1">
+                <button
+                  class="btn btn-success"
+                  type="button"
+                  (click)="addToCart(product)"
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-  </div>
-   
-   
-  <div class="container">
-    <p class="text-light fs-5 p-2 my-2 " style="background-color: rgb(4,67,67);">Inorganic</p>
-    <div class="container my-3">
-      <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Inorganic:Fruits</span></p>
-      <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
-        <div class="col" *ngFor = "let product of productsInorgaincFruits">
-          <div class="card" >
-            <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-center">{{product.productName}}</h5>
-              <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-              <div class="row">
-                <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
-                <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
-              </div>
-            </div>
-            </div>
-        </div>
-      </div>
-    
-      <div class="my-3">
-        <p class="text-light fs-5 p-2 my-2" style="background-color: rgb(4,67,67);"><span class="ms-2">Inorganic:Vegetables</span></p>
-        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3" >
-          <div class="col" *ngFor = "let product of productsInorgaincVegetables">
-            <div class="card" >
-              <img [src]="product.productImage" class="card-img-top" height="220px" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">{{product.productName}}</h5>
-                <p class="card-text text-center"> ₹{{product.productPrice}} </p>
-                <div class="row">
-                  <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-primary" (click)="details(product.productId)">More Details</button></div>
-                  <div class="col-md-6 px-0 my-1 text-center"><button class="btn btn-success" (click)="addToCart(product)">Add to Cart</button></div>
-                </div>
-              </div>
-              </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-    
-       
+</div>

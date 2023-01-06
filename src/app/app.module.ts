@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './login/register/register.component';
 
 import { HomeComponent } from './home/home.component';
 
@@ -40,7 +39,6 @@ import { AdminprofileComponent } from './admin/adminprofile/adminprofile.compone
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     HomeComponent,
     AddproductComponent,
     AboutComponent,
@@ -63,23 +61,25 @@ import { AdminprofileComponent } from './admin/adminprofile/adminprofile.compone
     UserprofileComponent,
     CheckoutComponent,
     PaymentComponent,
-    AdminprofileComponent
+    AdminprofileComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot({
-      positionClass:'toast-top-center',
-      progressBar:true,
-      preventDuplicates:true,
-      countDuplicates:true
+      positionClass: 'toast-top-center',
+      progressBar: true,
+      preventDuplicates: true,
+      countDuplicates: true,
     }),
-    BrowserAnimationsModule
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthorisationService,multi:true}],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorisationService, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

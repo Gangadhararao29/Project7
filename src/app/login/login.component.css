@@ -1,0 +1,21 @@
+.active {
+  background-color: rgb(4, 67, 67) !important;
+  color: white !important;
+}
+
+.text-green {
+  color: rgb(4, 67, 67);
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 0.2rem rgb(4, 67, 67);
+}
+
+.regLink {
+  cursor: pointer;
+}
+
+.loginWidth {
+  max-width: 500px;
+}

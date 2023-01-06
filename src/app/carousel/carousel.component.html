@@ -1,37 +1,88 @@
 <!-- CAROUSEL -->
-<div id="carouselExampleIndicators" class="carousel slide m-2" data-bs-ride="carousel">
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide m-2"
+  data-bs-ride="carousel"
+>
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
   </div>
   <div class="carousel-inner text-shadow-drop-top">
     <div class="carousel-item active">
-      <img src="{{carouselimage[0]}}" class="d-block w-100 " height="600vh" alt="1">
-      <div class = "tag-line c1">
-        <h2>Relish the real<br> taste of nature</h2>
+      <img
+        src="{{ carouselimage[0] }}"
+        class="d-block w-100"
+        height="600vh"
+        alt="1"
+      />
+      <div class="tag-line c1">
+        <h2>
+          Relish the real<br />
+          taste of nature
+        </h2>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{{carouselimage[1]}}" class="d-block w-100" height="600vh" alt="2">
-      <div class = "tag-line c2">
-        <h2>Eat better, feel better</h2>
+      <img
+        src="{{ carouselimage[1] }}"
+        class="d-block w-100"
+        height="600vh"
+        alt="2"
+      />
+      <div class="tag-line c2">
+        <h2>
+          Eat better,<br />
+          feel better
+        </h2>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="{{carouselimage[2]}}" class="d-block w-100" height="600vh" alt="3">
-      <div class = "tag-line c3">
-        <h2>Adding Green to your Life</h2>
+      <img
+        src="{{ carouselimage[2] }}"
+        class="d-block w-100"
+        height="600vh"
+        alt="3"
+      />
+      <div class="tag-line c3">
+        <h2>Right from the fields</h2>
       </div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev"
+  >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next"
+  >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-

@@ -1,73 +1,120 @@
-<!-- LOGIN  PAGE -->
-<div
-  class="container text-center text-light fst-italic p-3 mx-auto my-3"
-  style="width: 50%; background-color: rgb(4, 67, 67)"
->
-  <h5 style="width: 80%; margin: auto">Please Login to continue</h5>
-</div>
-<!-- LOGIN DASHBOARD PAGE -->
-<form
-  #formRef="ngForm"
-  (ngSubmit)="onSubmit(formRef)"
-  class="mt-3"
-  style="width: 50%; margin: auto"
->
-  <div class="form-floating mb-3">
-    <input
-      type="text"
-      required
-      class="form-control"
-      id="un"
-      placeholder="Username"
-      name="userName"
-      ngModel
-      #userName="ngModel"
-      [class.is-valid]="userName.valid"
-      [class.is-invalid]="
-        (userName.invalid && userName.touched) || formRef.submitted
-      "
-    />
-    <label for="un">Username</label>
-    <div id="un" class="invalid-feedback bg-warning m-0 fw-bolder">
-      Please Enter valid Username
+<div class="loginWidth my-3 mx-auto container">
+  <!-- TABS -->
+  <ul class="nav nav-pills nav-fill nav-justified">
+    <li class="nav-item rounded" (click)="changeSignType('login')">
+      <a class="nav-link bg-light text-green" [class.active]="isLogin"
+        ><h6>Login</h6></a
+      >
+    </li>
+    <li class="nav-item rounded" (click)="changeSignType('register')">
+      <a class="nav-link bg-light text-green" [class.active]="!isLogin"
+        ><h6>Register</h6></a
+      >
+    </li>
+  </ul>
+  <!-- Header Test -->
+  <div class="text-center rounded bg-light text-green fst-italic p-2 my-3">
+    <h6>
+      {{
+        isLogin ? "Please Login to continue" : "Enter credentials to continue"
+      }}
+    </h6>
+  </div>
+
+  <!-- FORMS -->
+  <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef)" class="mt-3">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        required
+        class="form-control"
+        id="un"
+        placeholder="Username"
+        name="userName"
+        ngModel
+        #userName="ngModel"
+        [class.is-valid]="userName.valid && !userFlag"
+        [class.is-invalid]="
+          (userName.invalid && (userName.touched || formRef.submitted)) ||
+          userFlag
+        "
+        (keyup)="checkForUser(userName.value)"
+      />
+      <label for="un">Username</label>
+      <div
+        *ngIf="!userFlag"
+        id="un"
+        class="invalid-feedback bg-warning m-0 fw-bolder"
+      >
+        Please Enter valid Username
+      </div>
+      <div
+        class="text-danger bg-warning m-0 fw-bolder"
+        style="font-size: small"
+        *ngIf="userFlag"
+      >
+        Username already taken. Please choose another
+      </div>
     </div>
-  </div>
-  <div class="form-floating">
-    <input
-      type="password"
-      required
-      class="form-control"
-      id="pw"
-      placeholder="Password"
-      name="password"
-      ngModel
-      #password="ngModel"
-      [class.is-valid]="password.valid"
-      [class.is-invalid]="(password.invalid && password.touched) || formRef.submitted"
-    />
-    <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
-      Please Enter valid password
+    <div *ngIf="!isLogin" class="form-floating mb-3">
+      <input
+        type="email"
+        required
+        class="form-control"
+        id="em"
+        placeholder="name@example.com"
+        name="email"
+        ngModel
+        #email="ngModel"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        [class.is-valid]="email.valid"
+        [class.is-invalid]="
+          email.invalid && (email.touched || formRef.submitted)
+        "
+      />
+      <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
+        Please Enter valid Email address
+      </div>
+      <label for="em">Email address</label>
     </div>
-    <label for="pw">Password</label>
-  </div>
-  <div class="m-3 text-center">
-    <button class="btn btn-success">Login</button>
-  </div>
-</form>
+    <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" -->
+    <div class="form-floating">
+      <input
+        type="password"
+        required
+        class="form-control"
+        id="pw"
+        placeholder="Password"
+        name="password"
+        ngModel
+        minlength="5"
+        #password="ngModel"
+        [class.is-valid]="password.valid"
+        [class.is-invalid]="
+          password.invalid && (formRef.submitted || password.touched)
+        "
+      />
+      <div id="em" class="invalid-feedback bg-warning m-0 fw-bolder">
+        Please Enter valid password (min:5)
+      </div>
+      <label for="pw">Password</label>
+    </div>
+    <div class="d-grid mt-3">
+      <button class="btn btn-success btn-block btn-lg">
+        {{ isLogin ? "Login" : "Register" }}
+      </button>
+    </div>
+  </form>
 
-<!-- REGISTRATION PAGE -->
-
-<div
-  class="container text-center text-light fst-italic p-3 m-auto"
-  style="width: 50%; background-color: rgb(4, 67, 67)"
->
-  <h5 style="width: 80%; margin: auto">
-    Dont have an account, Please click on
-    <a class="text-light" routerLink="register">Register</a>
-  </h5>
+  <div
+    *ngIf="isLogin"
+    class="text-center rounded bg-light text-green fst-italic p-2 my-3"
+  >
+    <h6>
+      Dont have an account, Please click on
+      <a class="text-green regLink" (click)="changeSignType('Register')"
+        >Register</a
+      >
+    </h6>
+  </div>
 </div>
-
-<!-- REGISTRATION COMPONENT -->
-<router-outlet></router-outlet>
-
-<div><br /><br /><br /></div>
