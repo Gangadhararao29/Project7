@@ -9,16 +9,19 @@ import { OrderService } from 'services/order.service';
   styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
-
-  constructor(private toastr: ToastrService,private os:OrderService, private router: Router) {}
+  constructor(
+    private toastr: ToastrService,
+    private os: OrderService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   order(checkOut) {
+    // console.log(checkOut.value);
     if (checkOut.valid) {
-      //console.log(checkOut.value);
       this.os.storeAddress(checkOut.value);
-      this.toastr.success("Address added successfully")
+      this.toastr.success('Address added successfully');
       this.router.navigateByUrl('/user/payment');
     }
   }

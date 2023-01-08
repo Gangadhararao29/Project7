@@ -1,23 +1,12 @@
-body {
-    background: #f5f5f5
+.bg-green {
+  background-color: rgb(4, 67, 67);
 }
 
-.rounded {
-    border-radius: 1rem
+.nav .nav-item .nav-link {
+  color: rgb(4, 67, 67);
 }
 
-.nav-pills .nav-link {
-    color: #555
-}
-
-.nav-pills .nav-link.active {
-    color: white
-}
-
-input[type="radio"] {
-    margin-right: 5px
-}
-
-.bold {
-    font-weight: bold
+.nav .nav-item .active {
+  background-color: rgb(4, 67, 67);
+  color: whitesmoke;
 }

@@ -1,120 +1,122 @@
-<div class="container bg-light rounded">
-  
+<div class="container bg-light rounded mb-3">
+  <div class="p-2 mt-3 text-center">
+    <h4 class="text-green mb-0">User Cart</h4>
+  </div>
 
-  <div class="p-3 m-2 text-center align-middle">
-    <h4 class="text-light mt-3">
-        <span class="px-5 py-3" style="background-color: rgb(4, 67, 67)"> User Cart </span>
-    </h4>
-</div>
+  <hr class="text-green my-1" />
 
-  <div class="table-responsive-sm mt-2">
+  <div class="table-responsive">
     <table class="table table-striped table-hover text-center align-middle">
       <thead>
         <th>Sno.</th>
-        <th>Product Image</th>
-        <th>Product Name</th>
+        <th>Product</th>
         <th>Price</th>
-        <th>Type</th>
-        <th>Quantity</th>
-        <th>Amount</th>
+        <th>Qty</th>
+        <th>Amt</th>
       </thead>
+
       <tbody>
         <tr *ngFor="let product of cartsArray; let i = index">
-          <td>{{i+1}}</td>
-          <td>
+          <td>{{ i + 1 }}</td>
+          <td class="d-flex justify-content-evenly">
             <img
               style="width: 50px; height: 50px"
               src="{{ product.productImage }}"
             />
+            <div class="ps-2">
+              {{ product.productName }} <br />
+              {{ product.productBrand }}
+            </div>
           </td>
-          <td>{{ product.productName }}</td>
           <td>₹{{ product.productPrice }}</td>
-          <td>{{ product.productBrand }}</td>
           <td>
-              <button class="btn btn-danger rounded-circle" (click)='removeQuantity(product)'> – </button>&nbsp; {{ product.quantity}} &nbsp;
-              <button class="btn btn-danger rounded-circle" (click)='addQuantity(product)'> + </button>
+            <i
+              class="bi bi-dash-lg bg-danger text-light rounded-5 px-1"
+              style="cursor: pointer"
+              (click)="removeQuantity(product)"
+            ></i>
+            {{ product.quantity }}
+            <i
+              class="bi bi-plus-lg bg-danger text-light rounded-5 px-1"
+              style="cursor: pointer"
+              (click)="addQuantity(product)"
+            ></i>
           </td>
-          <td>₹{{ product.productPrice * product.quantity  }}</td>
-          <td><button class="btn btn-close" (click)='deleteCartItem(product)'></button></td>
+          <td>₹{{ product.productPrice * product.quantity }}</td>
+          <td>
+            <button
+              class="btn btn-close"
+              (click)="deleteCartItem(product)"
+            ></button>
+          </td>
         </tr>
-
         <tr>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <th>Total Quantity: {{quantity}}</th>
-          <th>Total Amount: ₹{{sum}}</th>
+          <th>Total</th>
+          <th>{{ quantity }}</th>
+          <th>₹{{ sum }}</th>
           <td></td>
         </tr>
       </tbody>
     </table>
-
   </div>
 
-<!-- EXTRA -->
-<div id="spinner">
-  <div class="d-flex justify-content-center">
-    <div class="spinner-grow text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-secondary" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-success" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-danger" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-warning" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-info" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-    <div class="spinner-grow text-dark" role="status">
+  <!-- Spinner -->
+  <div id="spinner" class="text-center">
+    <div class="spinner-border text-green" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
-</div>
-<!--  EXTRA-->
 
-<!-- CHECKOUT -->
-<div class="text-center" *ngIf='cartsArray.length'>
-  <button class="btn btn-success" (click)="checkOut(cartsArray)">Checkout</button>
-</div>
+  <!-- CHECKOUT -->
+  <div *ngIf="cartsArray.length" class="text-center">
+    <button
+      class="btn bg-green text-light col-6 mb-3"
+      (click)="checkOut(cartsArray)"
+    >
+      Checkout
+    </button>
+  </div>
 
-<!-- No items banner -->
-<div id="noitems" style="display:none;" class="bg-warning text-center p-3 rounded m-2 text-light">
-  <h2> Oops!! <br>There are no items in the Cart </h2>
-</div>
+  <!-- No items banner -->
+  <div
+    id="noitems"
+    style="display: none"
+    class="p-3 rounded m-2 text-center border border-success"
+  >
+    <h5>
+      No items in your cart. <br />
+      Add products to checkout
+    </h5>
+  </div>
 
-
-<!-- NOT FOUND ITEMS -->
-<div class="text-center" *ngIf='notFoundItems.length'>
-  <h2 class="bg-danger text-center p-3 rounded m-2 text-light"> We are really sorry!! <br>These items are deleted by Admin or Out of Stock </h2>
-  <table class="table table-striped table-hover text-center align-middle">
-    <thead>
-      <th>Sno.</th>
-      <th>Product Id</th>
-      <th>Product Quantity</th>
-      <th></th>
-      
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of notFoundItems; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{product.productId}}</td>
-        <td>{{product.quantity}}</td>
-        <td><button class="btn btn-close" (click)='deleteCartItem(product)'></button></td>
-      </tr>
+  <!-- NOT FOUND ITEMS -->
+  <div class="text-center" *ngIf="notFoundItems.length">
+    <h2 class="bg-danger text-center p-3 rounded m-2 text-light">
+      We are really sorry!! <br />These items are deleted by Admin or Out of
+      Stock
+    </h2>
+    <table class="table table-striped table-hover text-center align-middle">
+      <thead>
+        <th>Sno.</th>
+        <th>Product Id</th>
+        <th>Product Quantity</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of notFoundItems; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ product.productId }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>
+            <button
+              class="btn btn-close"
+              (click)="deleteCartItem(product)"
+            ></button>
+          </td>
+        </tr>
       </tbody>
-      </table>
-  
-</div>
-
-<br><br><br><br><br><br><br><br>
-
+    </table>
+  </div>
 </div>

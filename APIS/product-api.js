@@ -102,7 +102,7 @@ productApiObj.post('/updateproduct', validateToken, errorHandler(async (req, res
 )
 
 //Adding of review of product by User
-productApiObj.post('/addproductreview',validateToken, errorHandler(async (req, res) => {
+productApiObj.post('/addproductreview', validateToken, errorHandler(async (req, res) => {
 
     const reviewObj = await Product.findOne({ "productId": req.body.productId, productReview: { $elemMatch: { userName: req.body.userName } } })
 
@@ -122,8 +122,8 @@ productApiObj.post('/addproductreview',validateToken, errorHandler(async (req, r
                 review.productComments = req.body.productComments;
             }
         }
-        res.send({ message: "Product review updated" })
         await reviewObj.save();
+        res.send({ message: "Product review updated" })
     }
 }))
 

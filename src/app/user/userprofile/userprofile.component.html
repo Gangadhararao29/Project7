@@ -1,6 +1,6 @@
-<div class="container bg-light rounded p-2">
+<div class="container bg-light rounded p-2 my-3">
   <h3 class="fw-bold text-center p-3">User Profile</h3>
-  <div class="row mt-3">
+  <div class="row p-2">
     <div class="col-sm-4 mt-3">
       <img
         src="../../../assets/userprofile.jpg"
@@ -8,10 +8,10 @@
         class="d-block mx-auto img-fluid"
       />
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
       <div class="form">
         <div class="form-group mb-2">
-          <label for="username" class="form-label">Username</label>
+          <label for="username" class="form-label">Username :</label>
           <input
             type="text"
             class="form-control"
@@ -23,7 +23,7 @@
           />
         </div>
         <div class="form-group mb-2">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label">Email :</label>
           <input
             type="email"
             class="form-control"
@@ -51,27 +51,23 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-6 px-0 my-1 text-center">
-          <button class="btn btn-success" (click)="updateProfile()">
-            Update Phone
-          </button>
-        </div>
-        <div class="col-md-6 px-0 my-1 text-center">
-          <button class="btn btn-success" (click)="updatePassword()">
-            Update Password
-          </button>
-        </div>
+      <div class="d-flex justify-content-between m-1">
+        <button class="btn btn-success w-100 me-1" (click)="updateProfile()">
+          Update Phone
+        </button>
+        <button class="btn btn-success w-100 ms-1" (click)="updatePassword()">
+          Update Password
+        </button>
       </div>
 
       <div *ngIf="keyPhone">
-        <hr>
+        <hr />
         <form
           class="form"
           #phoneRef="ngForm"
           (ngSubmit)="onSubmitPhone(phoneRef)"
         >
-          <div class="form-floating m-2">
+          <div class="form-floating my-2">
             <input
               type="phone"
               class="form-control"
@@ -94,7 +90,7 @@
             </div>
           </div>
 
-          <div class="my-3 text-center">
+          <div class="text-center">
             <button class="btn btn-success">Submit</button>
           </div>
         </form>
@@ -102,13 +98,13 @@
 
       <!-- Password Change HTML-->
       <div *ngIf="keyPassword">
-        <hr>
+        <hr />
         <form
           class="form"
           #pwdRef="ngForm"
           (ngSubmit)="onSubmitPassword(pwdRef)"
         >
-        <!-- Old password -->
+          <!-- Old password -->
           <div class="form-floating mb-2">
             <input
               type="password"
@@ -165,7 +161,7 @@
               ngModel
               #newpwd2="ngModel"
               required
-              [class.is-valid]="newpwd2.valid && newpwd.value == newpwd2.value "
+              [class.is-valid]="newpwd2.valid && newpwd.value == newpwd2.value"
               [class.is-invalid]="
                 (newpwd2.touched || pwdRef.submitted) &&
                 newpwd.value != newpwd2.value
@@ -176,24 +172,18 @@
               Passwords not matched
             </div>
           </div>
-          <div class="my-3 text-center">
+          <div class="text-center">
             <button class="btn btn-success">Submit</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-
-  <div class="col-sm-2"></div>
-  <!-- <br /><br /><br /><br /><br /> -->
 </div>
 
-<hr />
-
 <!-- ORDER HISTORY -->
-
-<div class="container bg-light rounded p-3">
-  <h3 class="fw-bold text-center p-3">Order History</h3>
+<div class="container bg-light rounded p-2 mb-3">
+  <h3 class="fw-bold text-center p-2">Order History</h3>
   <div class="accordion" id="accordionExample">
     <div
       class="accordion-item"
@@ -222,7 +212,7 @@
         <div class="accordion-body">
           <div class="row">
             <div class="col-md-8">
-              <p class="text-center fw-bold fs-6">Items list</p>
+              <p class="text-center fw-bold">Items list</p>
               <table class="table table-borderless table-hover text-center">
                 <thead>
                   <tr>
@@ -242,15 +232,15 @@
                 </tbody>
               </table>
             </div>
-            <div class="col-md-4 text-center lh-sm fs-6">
-              <p class="text-center fw-bold">Address</p>
+            <div class="col-md-4 text-center">
+              <span class="text-center fw-bold p-2">Address</span>
+              <br />
+              <br />
               <p>
                 {{ order.address.firstName + " " + order.address.lastName }}
-              </p>
-              <p>{{ order.address.email }}</p>
-              <p>{{ order.address.address1 }}</p>
-              <p>{{ order.address.address2 }}</p>
-              <p>
+                <br />{{ order.address.email }} <br />
+                {{ order.address.address1 }}
+                <br />{{ order.address.address2 }}<br />
                 {{ order.address.City }}, {{ order.address.State }} ,
                 {{ order.address.Zip }}
               </p>

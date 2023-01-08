@@ -6,10 +6,8 @@ const jwt = require("jsonwebtoken")
 const userApiObject = express.Router();
 const errorHandler = require("express-async-handler")
 
-
 // import validate token middleware
 const validateToken = require("./middlewares/verifyToken")
-
 
 //in userprofile
 userApiObject.get('/getuser/:userName', validateToken, errorHandler(async (req, res) => {
@@ -144,7 +142,6 @@ userApiObject.post('/removequantity/:userName/:id', validateToken, errorHandler(
 
 //Completely remove cart item from the cart in the cart component
 userApiObject.post('/removecartitem/:userName/:id', validateToken, errorHandler(async (req, res) => {
-
   const findItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
     { $pull: { 'cart': { productId: req.params.id } } }, { returnOriginal: false, upsert: true, new: true })
   // console.log(findItem);
@@ -162,27 +159,27 @@ userApiObject.get('/getcount/:userName', errorHandler(async (req, res) => {
 }))
 
 //After payment of the order
-userApiObject.post('/resetcart/:userName',errorHandler(async(req,res)=>{
+userApiObject.post('/resetcart/:userName', errorHandler(async (req, res) => {
   const newItem = await userModel.findOneAndUpdate({ "userName": req.params.userName },
-  { $set: { "cart":  [] }}, { multi:true })
-  
+    { $set: { "cart": [] } }, { multi: true })
+
   res.send({ message: "user cart got reset" })
 
 }))
 
 //password changing
-userApiObject.post('/changepassword/:userName',validateToken,errorHandler(async(req,res)=>{
+userApiObject.post('/changepassword/:userName', validateToken, errorHandler(async (req, res) => {
 
   const userObj = await userModel.findOne({ "userName": req.params.userName })
 
-  if(!req.body.currentpwd) {
-    res.send({message:"currentpwd is missing"})
+  if (!req.body.currentpwd) {
+    res.send({ message: "currentpwd is missing" })
   }
   else if (!req.body.newpwd) {
-    res.send({message:"newpwd is missing"})
+    res.send({ message: "newpwd is missing" })
   }
-  else if (req.body.newpwd != req.body.newpwd2){
-    res.send({message:"not matching"})
+  else if (req.body.newpwd != req.body.newpwd2) {
+    res.send({ message: "not matching" })
   }
   else {
     let value = await bcrypt.compare(req.body.currentpwd, userObj.password)

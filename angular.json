@@ -115,5 +115,8 @@
       }
     }
   },
-  "defaultProject": "FarmFreshApp"
+  "defaultProject": "FarmFreshApp",
+  "cli": {
+    "analytics": false
+  }
 }

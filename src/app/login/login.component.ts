@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formRef) {
-    console.log(formRef.value, formRef.valid);
-
     if (formRef.valid) {
       if (this.isLogin) {
         this.us.loginUser(formRef.value).subscribe((res) => {

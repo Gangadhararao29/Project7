@@ -2,23 +2,17 @@
   <!-- TABS -->
   <ul class="nav nav-pills nav-fill nav-justified">
     <li class="nav-item rounded" (click)="changeSignType('login')">
-      <a class="nav-link bg-light text-green" [class.active]="isLogin"
-        ><h6>Login</h6></a
-      >
+      <a class="nav-link bg-light text-green" [class.active]="isLogin">Login</a>
     </li>
     <li class="nav-item rounded" (click)="changeSignType('register')">
       <a class="nav-link bg-light text-green" [class.active]="!isLogin"
-        ><h6>Register</h6></a
+        >Register</a
       >
     </li>
   </ul>
   <!-- Header Test -->
   <div class="text-center rounded bg-light text-green fst-italic p-2 my-3">
-    <h6>
-      {{
-        isLogin ? "Please Login to continue" : "Enter credentials to continue"
-      }}
-    </h6>
+    {{ isLogin ? "Please Login to continue" : "Enter credentials to continue" }}
   </div>
 
   <!-- FORMS -->
@@ -100,7 +94,7 @@
       <label for="pw">Password</label>
     </div>
     <div class="d-grid mt-3">
-      <button class="btn btn-success btn-block btn-lg">
+      <button class="btn bg-green btn-lg">
         {{ isLogin ? "Login" : "Register" }}
       </button>
     </div>
@@ -110,11 +104,9 @@
     *ngIf="isLogin"
     class="text-center rounded bg-light text-green fst-italic p-2 my-3"
   >
-    <h6>
-      Dont have an account, Please click on
-      <a class="text-green regLink" (click)="changeSignType('Register')"
-        >Register</a
-      >
-    </h6>
+    Dont have an account, Please click on
+    <a class="text-green regLink" (click)="changeSignType('Register')"
+      >Register</a
+    >
   </div>
 </div>

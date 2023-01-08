@@ -1,84 +1,174 @@
-<div class="container bg-light rounded">
+<div class="container bg-light rounded my-3">
+  <div class="p-2 mt-3 text-center">
+    <h4 class="text-green mb-0">Billing Address</h4>
+  </div>
+  <hr class="text-green my-1" />
+
+  <form
+    class="form mt-2"
+    #checkoutForm="ngForm"
+    (ngSubmit)="order(checkoutForm)"
+  >
     <div class="row">
-        <div class="col my-3">
-            <div class="p-3 m-2 text-center">
-                <h3 class="text-light">
-                    <span class="p-2" style="background-color: rgb(4, 67, 67)">Billing Address</span>
-                </h3>
-            </div>
-            <form class="form" #checkoutForm="ngForm" (ngSubmit)="order(checkoutForm)">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" ngModel name="firstName" #firstName="ngModel"
-                            placeholder="Steve" required>
-                            <div class="text-danger bg-warning px-2"
-                            *ngIf="(firstName.touched ||checkoutForm.submitted) && !firstName.valid">First Name is
-                            required</div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" ngModel name="lastName" #lastName="ngModel"
-                            placeholder="Smith" required>
-                        <div class="text-danger bg-warning px-2"
-                            *ngIf="(lastName.touched ||checkoutForm.submitted) && !lastName.valid">Last Name is required
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" ngModel name="email" #email="ngModel"
-                        placeholder="you@example.com" required>
-                        <div class="text-danger bg-warning px-2" *ngIf="(email.touched ||checkoutForm.submitted)&& !email.valid">
-                        Email is required</div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address1">Address</label>
-                    <input type="text" class="form-control" id="address1" ngModel name="address1" #address1="ngModel"
-                        placeholder="1234 Main Street" required>
-                        <div class="text-danger bg-warning px-2"*ngIf="(address1.touched ||checkoutForm.submitted)&& !address1.valid">
-                        Address is required</div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="address2">address2
-                        <span class="text-muted">(Optional)</span>
-                    </label>
-                    <input type="text" class="form-control" id="address2" ngModel name="address2" #address2="ngModel"
-                        placeholder="Apartment or suite">
-                </div>
-
-                <div class="row">
-                    <div class="col-md-5 mb-3">
-                        <label for="State">State</label>
-                        <input type="text" class="form-control" ngModel name="State" #State="ngModel" placeholder=""
-                            required>
-                            <div class="text-danger bg-warning px-2" *ngIf="(State.touched ||checkoutForm.submitted)&& !State.valid">
-                            State is required</div>
-
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="City">City</label>
-                        <input type="text" class="form-control" ngModel name="City" #City="ngModel" placeholder=""
-                            required>
-                            <div class="text-danger bg-warning px-2" *ngIf="(City.touched ||checkoutForm.submitted)&& !City.valid">
-                            City is required</div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="zip">Pincode</label>
-                        <input type="text" class="form-control" ngModel name="Zip" #Zip="ngModel" placeholder=""
-                            required>
-                            <div class="text-danger bg-warning px-2" *ngIf="(Zip.touched ||checkoutForm.submitted)&& !Zip.valid">Pincode 
-                            is required</div>
-                    </div>
-                </div>
-               <div class="text-center"> <button type="submit" class="btn btn-success ">Proceed to Payment</button></div>
-               
-             </form>
+      <div class="col-md-6 mb-3">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          ngModel
+          name="firstName"
+          #firstName="ngModel"
+          placeholder="Steve"
+          required
+        />
+        <div
+          class="text-danger bg-warning px-2"
+          *ngIf="
+            (firstName.touched || checkoutForm.submitted) && !firstName.valid
+          "
+        >
+          First Name is required
         </div>
-        
-       
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          ngModel
+          name="lastName"
+          #lastName="ngModel"
+          placeholder="Smith"
+          required
+        />
+        <div
+          class="text-danger bg-warning px-2"
+          *ngIf="
+            (lastName.touched || checkoutForm.submitted) && !lastName.valid
+          "
+        >
+          Last Name is required
+        </div>
+      </div>
     </div>
+
+    <div class="mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        ngModel
+        name="email"
+        #email="ngModel"
+        placeholder="you@example.com"
+        required
+      />
+      <div
+        class="text-danger bg-warning px-2"
+        *ngIf="(email.touched || checkoutForm.submitted) && !email.valid"
+      >
+        Email is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address1">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address1"
+        ngModel
+        name="address1"
+        #address1="ngModel"
+        placeholder="1234 Main Street"
+        required
+      />
+      <div
+        class="text-danger bg-warning px-2"
+        *ngIf="(address1.touched || checkoutForm.submitted) && !address1.valid"
+      >
+        Address is required
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="address2"
+        >address2
+        <span class="text-muted">(Optional)</span>
+      </label>
+      <input
+        type="text"
+        class="form-control"
+        id="address2"
+        ngModel
+        name="address2"
+        #address2="ngModel"
+        placeholder="Apartment or suite"
+      />
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <label for="State">State</label>
+        <input
+          type="text"
+          class="form-control"
+          ngModel
+          name="State"
+          #State="ngModel"
+          placeholder=""
+          required
+        />
+        <div
+          class="text-danger bg-warning px-2"
+          *ngIf="(State.touched || checkoutForm.submitted) && !State.valid"
+        >
+          State is required
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="City">City</label>
+        <input
+          type="text"
+          class="form-control"
+          ngModel
+          name="City"
+          #City="ngModel"
+          placeholder=""
+          required
+        />
+        <div
+          class="text-danger bg-warning px-2"
+          *ngIf="(City.touched || checkoutForm.submitted) && !City.valid"
+        >
+          City is required
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="zip">Pincode</label>
+        <input
+          type="text"
+          class="form-control"
+          ngModel
+          name="Zip"
+          #Zip="ngModel"
+          placeholder=""
+          required
+        />
+        <div
+          class="text-danger bg-warning px-2"
+          *ngIf="(Zip.touched || checkoutForm.submitted) && !Zip.valid"
+        >
+          Pincode is required
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button class="btn bg-green text-light col-6 mb-3" type="submit">
+        Checkout
+      </button>
+    </div>
+  </form>
 </div>

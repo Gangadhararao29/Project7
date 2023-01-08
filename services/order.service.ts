@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-
-  orderObject:any;
+  orderObject: any;
 
   constructor(private hc: HttpClient) {}
 
@@ -19,19 +18,17 @@ export class OrderService {
     return this.hc.get(`/order/getorders/${userName}`);
   }
 
-  storeCart(cartObj){
-    this.orderObject= cartObj;
+  storeCart(cartObj) {
+    this.orderObject = cartObj;
   }
 
-  storeAddress(addressObj){
-    this.orderObject['address']=addressObj;
-    //console.log(this.orderObject)
+  storeAddress(addressObj) {
+    // console.log(this.orderObject);
+    this.orderObject['address'] = addressObj;
   }
 
-  confirmedOrder(){
+  confirmedOrder() {
     this.orderObject.orderStatus = true;
     return this.orderObject;
   }
-
-  
 }

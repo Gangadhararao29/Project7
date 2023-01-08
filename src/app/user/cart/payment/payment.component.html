@@ -1,150 +1,286 @@
-<div class="container bg-light py-3 rounded">
+<div class="container bg-light p-3 my-3 rounded">
+  <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="pills-home-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-home"
+        type="button"
+        role="tab"
+        aria-controls="pills-home"
+        aria-selected="true"
+      >
+        Credit Card
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-profile-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-profile"
+        type="button"
+        role="tab"
+        aria-controls="pills-profile"
+        aria-selected="false"
+      >
+        Paypal
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="pills-contact-tab"
+        data-bs-toggle="pill"
+        data-bs-target="#pills-contact"
+        type="button"
+        role="tab"
+        aria-controls="pills-contact"
+        aria-selected="false"
+      >
+        Net Banking
+      </button>
+    </li>
+  </ul>
 
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                type="button" role="tab" aria-controls="pills-home" aria-selected="true">Credit Card</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Paypal</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact"
-                type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Net Banking</button>
-        </li>
-    </ul>
-
-    <div class="tab-content" id="pills-tabContent">
-        <!-- creditcard -->
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <form class="form" #paymentForm="ngForm" (ngSubmit)="orderPlaced(paymentForm,0,0)">
-                <div class="form-group">
-                    <label for="username">
-                        <h6>Card Owner</h6>
-                    </label>
-                    <input type="text" ngModel name="username" #username="ngModel" placeholder="Card Owner Name"
-                        required class="form-control ">
-                    <div class="text-danger bg-warning px-2"
-                        *ngIf="(username.touched ||paymentForm.submitted)&& !username.valid">
-                        Card Owner Name is required</div>
-                </div>
-                <div class="form-group">
-                    <label for="cardNumber">
-                        <h6>Card number</h6>
-                    </label>
-                    <input type="text" required minlength="14" ngModel name="cardNumber" #cardNumber="ngModel"
-                        placeholder="Valid card number" class="form-control ">
-                    <div class="text-danger bg-warning px-2"
-                        *ngIf="(cardNumber.touched ||paymentForm.submitted)&& !cardNumber.valid">
-                        card Number should have minimum 14 Numbers</div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label for="Expiration">
-                                <h6>Expiration Date</h6>
-                            </label>
-                            <form id="form" #validForm="ngForm" (change)="checkvalidation(validForm)">
-                                <select id="expiryMonth" ngModel name="month" #month="ngModel" required>
-                                    <!-- <option selected value=""> Month </option> -->
-                                    <option value=01>january</option>
-                                    <option value=02>february</option>
-                                    <option value=03>march</option>
-                                    <option value=04>april</option>
-                                    <option value=05>may</option>
-                                    <option value=06>june</option>
-                                    <option value=07>july</option>
-                                    <option value=08>august</option>
-                                    <option value=09>september</option>
-                                    <option value=10>october</option>
-                                    <option value=11>novemeber </option>
-                                    <option value=12>december</option>
-                                </select>
-                                <div class="text-danger bg-warning px-2"
-                                    *ngIf="(month.touched ||paymentForm.submitted)&& !month.valid">
-                                    Expiry Month is required</div>
-                                <select id="expiryYear" ngModel name="year" #year="ngModel" required>
-                                    <!-- <option selected value=""> Year </option> -->
-
-                                    <option value="2021"> 2021 </option>
-                                    <option value="2022"> 2022 </option>
-                                    <option value="2023"> 2023 </option>
-                                    <option value="2024"> 2024 </option>
-                                    <option value="2025"> 2025 </option>
-                                    <option value="2026"> 2026 </option>
-                                    <option value="2027"> 2027 </option>
-                                    <option value="2028"> 2028 </option>
-                                    <option value="2029"> 2029 </option>
-                                    <option value="2030"> 2030 </option>
-                                    <option value="2031"> 2018 </option>
-                                    <option value="2032"> 2019 </option>
-                                    <option value="2033"> 2020 </option>
-                                </select>
-                                <div class="text-danger bg-warning px-2"
-                                    *ngIf="(year.touched ||paymentForm.submitted)&& !year.valid">
-                                    Expiry Year is required</div>
-
-                            </form>
-                            <div *ngIf="!value">
-                                <div class="text-danger bg-warning px-2">Please choose valid Date</div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group mb-4"> <label data-bs-toggle="tooltip"
-                                title="Three digit CV code on the back of your card">
-                                <h6>CVV </h6>
-                            </label>
-                            <input type="text" required minlength="3" ngModel name="cvv" #cvv="ngModel"
-                                class="form-control">
-                        </div>
-                        <div class="text-danger bg-warning px-2"
-                            *ngIf="(cvv.touched ||paymentForm.submitted)&& !cvv.valid">
-                            CVV should have minimum 3 numbers</div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm "
-                        [class.disabled]='!value || !mainvalue'> Confirm Payment </button>
-                </div>
-
-            </form>
+  <div class="tab-content" id="pills-tabContent">
+    <!-- creditcard -->
+    <div
+      class="tab-pane fade show active"
+      id="pills-home"
+      role="tabpanel"
+      aria-labelledby="pills-home-tab"
+    >
+      <form
+        class="form"
+        #paymentForm="ngForm"
+        (ngSubmit)="orderPlaced(paymentForm, 0, 0)"
+      >
+        <div class="form-group">
+          <label for="username">
+            <h6>Card Owner</h6>
+          </label>
+          <input
+            type="text"
+            ngModel
+            name="username"
+            #username="ngModel"
+            placeholder="Card Owner Name"
+            required
+            class="form-control"
+          />
+          <small
+            class="text-danger bg-warning px-2"
+            *ngIf="
+              (username.touched || paymentForm.submitted) && !username.valid
+            "
+          >
+            Card Owner Name is required
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="cardNumber">
+            <h6>Card number</h6>
+          </label>
+          <input
+            type="text"
+            required
+            minlength="14"
+            ngModel
+            name="cardNumber"
+            #cardNumber="ngModel"
+            placeholder="Valid card number"
+            class="form-control"
+          />
+          <small
+            class="text-danger bg-warning px-2"
+            *ngIf="
+              (cardNumber.touched || paymentForm.submitted) && !cardNumber.valid
+            "
+          >
+            card Number should have minimum 14 Numbers
+          </small>
         </div>
 
-        <!-- paypal -->
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-
-            <h6 class="pb-2">Select your paypal account type</h6>
-            <div class="form-group "> <label class="radio-inline">
-                    <input type="radio" name="optradio" checked> Domestic </label>
-                <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label>
-            </div>
-            <p> <button type="button" class="btn btn-primary" (click)="orderPlaced(0,true,0)"> Log into my
-                    Paypal</button> </p>
-
-        </div>
-
-
-        <!-- netbanking -->
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-
-
-            <div class="form-group "> <label for="Select Your Bank">
-                    <h6>Select your Bank</h6>
-                </label> <select class="form-control" id="ccmonth" ngModel name="bank" #bank="ngModel" required>
-                    <option value="" selected disabled>--Please select your Bank--</option>
-                    <option>State Bank</option>
-                    <option>Union Bank</option>
-                    <option>Andhra Bank</option>
-                    <option>Hdfc Bank</option>
-                    <option>ICICI Bank</option>
-                </select> </div>
+        <div class="row mb-3">
+          <div class="col-sm-4">
             <div class="form-group">
-                <button type="submit" class="btn btn-primary" (click)="orderPlaced(0,0,true)">Proceed Payment</button>
+              <label
+                data-bs-toggle="tooltip"
+                title="Three digit CV code on the back of your card"
+              >
+                <h6>CVV</h6>
+              </label>
+              <input
+                type="text"
+                required
+                minlength="3"
+                ngModel
+                name="cvv"
+                #cvv="ngModel"
+                class="form-control"
+              />
             </div>
+            <small
+              class="text-danger bg-warning px-2"
+              *ngIf="(cvv.touched || paymentForm.submitted) && !cvv.valid"
+            >
+              CVV should have minimum 3 numbers
+            </small>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="Expiration">
+                <h6>Expiration Date</h6>
+              </label>
+              <form
+                id="form"
+                #validForm="ngForm"
+                (change)="checkvalidation(validForm)"
+              >
+                <select
+                  id="expiryMonth"
+                  ngModel
+                  name="month"
+                  #month="ngModel"
+                  required
+                >
+                  <!-- <option selected value=""> Month </option> -->
+                  <option value="01">january</option>
+                  <option value="02">february</option>
+                  <option value="03">march</option>
+                  <option value="04">april</option>
+                  <option value="05">may</option>
+                  <option value="06">june</option>
+                  <option value="07">july</option>
+                  <option value="08">august</option>
+                  <option value="09">september</option>
+                  <option value="10">october</option>
+                  <option value="11">novemeber</option>
+                  <option value="12">december</option>
+                </select>
+                <small
+                  class="text-danger bg-warning px-2"
+                  *ngIf="
+                    (month.touched || paymentForm.submitted) && !month.valid
+                  "
+                >
+                  Expiry Month is required
+                </small>
+                <select
+                  id="expiryYear"
+                  ngModel
+                  name="year"
+                  #year="ngModel"
+                  required
+                >
+                  <!-- <option selected value=""> Year </option> -->
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                  <option value="2030">2030</option>
+                  <option value="2031">2031</option>
+                  <option value="2032">2032</option>
+                  <option value="2033">2033</option>
+                </select>
+                <small
+                  class="text-danger bg-warning px-2"
+                  *ngIf="(year.touched || paymentForm.submitted) && !year.valid"
+                >
+                  Expiry Year is required
+                </small>
+              </form>
+              <div *ngIf="!value">
+                <div class="text-danger bg-warning px-2">
+                  Please choose valid Date
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <div class="card-footer mt-3 text-center">
+          <button
+            type="submit"
+            class="subscribe btn bg-green text-light col-6"
+            [class.disabled]="!value || !mainvalue"
+          >
+            Confirm Payment
+          </button>
+        </div>
+      </form>
     </div>
+
+    <!-- paypal -->
+    <div
+      class="tab-pane fade"
+      id="pills-profile"
+      role="tabpanel"
+      aria-labelledby="pills-profile-tab"
+    >
+      <h6 class="p-1">Select your paypal account type</h6>
+      <div class="form-group">
+        <label class="radio-inline mx-1">
+          <input type="radio" name="optradio" checked /> Domestic
+        </label>
+        <label class="radio-inline mx-2">
+          <input type="radio" name="optradio" class="mx-1" />International
+        </label>
+      </div>
+      <p class="text-center mt-2 mb-0">
+        <button
+          type="button"
+          class="btn bg-green text-light col-6"
+          (click)="orderPlaced(0, true, 0)"
+        >
+          Log into my Paypal
+        </button>
+      </p>
+    </div>
+
+    <!-- netbanking -->
+    <div
+      class="tab-pane fade"
+      id="pills-contact"
+      role="tabpanel"
+      aria-labelledby="pills-contact-tab"
+    >
+      <div class="form-group mb-3">
+        <label for="Select Your Bank">
+          <h6>Select your Bank</h6>
+        </label>
+        <select
+          class="form-control"
+          id="ccmonth"
+          ngModel
+          name="bank"
+          #bank="ngModel"
+          required
+        >
+          <option value="" selected disabled>
+            --Please select your Bank--
+          </option>
+          <option>State Bank</option>
+          <option>Union Bank</option>
+          <option>Andhra Bank</option>
+          <option>Hdfc Bank</option>
+          <option>ICICI Bank</option>
+        </select>
+      </div>
+      <div class="form-group mt-2 mb-0 text-center">
+        <button
+          type="submit"
+          class="btn bg-green text-light col-6"
+          (click)="orderPlaced(0, 0, true)"
+        >
+          Proceed Payment
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

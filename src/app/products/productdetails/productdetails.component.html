@@ -13,10 +13,10 @@
           {{ product?.productName }}
         </div>
         <div class="fs-5 fw-bolder">Price: ₹ {{ product?.productPrice }}</div>
-        <span class="badge rounded-pill text-bg-primary p-2">{{
+        <span class="badge rounded-pill text-bg-primary p-2 mx-1">{{
           product?.productBrand
         }}</span>
-        <span class="badge rounded-pill text-bg-info p-2">{{
+        <span class="badge rounded-pill text-bg-info p-2 mx-1">{{
           product?.productCategory
         }}</span>
         <br />
@@ -36,7 +36,7 @@
       <p class="text-justify">{{ product?.productDescription }}</p>
 
       <div>
-        <h4>Rate product</h4>
+        <h4 class="text-center">Rate product</h4>
         <hr />
         <form
           #formRef="ngForm"

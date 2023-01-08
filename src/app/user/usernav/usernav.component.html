@@ -60,13 +60,16 @@
         </p>
       </div>
       <div class="ms-2">
-        <a
+        <button
           class="btn btn-success"
           routerLink="cart"
           data-bs-toggle="collapse"
           data-bs-target=".navbar-collapse.show"
-          >Cart <span class="badge rounded">🛒{{ num }}</span></a
         >
+          Cart
+          <i class="bi bi-cart2 position-relative"> </i>
+          <span class="badge rounded-pill">{{ num }}</span>
+        </button>
       </div>
       <div class="ms-2">
         <button class="btn btn-danger" (click)="logOut()">Logout</button>
