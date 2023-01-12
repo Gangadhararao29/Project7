@@ -1,5 +1,5 @@
 {
-  "name": "farm-fresh-app",
+  "name": "farm-fresh",
   "version": "2.0.0",
   "scripts": {
     "ng": "ng",
@@ -50,8 +50,8 @@
     "karma-jasmine-html-reporter": "^2.0.0",
     "typescript": "~4.8.4"
   },
-  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.",
+  "description": "Full stack application of a simple Grocery store developed using MEAN",
   "main": "server.js",
-  "author": "Team7",
+  "author": "ChaGa",
   "license": "ISC"
 }
