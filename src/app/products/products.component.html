@@ -1,14 +1,17 @@
-<div class="container">
+<div class="container-xl">
   <div class="my-3">
     <p class="text-light bg-green fs-5 p-2 my-2 rounded">
       <span class="ms-2">Organic : Fruits</span>
     </p>
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
       <div class="col" *ngFor="let product of productsOrgaincFruits">
-        <div class="card" style="cursor: pointer">
+        <div
+          class="card m-1"
+          (click)="details(product.productId)"
+          style="cursor: pointer"
+        >
           <img
             [src]="product.productImage"
-            (click)="details(product.productId)"
             class="card-img-top"
             width="200px"
             height="200px"
@@ -23,7 +26,7 @@
               <button
                 class="btn btn-success"
                 type="button"
-                (click)="addToCart(product)"
+                (click)="addToCart($event, product)"
               >
                 Add to cart
               </button>
@@ -38,12 +41,19 @@
         <span class="ms-2">Organic : Vegetables</span>
       </p>
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
-        <div class="col" *ngFor="let product of productsOrgaincVegetables">
-          <div class="card" style="cursor: pointer">
+        <div
+          class="col"
+          *ngFor="let product of productsOrgaincVegetables"
+          (click)="details(product.productId)"
+        >
+          <div
+            class="card m-1"
+            style="cursor: pointer"
+            (click)="details(product.productId)"
+          >
             <img
               [src]="product.productImage"
               class="card-img-top"
-              (click)="details(product.productId)"
               width="200px"
               height="200px"
               alt="..."
@@ -75,11 +85,14 @@
     </p>
     <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
       <div class="col" *ngFor="let product of productsInorgaincFruits">
-        <div class="card" style="cursor: pointer">
+        <div
+          class="card m-1"
+          style="cursor: pointer"
+          (click)="details(product.productId)"
+        >
           <img
             [src]="product.productImage"
             class="card-img-top"
-            (click)="details(product.productId)"
             width="200px"
             height="200px"
             alt="..."
@@ -93,7 +106,7 @@
               <button
                 class="btn btn-success"
                 type="button"
-                (click)="addToCart(product)"
+                (click)="addToCart($event, product)"
               >
                 Add to cart
               </button>
@@ -109,7 +122,11 @@
       </p>
       <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-sm-1 g-2 g-lg-3">
         <div class="col" *ngFor="let product of productsInorgaincVegetables">
-          <div class="card" style="cursor: pointer">
+          <div
+            class="card m-1"
+            style="cursor: pointer"
+            (click)="details(product.productId)"
+          >
             <img
               [src]="product.productImage"
               (click)="details(product.productId)"

@@ -1,6 +1,6 @@
 # FarmFreshApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+Frontend and Backend Development of a typical vegetable and fruit store using Angular, Express and MongoDB.
 
 ## Development server
 
@@ -27,6 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Steps
-Run server using node server.js
+
 Build latest Angular application using ng build
+Run server using node server.js
 

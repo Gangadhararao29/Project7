@@ -1,30 +1,30 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthorisationService implements HttpInterceptor{
+export class AuthorisationService implements HttpInterceptor {
+  constructor() {}
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('token');
 
-  constructor() { }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //get token from local storage
-    let token = localStorage.getItem("token")
-    // console.log(token);
-    //if token doesn't exists
-    if(token == undefined){
-      return next.handle(req)
+    if (token) {
+      const modifiedToken = req.clone({
+        headers: req.headers.set('Authorisation', 'Bearer ' + token),
+      });
+      return next.handle(modifiedToken);
+    } else {
+      return next.handle(req);
     }
-    //if token exists
-    else{
-      //Add it to header
-      let modifiedToken = req.clone({
-        headers : req.headers.set("Authorisation","Bearer "+token)
-      })
-      //handover to next
-      return next.handle(modifiedToken)
-    }
-    
   }
 }

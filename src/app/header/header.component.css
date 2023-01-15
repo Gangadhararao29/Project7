@@ -3,14 +3,12 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  height: auto;
-  width: 100%;
 }
+
 .logo img {
-  width: 75%;
-  margin: auto;
-  padding: 3%;
-  max-height: 450px;
+  width: 70%;
+  padding: 1%;
+  max-height: 400px;
 }
 
 .logo {

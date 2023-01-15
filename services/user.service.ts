@@ -47,7 +47,7 @@ export class UserService {
   resetCart(userName): Observable<any> {
     return this.hc.post(`/user/resetcart/${userName}`, '');
   }
-  changePassword(userName,pwdObj): Observable<any> {
+  changePassword(userName, pwdObj): Observable<any> {
     return this.hc.post(`/user/changepassword/${userName}`, pwdObj);
   }
 }
